@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Spider-Man 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('83ce79c0-2d22-4fc0-a5e8-797790b4b30b/32c466f2-c12c-419a-a85e-ade72e0ba0c3.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="83ce79c0-2d22-4fc0-a5e8-797790b4b30b/3b5396a3-6ded-4cf7-9dc6-2224547f121d.ico"/> Spider-Man 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo GameCube">Nintendo GameCube</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-29/06/2004">29/06/2004</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-76">76</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-67">67</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Treyarch">Treyarch</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Vicarious Visions">Vicarious Visions</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Activision">Activision</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Taito">Taito</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Spider-Man 2</b></i> is a 2004 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> based on the 2004 film <a href="https://en.wikipedia.org/wiki/Spider-Man_2">of the same name</a>. The game is the sequel to 2002's <i><a href="https://en.wikipedia.org/wiki/Spider-Man_(2002_video_game)">Spider-Man</a></i>, itself based on the 2002 film <a href="https://en.wikipedia.org/wiki/Spider-Man_(2002_film)">of the same name</a>. It was released on June 29, 2004, for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>, <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a>, <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, and <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, followed by <a href="https://en.wikipedia.org/wiki/N-Gage_(device)">N-Gage</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> versions later the same year. A <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> version was released almost one year later, on March 23, 2005. The Game Boy Advance version, developed by <a href="https://en.wikipedia.org/wiki/Digital_Eclipse">Digital Eclipse</a>, was re-released on a twin pack cartridge and bundled with that system's version of the 2002 <i>Spider-Man</i> game in 2005. A tie-in game, titled <i>Spider-Man 2: Activity Center</i>, was also released in June 2004. Published by <a href="https://en.wikipedia.org/wiki/Activision">Activision</a>, the console versions were developed by <a href="https://en.wikipedia.org/wiki/Treyarch">Treyarch</a>, while the others had different developers and are drastically different as a result. The Treyarch-developed versions are considered<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Words_to_watch#Unsupported_attributions">by whom?</a></i>]</sup> a landmark title in the industry for being the first superhero video game to incorporate a full <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> design.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>All versions of the game closely follow the film's plot, but expand upon it by including scenes and characters that do not appear in the movie. Set two years after the events of <i>Spider-Man</i>, the game finds <a href="https://en.wikipedia.org/wiki/Peter_Parker_(Sam_Raimi_film_series)">Peter Parker</a> struggling to manage both his personal life and his duties as Spider-Man. When scientist and Peter's mentor, <a href="https://en.wikipedia.org/wiki/Otto_Octavius_(film_character)">Dr. Otto Octavius</a>, becomes the diabolical villain Doctor Octopus after an accident, Spider-Man must stop him from recreating a dangerous <a href="https://en.wikipedia.org/wiki/Fusion_power">fusion power</a> experiment. <a href="https://en.wikipedia.org/wiki/Tobey_Maguire">Tobey Maguire</a>, <a href="https://en.wikipedia.org/wiki/Alfred_Molina">Alfred Molina</a>, <a href="https://en.wikipedia.org/wiki/Kirsten_Dunst">Kirsten Dunst</a> and <a href="https://en.wikipedia.org/wiki/J._K._Simmons">J. K. Simmons</a> (PSP version only) reprise their roles from the film, as Spider-Man, Doctor Octopus, <a href="https://en.wikipedia.org/wiki/Mary_Jane_Watson_(Sam_Raimi_film_series)">Mary Jane Watson</a> and <a href="https://en.wikipedia.org/wiki/J._Jonah_Jameson_(film_character)">J. Jonah Jameson</a>, respectively, while <a href="https://en.wikipedia.org/wiki/Bruce_Campbell">Bruce Campbell</a>, who played an usher in the doors of Mary Jane's show, narrates the game.</p>
+
+<p>The console versions of the game were positively received, with critics commending the realistic <a href="https://en.wikipedia.org/wiki/Manhattan">Manhattan</a> setting and web swinging mechanics. It has been called one of the best superhero games of all time,<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Words_to_watch#Unsupported_attributions">by whom?</a></i>]</sup> with some<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Words_to_watch#Unsupported_attributions">who?</a></i>]</sup> crediting the game for helping revolutionize the open world genre. The handheld versions received mixed reviews, while the PC version received negative reviews. The game was followed by <i><a href="https://en.wikipedia.org/wiki/Spider-Man_3_(video_game)">Spider-Man 3</a></i> the video game, itself based on the <a href="https://en.wikipedia.org/wiki/Spider-Man_3">2007 film</a>.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

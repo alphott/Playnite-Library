@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dot Hack G.U. Vol. 1 - Rebirth</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('81fac0ab-2b49-4391-be7f-904013d98de4/db848c01-a4ef-48ef-b569-4fa07983ff42.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="81fac0ab-2b49-4391-be7f-904013d98de4/d2b6e15f-9e9c-4103-9ec6-0917cd42d80d.png"/> Dot Hack G.U. Vol. 1 - Rebirth</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 18:13:23</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-18/05/2006">18/05/2006</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-CyberConnect2">CyberConnect2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Namco Bandai Games">Namco Bandai Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>.hack//G.U.</b></i> is a series of <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing games</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, developed by <a href="https://en.wikipedia.org/wiki/CyberConnect2">CyberConnect2</a> and published by <a href="https://en.wikipedia.org/wiki/Bandai_Namco_Entertainment">Bandai Namco Entertainment</a> between 2006 and 2007. The series contains three games: <i>.hack//G.U. Vol. 1//Rebirth</i>, <i>.hack//G.U. Vol. 2//Reminisce</i> and <i>.hack//G.U. Vol. 3//Redemption</i>. As in the previous <i><a href="https://en.wikipedia.org/wiki/.hack_(video_game_series)">.hack</a></i> games, <i>.hack//G.U.</i> simulates a <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game">massively multiplayer online role-playing game</a> (MMORPG) called <i>The World</i>—the player controls a character who plays the fictional online game. They were directed by <a href="https://en.wikipedia.org/wiki/Hiroshi_Matsuyama">Hiroshi Matsuyama</a> who aimed to address criticisms of the previous series. Its narrative, by Tatsuya Hamazaki, was written concurrently with <i><a href="https://en.wikipedia.org/wiki/.hack//Roots">.hack//Roots</a></i>, an <a href="https://en.wikipedia.org/wiki/Anime">anime</a> set before the events of the games.</p>
+
+<p>The story focuses on a character named <a href="https://en.wikipedia.org/wiki/Haseo">Haseo</a>. He hunts another player named "Tri-Edge" who killed his friend Shino within the game and left her in a <a href="https://en.wikipedia.org/wiki/Coma">coma</a> in real life. Haseo joins an organization that is also tracking Tri-Edge. The reason Shino and other players fall into comas is connected with AIDA, a mysterious computer anomaly that infects their characters. During the release of the games in Japan, <a href="https://en.wikipedia.org/wiki/Bee_Train">Bee Train</a> produced <i>.hack//Roots</i>, which depicts Haseo's first days in <i>The World</i>. The series has also been adapted into a <a href="https://en.wikipedia.org/wiki/Manga">manga</a>, a <a href="https://en.wikipedia.org/wiki/Light_novel">light novel</a>, and an animated film.</p>
+
+<p>Critical reception to the games has been lukewarm with reviewers focusing on how the developers dealt with the issues regarding the previous <i>.hack</i> games and the execution of the storyline across the three titles. The first game got higher ratings; critics praised the addition of new gameplay features while parts from the story have been labeled as filler. Average scores declined across the three games. A <a href="https://en.wikipedia.org/wiki/High-definition_video">high-definition</a> <a href="https://en.wikipedia.org/wiki/Video_game_remake">remaster</a> of the trilogy, <i><b>.hack//G.U. Last Recode</b></i>, was released for <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> in November 2017, and was released on <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> in March 2022. The remaster marks the first time that <i>.hack//G.U.</i> was released in Europe. The collection received more praise than the original trilogy for solving issues with the gameplay and presentation but was criticized for the lack of variety in dungeons.</p>
+
+<h4><i>Vol. 1//Rebirth</i></h4>
+
+<p>After months of searching, Haseo finally encounters Tri-Edge and attempts to kill him but is hopelessly outmatched. In the battle, Tri-Edge uses an illegal <a href="https://en.wikipedia.org/wiki/Skill_(role-playing_games)">skill</a> on Haseo, Data Drain, which corrupts his character data and resets it to <a href="https://en.wikipedia.org/wiki/Experience_point#Level-based_progression">level one</a>. Lacking the strength he once had, Haseo meets two friendly players, Silabus and Gaspard, who invite him to join their <a href="https://en.wikipedia.org/wiki/Clan_(video_games)">guild</a>. Haseo is also approached by Kuhn and Pi who recruit him into Yata's organization of Epitaph PCs, players who can summon Avatars. This group's goal is to protect <i>The World</i> from AIDA, a mysterious <a href="https://en.wikipedia.org/wiki/Software_bug">software bug</a> that has been infecting parts of the game which can only be defeated using an Avatar.</p>
+
+<p>During this time, Haseo is contacted repeatedly by Atoli, a gentle <a href="https://en.wikipedia.org/wiki/Healer_(video_games)">healer</a> from Moon Tree guild who tries to convince him to enjoy the game and its world more. He is brusque and standoffish with her because her character model strongly resembles Shino's but she persists in trying to befriend him. Haseo awakens his Avatar, Skeith, while fighting in a tournament and he prevails over the champion Endrance, who was being controlled by AIDA. After Endrance's defeat, Atoli finds a strange red mark made by Tri-Edge and falls into the portal it creates. Haseo, Pi, and Kuhn follow her through the warp and see her struggling to open a <a href="https://en.wikipedia.org/wiki/Locker">locker</a> in a white void. Tri-Edge ambushes them but they manage to defeat him. After he fades away, the locker opens to reveal AIDA, which infects Atoli.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
