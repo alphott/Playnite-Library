@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sly 3 - Honor Among Thieves</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('711f0b7b-1c6e-4aa4-99c8-8d92b153ed9e/c13e18a4-212c-40b4-b626-ea42d6330b82.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="711f0b7b-1c6e-4aa4-99c8-8d92b153ed9e/66ebdd79-97ab-4aa8-b742-4e1483260d5a.png"/> Sly 3 - Honor Among Thieves</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-26/09/2005">26/09/2005</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-73">73</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sucker Punch Productions">Sucker Punch Productions</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sony Computer Entertainment">Sony Computer Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Sly 3: Honor Among Thieves</b></i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action</a> <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Sucker_Punch_Productions">Sucker Punch Productions</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> in 2005. It is the third game in the <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i> franchise. <i>Sly 3</i> has optional 3D stages, and comes with a pair of <a href="https://en.wikipedia.org/wiki/3D_glasses">3D glasses</a> inside the manual. The game received generally positive reviews.</p>
+
+<h2>Gameplay</h2>
+
+<p>New variations in the game include additional playable characters besides those of Sly, Murray, and Bentley. Firstly, Inspector Carmelita Fox is a playable character in some of the mini-games and a few times in the main game. Secondly, some new characters have been introduced, including a shaman named The Guru and a mouse named Penelope. Finally, characters from previous titles, such as Dimitri and the Panda King, are playable as well.</p>
+
+<p>Furthermore, Bentley and Murray have the ability to pick-pocket in this game. 
+Murray hoists stunned or unsuspecting guards above his head and shakes them down for coins and loot. The coins must be picked up off the ground after the guard is shaken. Bentley uses a fishing rod-like magnet to reel in coins and loot. When the magnet attaches, Bentley moves away from the guard to pick the pocket. Pickpocketed loot no longer needs to be sold back at the safe house. The amount an item is worth is added immediately to the coin count. Special treasure is absent from the over world.</p>
+
+<p>The game also contains 3-D sections. 3-D glasses have been distributed with each new copy of the game, and are used in certain parts of the game. However, 3-D effects are optional, allowing the player to view the levels in standard 2-D instead. Some levels are playable in 3-D from the beginning, while other levels require the 3-D feature to be unlocked. The 3-D effect is focused upon certain objects in the background rather than the characters themselves, minimizing the necessary blue/red separation and making it easier for observers without 3-D glasses.</p>
+
+<p><i>Sly 3</i> features new gameplay elements and skills, such as safe-cracking, searching for clues and objects in paintings, aerial combat, disguises, pirate ship battles, and conversations. However, the removal of clue bottles and vaults was unpopular with players.</p>
+
+<p>To increase replay value, an offline multiplayer mode is included, along with challenges and extra movies unlocked for specific game completion percentages. The multiplayer games are: Cops and Robbers, Hackathon, Bi-Plane Duel, and Galleon Duel. Challenges are missions that are set with specific standards, along with a Treasure Hunt mission for each world attained at the end of the game.</p>
+
+<h2>Plot</h2>
+
+<p><i>Sly 3</i> opens <i><a href="https://en.wikipedia.org/wiki/In_medias_res">in medias res</a></i> one year after the events of <i><a href="https://en.wikipedia.org/wiki/Sly_2:_Band_of_Thieves">Sly 2: Band of Thieves</a></i>: <a href="https://en.wikipedia.org/wiki/Sly_Cooper_(character)">Sly Cooper</a>, <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Bentley's_Hackpack_(2013)">Bentley</a>, and other unidentified characters are attempting a vault heist on an island in the Pacific Ocean. They are intercepted by Dr. M, the island's owner. Sly gives up his family's cane to save Bentley from a monster, but gets captured himself. While the monster crushes him, Sly's life <a href="https://en.wikipedia.org/wiki/Life_review">flashes before his eyes</a>. He recounts his family's history and the events of the prior two games. He recalls meeting one of his father's colleagues, Jim McSweeney, who revealed to Sly the existence of the vault and that it contains the Cooper family's accumulated wealth built up over the centuries. Sly went to find the vault, only to discover Dr. M had built a fortress on the island in an attempt to enter the vault himself. Sly needed additional experts to get past Dr. M's extensive security; he needed to expand the Cooper Gang.</p>
+
+<p>The majority of the game is a large <a href="https://en.wikipedia.org/wiki/Flashback_(narrative)">flashback</a> that recounts how Sly and Bentley recruited more members for the heist. They first sought to bring back <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Murray">Murray</a>, who had left the gang after taking responsibility for Bentley's paralysis resulting from the end of the previous game. He had begun studying <a href="https://en.wikipedia.org/wiki/The_Dreaming">Dreamtime</a> from a <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#The_Guru">Guru</a> to find inner peace, and the Guru had sent Murray on a mission to clean the water in <a href="https://en.wikipedia.org/wiki/Venice,_Italy">Venice, Italy</a>. Sly broke <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Dimitri">Dimitri</a> out of a local prison in exchange for Dimitri's help in locating Murray. Sly and Bentley learned that the local mob boss, <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Octavio">Octavio</a>, was polluting the water with tar as part of a scheme to threaten the city into liking <a href="https://en.wikipedia.org/wiki/Opera">opera</a> again. They foiled Octavio's plan but he injured Bentley, leading Murray to defeat Octavio in battle to defend Bentley. Murray re-joined the gang but felt guilty about resorting to violence, so the gang traveled to <a href="https://en.wikipedia.org/wiki/Yuendumu">Yuendumu</a> in Australia's <a href="https://en.wikipedia.org/wiki/Northern_Territory">Northern Territory</a> to allow Murray to reconcile his actions with the Guru. They discovered the Guru was captured by local miners who were tearing up <a href="https://en.wikipedia.org/wiki/Australian_Aboriginal_sacred_site">Aboriginal sacred sites</a> in search of precious <a href="https://en.wikipedia.org/wiki/Opal">opals</a>. After freeing the Guru, he informed the gang that the miners had inadvertently awoken the Mask of Dark Earth, a sentient mask that makes its wearer a vicious, powerful giant. The mask latched onto <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Inspector_Carmelita_Montoya_Fox">Carmelita Fox</a>, who had continued her chase against the gang. The Guru assisted the gang in removing the miners from his land, freeing Carmelita, and destroying the mask. He joined the gang to continue Murray's training and return the favor for their help.</p>
+
+<p>In search of a robotics combat expert beyond his own abilities, Bentley met a Dutch mouse named <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Penelope">Penelope</a> online. She agreed to join the gang if they could prove themselves by taking down her boss, the <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Black_Baron">Black Baron</a>, in his flying competition. The gang traveled to <a href="https://en.wikipedia.org/wiki/Kinderdijk">Kinderdijk</a>, <a href="https://en.wikipedia.org/wiki/The_Netherlands">the Netherlands</a> and entered Sly in the competition. Dimitri, who was hired as a <a href="https://en.wikipedia.org/wiki/Color_commentator">color commentator</a>, helped the gang sabotage the other teams—including one run by <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Muggshot">Muggshot</a>—in exchange for a favor later. Sly defeated the Black Baron, who was revealed to be Penelope in costume; she had donned the persona to get around the competition's minimum age requirement. With her time as the Black Baron over, Penelope joined the gang without hesitation. Bentley determined they still needed an exceptional demolitions expert and suggested recruiting Sly's former enemy, the <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Panda_King">Panda King</a>, much to Sly's dismay. Bentley explained the Panda King had forsaken his life of crime; upon meeting him in China, the Panda King elaborated that his daughter, Jing King, had been kidnapped by a local general, <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#General_Tsao">Tsao</a>, who was planning to <a href="https://en.wikipedia.org/wiki/Forced_marriage">forcibly marry her</a>. Sly and the Panda King reconciled their past to work together and save her. In the process, Murray recovered the team van, which had floated all the way from Canada in the previous game. After the gang rescued Jing King, Carmelita arrested General Tsao and escorted him to jail, while the Panda King left his daughter safely with her aunt and joined the gang to repay his debt.</p>
+
+<p>Dimitri emailed Sly to call in the favor he mentioned in Holland. He bought tickets for the whole gang to travel to Blood Bath Bay, a town in the <a href="https://en.wikipedia.org/wiki/Caribbean_Sea">Caribbean Sea</a> that maintained the ways of piracy. Dimitri was searching for his grandfather's scuba diving gear and the loot he had obtained from undersea wrecks, all of which was stolen by a local pirate. The gang successfully recovered the scuba gear, but another pirate, <a href="https://en.wikipedia.org/wiki/List_of_Sly_Cooper_characters#Captain_LeFwee">Captain LeFwee</a>, stole the loot and kidnapped Penelope. The gang worked together to rescue her from LeFwee's ship; during the rescue, Bentley freed Penelope from her cell, but LeFwee injured him. While he prepared to deal a final blow, Penelope took the opportunity to grab a sword and challenge LeFwee to a duel. She defeated him and the gang escaped the harbor. Bentley and Penelope became a couple while Dimitri, unprompted, informed the gang that he'd be joining them as their <a href="https://en.wikipedia.org/wiki/Frogman">frogman</a> for the Cooper Vault heist.</p>
+
+<p>The flashback ends and the game returns to the present day, where Sly is still struggling in the grip of Dr. M's monster. Carmelita arrives on the island with mercenaries and battles the monster, intending on capturing both Dr. M and Sly. With both Carmelita and the monster distracted, Dr. M escapes while the gang rescues Sly. As he recovers, the gang works to retrieve Sly's family cane, the key to the vault, battling Dr. M multiple times in the process. Dr. M reveals to Sly that he also worked with Sly's father but, unlike McSweeney, he felt that he was mistreated and resolved to steal the Cooper fortune for himself. Sly recovers his cane and enters the vault alone while Bentley and Murray defend the entrance. Dr. M battles them before following Sly into the vault's Inner Sanctum. The two fight, causing the ancient structure to begin collapsing. Carmelita arrives to arrest them both. Dr. M attempts to shoot a blast of energy at her, but Sly jumps in between to protect her. Carmelita defeats Dr. M and checks on Sly, who appears to suffer from amnesia. He asks who he is, and Carmelita, taking the opportunity to rehabilitate Sly, chooses to say that he is her partner. They escape together while Dr. M, refusing to leave the vault he worked so hard to enter, dies in the collapse. The rest of the gang finds an alternate entrance to the vault marked by Sly's family cane and his classic calling card, realizing he's alive but didn't want to be found.</p>
+
+<p>When Sly does not return after a few months, the gang splits up to go their separate ways. Dimitri becomes a rich scuba diver; the Panda King returns to China to live near Jing King, who was happy to let him screen all of her future <a href="https://en.wikipedia.org/wiki/Courtship">suitors</a>; Murray completes his training with the Guru and becomes a professional race car driver using the team's van; the Guru begins teaching his mystic art to a group of rock stars in New York City; Bentley and Penelope stay together, create a new Cooper vault with higher security, and begin work on a time machine. One day, while Bentley is looking across the Paris skyline, he spots Sly and Carmelita on a balcony holding hands. Sly notices Bentley and winks, confirming he faked his amnesia to start a new life with Carmelita.</p>
+
+<h2>Development</h2>
+
+<p>Development on a third <i>Sly Cooper</i> game started during the making of <i>Sly 2: Band of Thieves</i>. After its success, <i>Sly 3</i> was rushed into development. It was reported that <i>Sly 3</i> was set to have a completely different theme with the addition of multiplayer mode, a new set of characters, new vehicles, mini-games, disguises and enhanced combat move sets and replayable levels, which were also included in <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper:_Thieves_in_Time">Sly Cooper: Thieves in Time</a></i>. The game is the first in the series to not feature any clue bottles, the change was made via the addition of "treasure hunts", which are included along with the replayable levels.</p>
+
+<h2>Reception</h2>
+
+<p><i>Sly 3: Honor Among Thieves</i> received "generally favorable" reviews by critics, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. <a href="https://en.wikipedia.org/wiki/Complex_(magazine)">Complex</a>'s Rich Knight called <i>Sly 3</i> the best game in the series, and the 20th best PlayStation 2 game in general.</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/9th_Annual_Interactive_Achievement_Awards">9th Annual Interactive Achievement Awards</a>, <i>Sly 3</i> received nominations for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Family_Game_of_the_Year">Children's Game of the Year</a>" and "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Outstanding_Achievement_in_Story">Outstanding Achievement in Story and Character Development</a>".</p>
+
+<h2>Sequel</h2>
+
+<p>Brian Fleming of <a href="https://en.wikipedia.org/wiki/Sucker_Punch_Productions">Sucker Punch Productions</a> stated in an interview that "We're broadening ourselves a little bit, taking on some new challenges," but also noted that "I think it's extremely likely that you'll see us return to the <i>Sly Cooper</i> franchise at some point in the future". Nate Fox, one of the game designers for Sucker Punch Productions, also stated in a phone interview when questioned about it that he would love to make another <i>Sly</i> game, adding to the possibility of a sequel. An <a href="https://en.wikipedia.org/wiki/Easter_egg_(media)">Easter egg</a> found in the Sucker Punch game <i><a href="https://en.wikipedia.org/wiki/Infamous_(video_game)">Infamous</a></i> shows a movie called "Sly Cooper 4" on the building's marquee; there is also a <i>Sly Cooper</i> symbol on Cole's backpack and back of his pants. Upon completing all three games as part of <i>The Sly Collection</i> for the PlayStation 3, a movie option is enabled within the game's menus. The movie is a short video showing Sly's silhouette lurking in tall grass, followed by a <i>Sly 4</i> logo, with Cooper's trademark cane used as a question mark, teasing the possible sequel. Kevin Miller, the voice actor who voices Sly, has also confirmed that he has been contacted about voicing Sly in <i>Sly 4</i>, furthering its possibility.</p>
+
+<p>The sequel, <i>Sly Cooper: Thieves in Time</i>, was revealed at Sony's E3 conference 2011, but was not being developed by Sucker Punch, but by <a href="https://en.wikipedia.org/wiki/Sanzaru_Games">Sanzaru Games</a>. It was released on February 5, 2013 on <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>.</p>
+
+<h3>Other games</h3>
+
+<p><i>The Sly Collection</i> (titled as <i>The Sly Cooper Collection</i> in Japan and <i>The Sly Trilogy</i> in Europe and in some parts of Australia) is a remastered port of <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper_and_the_Thievius_Raccoonus">Sly Cooper and the Thievius Raccoonus</a></i>, <i><a href="https://en.wikipedia.org/wiki/Sly_2:_Band_of_Thieves">Sly 2: Band of Thieves</a></i> and <i>Sly 3: Honor Among Thieves</i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> on a single <a href="https://en.wikipedia.org/wiki/Blu-ray_Disc">Blu-ray Disc</a> as a <a href="https://en.wikipedia.org/wiki/Classics_HD">Classics HD</a> title. The game was released on November 9, 2010. The Collection updates the graphics, including support for the 3D capabilities of the PlayStation 3, new mini-games that can be played using the <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a> or standard controller and additional title supports such as Trophies.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/PlayStation_Move_Heroes">PlayStation Move Heroes</a></i> is a 2011 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> video game developed by <a href="https://en.wikipedia.org/wiki/Nihilistic_Software">Nihilistic Software</a> and published by <a href="https://en.wikipedia.org/wiki/Sony_Computer_Entertainment">Sony Computer Entertainment</a>. It was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> on March 22, 2011, and utilizes the <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a>. It is a cross-over of the <i><a href="https://en.wikipedia.org/wiki/Jak_and_Daxter">Jak and Daxter</a></i>, <i><a href="https://en.wikipedia.org/wiki/Ratchet_&amp;_Clank">Ratchet &amp; Clank</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Sly_Cooper">Sly Cooper</a></i> franchises to form a total of six main characters.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

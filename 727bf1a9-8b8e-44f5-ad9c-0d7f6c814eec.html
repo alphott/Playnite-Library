@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metal Gear NES</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('727bf1a9-8b8e-44f5-ad9c-0d7f6c814eec/3896fc48-feaf-4a89-a11b-71f4964d75da.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="727bf1a9-8b8e-44f5-ad9c-0d7f6c814eec/8b9b9270-6dda-40ff-88a8-9c76fdbb288d.png"/> Metal Gear NES</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 18:08:07</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-13/07/1987">13/07/1987</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Ultra Games">Ultra Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Metal Gear</b></i> is an <a href="https://en.wikipedia.org/wiki/Action_adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> for the <a href="https://en.wikipedia.org/wiki/MSX2">MSX2</a>. It was released for the system in Japan and parts of Europe in 1987. Considered the game to popularize the <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth game</a> genre, it was the first video game to be fully developed by <a href="https://en.wikipedia.org/wiki/Hideo_Kojima">Hideo Kojima</a>, who would go on to direct most of the games in the <a href="https://en.wikipedia.org/wiki/Metal_Gear"><i>Metal Gear</i> series</a>. A reworked port of the game was released for the <a href="https://en.wikipedia.org/wiki/Famicom">Famicom</a> a few months later, which later saw release in international markets for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">NES</a> over the following two years; this version was developed without Kojima's involvement and features drastically altered level designs, among other changes. An <a href="https://en.wikipedia.org/wiki/Video_game_console_emulator">emulated</a> Famicom version came with the special edition of <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid:_The_Twin_Snakes">Metal Gear Solid: The Twin Snakes</a></i> on <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a>. A more faithful port of the MSX2 version was later included in <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_3:_Subsistence">Metal Gear Solid 3: Subsistence</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, as well as in the <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_HD_Collection">HD Edition</a></i> of the same game released for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>, with these newer ports featuring a revised translation and additional gameplay features. The MSX version was also released for <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> and PC.</p>
+
+<p>Players control <a href="https://en.wikipedia.org/wiki/Solid_Snake">Solid Snake</a>, an operative of the <a href="https://en.wikipedia.org/wiki/Special_forces">special forces</a> unit <a href="https://en.wikipedia.org/wiki/FOXHOUND">FOXHOUND</a>, who goes on a solo infiltration mission into the fortified state of Outer Heaven to destroy <a href="https://en.wikipedia.org/wiki/Metal_Gear_(weapon)">Metal Gear</a>, a bipedal <a href="https://en.wikipedia.org/wiki/Mecha">walking tank</a> capable of launching <a href="https://en.wikipedia.org/wiki/Nuclear_missile">nuclear missiles</a> from anywhere in the world, as well as rescue a number of fellow agents who have been captured by the enemy. The game was a major international success, with the NES version selling 1 million units in the United States.</p>
+
+<h3>NES</h3>
+
+<p>A port of <i>Metal Gear</i> for the Family Computer (or Famicom) was released in Japan on December 22, 1987. This was followed by an English localization for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> (or NES) released in North America in June 1988 (published by Konami's <a href="https://en.wikipedia.org/wiki/Ultra_Games">Ultra Games</a> division) and in <a href="https://en.wikipedia.org/wiki/PAL_region">Europe and Australia</a> sometime in 1989. This was the first version of <i>Metal Gear</i> that was released in North America, since the MSX2 platform was never released in that market.</p>
+
+<p>According to Kojima, the port was developed by another Konami division at Tokyo which was given the <a href="https://en.wikipedia.org/wiki/Source_code">source code</a> from the MSX2 version without the consent of the original team. Many changes were made during the porting process that later led to this version being publicly disowned by Kojima years after its release. Masahiro Ueno, who worked as a programmer for the NES version, has stated that the staff who worked on the port were given a three-month deadline and were ordered to make the port as different as possible from the MSX2 version. Due to hardware limitations with the mapper used, the Metal Gear boss ended up being replaced by a Supercomputer guarded by four enemy soldiers.</p>
+
+<p>Another big change made to the game was in the level designs. Instead of the underwater infiltration from the MSX2 version, the NES version starts the game with Solid Snake parachuting into the middle of a jungle alongside three other soldiers (who are never seen nor mentioned after the intro). After landing in the jungle, the player must reach a transport truck at the end that will take Snake to the entrance of the first building. The player can use other transport trucks to reach the entrances of the other buildings quicker, since they travel in a cyclical pattern. The basement floors of Building 1 and 2 in the MSX2 version were made into separate buildings, Building 4 and 5 respectively, which are only reachable by going through one of two jungle mazes located in the outdoor areas between the other three buildings. The correct path to take in the jungle maze is never revealed in the game. In addition to the removal of the Metal Gear tank, the Hind D boss on the rooftop of Building 1 was replaced by a pair of armed turret gunners called "Twin Shot". The NES version lacks the higher alert phase from the MSX2 version and the <a href="https://en.wikipedia.org/wiki/Jet_pack">jetpack</a>-wearing soldiers on the rooftops of Building 1 and 2 lost their ability to fly (making them act more like regular guards). On the other hand, enemies no longer drop ammo nor rations when punched to death. Much like the MSX2 version, the English localization of the NES versions contains numerous instances of erroneous grammar, such as "Contact missing our Grey Fox", "Uh-Oh! The truck have started to move!", and "I feel asleep!!"</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Password_(video_gaming)">Passcodes</a> are used in this version to save progress. When Snake is killed by the enemy or loses his life by certain other means, the player is given a choice to continue the game from the last checkpoint or quit and resume later with the given passcode. The passcode keeps track of Snake's rank (which determines his checkpoint in this version), inventory, hostages rescued, bosses defeated and certain event flags. One particular passcode featured in the Japanese and North American version, in which the player types the expletive "fuck me" and fills the remaining spaces with "1", will transport the player to the final battle with no equipment. This resulted in the passcode system being altered for the European versions of the game, with all of the vowels being removed.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup></p>
+
+<p>Because the MSX2 version was not released in North America at the time, the NES version was the one that served as the basis for a couple of home computer ports released by Ultra Games in 1990 for the <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore 64</a> and <a href="https://en.wikipedia.org/wiki/MS-DOS">MS-DOS</a>. The Commodore 64 version was released in 1989, and the MS-DOS version in 1990. An emulated port of the Famicom version was also included in a bonus disc packaged alongside <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid:_The_Twin_Snakes">Metal Gear Solid: The Twin Snakes</a></i> in a limited edition <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> console bundle released in Japan.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Radiant Historia - Perfect Chronology</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('436ba9a6-0f35-40d4-bddf-9e1a71740888/8c9371bc-cabd-4afa-a861-a108b1bd262f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="436ba9a6-0f35-40d4-bddf-9e1a71740888/72419084-83b7-4158-b9ef-18e6018d98cf.png"/> Radiant Historia - Perfect Chronology</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo 3DS">Nintendo 3DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-03/11/2010">03/11/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Atlus">Atlus</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Headlock">Headlock</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Atlus">Atlus</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Atlus USA">Atlus USA</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Deep Silver">Deep Silver</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Radiant Historia</b></i> is a <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> co-developed by <a href="https://en.wikipedia.org/wiki/Atlus">Atlus</a> and Headlock for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>. It was released in Japan in 2010 by Atlus, and in North America in 2011 by their subsidiary <a href="https://en.wikipedia.org/wiki/Atlus_USA">Atlus USA</a>. An expanded remake for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, titled <i>Radiant Historia: Perfect Chronology</i>, was released in 2017 in Japan and released in North America and Europe the following year, with the European version being published by <a href="https://en.wikipedia.org/wiki/Deep_Silver">Deep Silver</a>.</p>
+
+<p>The game is set on Vainqueur, a continent divided between the warring nations of Alistel and Granorg. Alistel soldier Stocke is chosen to wield the White Chronicle, a tome capable of navigating multiple timelines, so he may prevent Vainqueur's <a href="https://en.wikipedia.org/wiki/Desertification">desertification</a>. Stocke and his party explore Vainqueur, fighting enemies on a grid-based battlefield using a <a href="https://en.wikipedia.org/wiki/Turns,_rounds_and_time-keeping_systems_in_games#Turn-based">turn-based</a> system. Travelling between alternate timelines is a key part of both the storyline and the gameplay, with the number of potential timelines unlocked influencing the ending.</p>
+
+<p><i>Radiant Historia</i> was developed by a team with staff drawn from both Atlus' <i><a href="https://en.wikipedia.org/wiki/Megami_Tensei">Megami Tensei</a></i> series, and the <a href="https://en.wikipedia.org/wiki/Tri-Ace">tri-Ace</a> title <i><a href="https://en.wikipedia.org/wiki/Radiata_Stories">Radiata Stories</a></i>. First proposed by Satoshi Takayashiki in 2007, the base concept underwent several changes due to suggestions from Atlus staff. The remake included redrawn artwork, voice acting, an additional story path, and an animated opening produced by <a href="https://en.wikipedia.org/wiki/A-1_Pictures">A-1 Pictures</a>. The music for both versions was composed by <a href="https://en.wikipedia.org/wiki/Yoko_Shimomura">Yoko Shimomura</a>, with theme songs performed by <a href="https://en.wikipedia.org/wiki/Haruka_Shimotsuki">Haruka Shimotsuki</a>.</p>
+
+<p>Reception and sales for both versions have been positive, with both reaching high sales chart positions in Japan and the West. The original received praise for its gameplay and time travel mechanics, though opinions were mixed on its graphics and linear structure. Several critics compared it favourably to role-playing games from the 16-bit gaming era. The remake saw a generally positive response, with many praising the added story and gameplay content.</p>
+
+<h3><i>Radiant Historia: Perfect Chronology</i></h3>
+
+<p><i>Radiant Historia: Perfect Chronology</i>, an expanded remake of the original game for <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, began development in 2016 following the completion of <i><a href="https://en.wikipedia.org/wiki/Tokyo_Mirage_Sessions_♯FE">Tokyo Mirage Sessions ♯FE</a></i>, which Hirata directed. A remake of <i>Radiant Historia</i> was originally in production for a different portable platform, the <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>, but Hirata's commitment to <i>Tokyo Mirage Sessions ♯FE</i> caused the project to be put on hold. When development on <i>Tokyo Mirage Sessions ♯FE</i> was completed, development resumed. In the time that had passed, the 3DS's userbase had grown to a far larger size than the Vita, resulting in development being shifted to it instead. Hirata had long wanted to return to the universe of <i>Radiant Historia</i>, and after completing <i>Tokyo Mirage Sessions ♯FE</i> talked with Atlus and learned that <i>Radiant Historia</i> had a strong following both in Japan and overseas, prompting Atlus to agree to a remake.</p>
+
+<p>Hirata returned to the remake as producer. The character art was redrawn by Masaki Hirooka, whose previous work includes <i><a href="https://en.wikipedia.org/wiki/Castlevania:_Order_of_Ecclesia">Castlevania: Order of Ecclesia</a></i>. His most notable redesign was Eruca, who was given long hair as originally planned to better fit her character as a princess. The anime opening was created by <a href="https://en.wikipedia.org/wiki/A-1_Pictures">A-1 Pictures</a>. Hirata's main goals were to update the game so that it would appeal to a modern gaming audience, with these involving increasing gameplay speed and adjusting the user interface. After that he decided to create a new scenario, discussing with staff how to implement it. Haduki, who had worked as the scenario writer on the original release, returned to write the new scenario based on Hirata's original concept. Hirata wanted to restore the original game's two discarded story routes, but instead opted for preserving the established scenario. A new gameplay mechanic was the "Support Skill" system, where characters could perform follow-up attacks, a system inspired by a similar mechanic in <i>Tokyo Mirage Sessions ♯FE</i>.</p>
+
+<p>The remake was released in Japan on June 29, 2017. It was released in February 2018, in North America by Atlus, and in Europe by <a href="https://en.wikipedia.org/wiki/Deep_Silver">Deep Silver</a>. <a href="https://en.wikipedia.org/wiki/Downloadable_content">Downloadable content</a>, composed of both battle challenges and additional narratives, were released in the months following the game's Japanese and Western releases respectively.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

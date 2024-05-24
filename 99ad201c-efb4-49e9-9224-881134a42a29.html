@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>R-Type Tactics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('99ad201c-efb4-49e9-9224-881134a42a29/3005f044-36ce-4bed-887b-e23305eef15a');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="99ad201c-efb4-49e9-9224-881134a42a29/6937dd05-1e60-43f4-ac69-d1cf44fef924.jpg"/> R-Type Tactics</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-20/09/2007">20/09/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-69">69</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Turn-based strategy (TBS)">Turn-based strategy (TBS)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Irem">Irem</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Atlus">Atlus</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Irem">Irem</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rising Star Games">Rising Star Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>R-Type Tactics</b></i> (アール・タイプ タクティクス, <i>Āru Taipu Takutikusu</i>), known in North America as <i><b>R-Type Command</b></i>, is a <a href="https://en.wikipedia.org/wiki/Turn-based_strategy">turn-based strategy</a>/<a href="https://en.wikipedia.org/wiki/Tactical_role-playing_game">tactical role-playing game</a> released in 2007 in Japan, and 2008 in North America and Europe for <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a>. The main part of the game consists of two consecutive campaigns, in which the player controls first the forces of Earth, then the Bydo Empire. The gameplay is structured as a typical mission-based tactical role-playing game, but retains many of the specific traits of the <i>R-Type</i> series. The game also supports <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a> combat via <a href="https://en.wikipedia.org/wiki/Wi-Fi">Wi-Fi</a>.</p>
+
+<p>The game received mixed reviews from critics. A sequel, <i><a href="https://en.wikipedia.org/wiki/R-Type_Tactics_II:_Operation_Bitter_Chocolate">R-Type Tactics II: Operation Bitter Chocolate</a></i>, was released in 2009 exclusively in Japan. A <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> of both games, <i>R-Type Tactics I • II Cosmos</i>, is in development at <a href="https://en.wikipedia.org/wiki/Granzella">Granzella</a>. It's set to be released in 2024 for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>R-Type Tactics</i> has 58 levels, through which the player navigates an army of R-Type space fighters and support units, fighting the enemy forces of the Bydo.</p>
+
+<p>The side-scrolling nature of the <i>R-Type</i> series is preserved in <i>R-Type Tactics</i>. Most levels are structured as in a side-scrolling shooter, with the player's units and the objective on opposite sides of the field. Units cannot change facing, which has an important impact on gameplay, as certain attacks can only be performed in one direction. Like other turn-based strategy games, the playing field is also divided into hexagons with varying effects.</p>
+
+<h3>Units</h3>
+
+<p><i>R-Type Tactics</i> features the opposing armies of the Earth Space Corps and the Bydo. The player can access more than 100 different units, including many of the R-series fighters from the other <i>R-Type</i> games. Each fighter has unique abilities such as sub-space movement and a distinct set of attacks. During the game, the player acquires abilities enabling new units and upgrades to existing units to be purchased for their army. Furthermore, new units can be acquired by capturing certain objectives in levels, such as derelict space stations and starbases.</p>
+
+<p>Support units range from large carrier ships to maintenance units as well as the Force units, well known from other games in the <i>R-Type</i> series.</p>
+
+<p>Force units can either be controlled separately or they can be attached to the R-series fighters. Attached Forces function as a unidirectional shield while providing the fighter with stronger attacks. When not attached, a Force is an independent unit that can be used as a <a href="https://en.wikipedia.org/wiki/Tank_(video_games)">tank</a>.</p>
+
+<p>As in other <i>R-Type</i> titles, the TP-02C POW armor functions as a supply unit. It is also used for capturing in-game locations such as space stations.</p>
+
+<p>The Rr2o-3 has a similar function to the TP-02C but has the added ability to repair friendly units or to mine asteroids for minerals called Solonium, Etherium, and Bydogen which are needed in the production of new units, especially Forces. Certain units on the human side can also extract Bydogen from Bydo units.</p>
+
+<h2>Plot</h2>
+
+<p>The game's narrative is viewed from the perspective of the player-character, who's an officer in Earth's defense forces, called the Space Corps, in the year MC 0065. Various entries in a journal also flesh out the plot.</p>
+
+<ul>
+  <li><b>Space Corps</b></li>
+</ul>
+
+<p>In the initial single-player campaign, the player is freshly commissioned into the Space Corps, which is steadily losing engagements against an alien race called the Bydo. After completing initial training, the player is ordered to investigate an outpost in Mars that has reportedly lost contact. As the Space Corps fleet advances outside the Solar System, the player is able to recruit more pilots. Through a warp-gate station outside Pluto, the player's fleet travels through a <a href="https://en.wikipedia.org/wiki/Hyperspace_(science_fiction)">hyperspace warp</a> called the <i>Tesseract</i> to the Bydo's star system.</p>
+
+<p>In the final battle located in the Bydo homeworld, the player encounters remains of Space Corps ships that were defeated in previous campaigns. The player eventually defeats the Bydo's core but it is a <a href="https://en.wikipedia.org/wiki/Pyrrhic_victory">Pyrrhic victory</a>, as the core opens a black hole that grapples the entire fleet and assimilates them in a large surge of slime. Completing this campaign would unlock the Bydo campaign.</p>
+
+<ul>
+  <li><b>Bydo Empire</b></li>
+</ul>
+
+<p>As the Bydo campaign begins, the player-character awakens from a deep slumber, now absorbed as one of the aliens. As the player fights their way out of the Bydo star system, this time against their old comrades in the Space Corps, they begin to further understand the origins of the Bydo.</p>
+
+<p>However, despite fighting all the way to Earth and defeating the Space Corps' home defense forces, the player-character is forced to admit that despite being from Earth, the fact that they are in a Bydo fleet means they are no longer welcome. The ending video shows the Bydo forces escaping Earth in the midst of a fierce Space Corps counterattack.</p>
+
+<h2>Release</h2>
+
+<h3>Demo version</h3>
+
+<p>A demo version was included with <a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a> PSP Vol.8. It includes Mission A-1, A-2, B stages. In addition, a demo is available for download on the NTSC-U region on the PlayStation Network.</p>
+
+<h3>Full version</h3>
+
+<p>The Japanese version of the game, <i>R-Type Tactics</i>, was released on September 26, 2007.</p>
+
+<p>Pre-orders for the North American version of the game featured a small black pre-painted <a href="https://en.wikipedia.org/wiki/Gashapon">gashapon</a> model of the R-9A Arrowhead fighter which required some assembly. Made by gashapon company Yujin, the kit had the fighter itself, the Force system and bits, plus a display stand.</p>
+
+<h3>Toys</h3>
+
+<p>Toy manufacturer A-Label also released standard and black versions of the R-9A <i>Arrowhead</i> as part of its "Madou Gokin" line. Only 2,000 copies of the standard version were produced, while a Benables custom red version is also available. An Rwf-9D <i>Shooting Star</i> fighter was released in March 2011.</p>
+
+<h2>Reception</h2>
+
+<p>The game received above-average reviews. At the high end, Destructoid gave the game an 85% score, stating that the learning curve is not that steep and the various R-type homages are a plus, while the loss of a reconnaissance unit could make or break the game. GameSpot's 7.0 rating was attributed to the game offering a chance to play massive fleets but the loading times and the repetitive cutscenes were a drag.</p>
+
+<h2>Sequel</h2>
+
+<p>A sequel, <i><a href="https://en.wikipedia.org/wiki/R-Type_Tactics_II:_Operation_Bitter_Chocolate">R-Type Tactics II: Operation Bitter Chocolate</a></i> was released for the PSP and <a href="https://en.wikipedia.org/wiki/PSPgo">PSPgo</a> on December 10, 2009 in Japan in both <a href="https://en.wikipedia.org/wiki/Universal_Media_Disc">retail</a> and <a href="https://en.wikipedia.org/wiki/Digital_distribution">download</a> forms.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

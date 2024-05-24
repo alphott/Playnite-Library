@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lunar - Dragon Song </title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('852e5010-5dd0-4746-8334-da74230e42cd/9f9be4db-c5ce-45a5-a9c6-49dfcf06d0ec.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="852e5010-5dd0-4746-8334-da74230e42cd/d28ee42b-0eda-486b-8e64-c2ea9a569a84.png"/> Lunar - Dragon Song </h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-30/03/2024">30/03/2024</a> 3:50:33</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo DS">Nintendo DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-25/08/2005">25/08/2005</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-52">52</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-59">59</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Japan Art Media">Japan Art Media</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Marvelous Interactive">Marvelous Interactive</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rising Star Games">Rising Star Games</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Ubi Soft">Ubi Soft</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Lunar: Dragon Song</b></i>, known in Japan and Europe as <i><b>Lunar Genesis</b></i> (ルナ-ジェネシス-, <i>Runa Jenesisu</i>), is a <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> developed by Japan Art Media for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> handheld console. The game was released in Japan by <a href="https://en.wikipedia.org/wiki/Marvelous_Interactive">Marvelous Interactive</a> on August 25, 2005, and later available in North America by <a href="https://en.wikipedia.org/wiki/Ubisoft">Ubisoft</a> on September 27, and a European version on February 17, 2006 by <a href="https://en.wikipedia.org/wiki/Rising_Star_Games">Rising Star Games</a>. As the first original <i><a href="https://en.wikipedia.org/wiki/Lunar_(series)">Lunar</a></i> series title in ten years, it was also the first traditional role-playing game available for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a>, utilizing several new features such as combat taking place across of two screens and the use of the system's built-in <a href="https://en.wikipedia.org/wiki/Microphone">microphone</a> to issue commands.</p>
+
+<p>The game takes place a thousand years before the events of the first <i>Lunar</i> game, <i><a href="https://en.wikipedia.org/wiki/Lunar:_The_Silver_Star">Lunar: The Silver Star</a></i>, and centers on Jian Campbell, a young delivery boy and adventurer who must save the world from the rising menace of the Vile Tribe, a race of powerful magicians who wish to gain control of the goddess Althena and take over the world. Largely panned by critics, the game has received negative reviews due to a number of gameplay additions often seen as tedious and debilitating, such as the inability to target specific enemies in combat, as well as the decision to not include series mainstays such as voice acting and full-motion video sequences.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Lunar: Dragon Song</i> is a traditional two-dimensional role-playing video game with an overhead, <a href="https://en.wikipedia.org/wiki/Isometric_projection">isometric</a> viewpoint.  Players may move the game's characters in eight directions using the Nintendo DS <a href="https://en.wikipedia.org/wiki/D-pad">D-pad</a> or <a href="https://en.wikipedia.org/wiki/Stylus">stylus</a> across of a number of different environments and completing story-based objects to move the plot forward. The game includes several differences to other games in the <i><a href="https://en.wikipedia.org/wiki/Lunar_(series)">Lunar</a></i> series, including a simplified world map that allows players to instantly travel to adjacent locations, and a condensed menu accessible from the bottom screen. A card collection system first seen in <i><a href="https://en.wikipedia.org/wiki/Lunar:_Silver_Star_Story_Complete#Lunar_Legend">Lunar Legend</a></i> is expanded to allow the cards to be used for beneficial effects, such as granting special abilities and changing game mechanics. Using the Nintendo DS wireless connection, two players can participate in a <a href="https://en.wikipedia.org/wiki/Multiplayer">multiplayer</a> match using cards obtained through normal gameplay called Scratch Battle. By scratching off sections of each card, a player can "damage" their opponent by revealing numbers on its surface.</p>
+
+<p>Unlike previous <i>Lunar</i> games that took a <a href="https://en.wikipedia.org/wiki/Strategy_game">strategy</a>-based approach to combat, <i>Lunar: Dragon Song</i> relies on a strictly traditional <a href="https://en.wikipedia.org/wiki/Turn-based_strategy">turn-based</a> system where the player inputs commands at the start of each combat round with the appropriate actions taking place in accordance with a character's speed. While a player may freely select any character to use items or supportive magic on, specific enemies cannot be targeted by attacks, with the character <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a> instead choosing the target itself. Game producer and Japan Art Media president Mitsuru Takahashi stated that the game's battle system was made intentionally simplistic to "speed up" combat sequences, as well as streamline the battling process. A player's party may consist of no more than three characters, each of which are switched in or out automatically at certain points throughout the story, with no way to actively switch between them. Before going into battle, a player may choose one of two different modes: Combat and Virtue. Virtue Mode allows a player to earn experience points known as "Althena Conduct" after winning a battle which go towards gaining levels which grant characters increased statistics and new skills. Combat Mode instead yields items.</p>
+
+<h2>Plot</h2>
+
+<h3>Characters</h3>
+
+<p>The principal characters are Jian Campbell and his companions, a group of young adventurers who are caught up in a quest to save the world from the rising menace of the Vile Tribe. Jian himself is a headstrong delivery boy for Gad's Delivery who must often travel through monster infested lands to make his runs, and has trained himself in hand-to-hand combat accordingly. Lucia Collins is a kind-hearted yet bossy young girl who works with Jian, and has a natural gift for healing magic. Gabryel Ryan is a free-thinking young beast-woman who believes humans and beastmen should be considered equals, and fights with a combination of martial arts and magic dances. Flora Banks is a skilled marksman and healer who lives with her brother on the outskirts of the Frontier, a barren place that resembles the world of Lunar before the Goddesses' intervention. Rufus Crow is an adolescent Beastman and general of his nation's army who develops a rivalry with Jian after their first encounter, yet sees him as an ally soon after.</p>
+
+<p>Primary supporting characters include Gad, manager and owner of Gad's Delivery Service where Jian and Lucia are employed, and Zethos, leader of the Beastmen and one of the world's strongest fighters who follows the old doctrine that his people are superior. The primary <a href="https://en.wikipedia.org/wiki/Antagonist">antagonist</a> is Ignatius, member of the villainous Vile Tribe and expert magician who seeks to covet the power of the Goddess for himself. <i>Lunar: Dragon Song</i> is the first game in the series to not have <a href="https://en.wikipedia.org/wiki/Toshiyuki_Kubooka">Toshiyuki Kubooka</a> as lead character designer, but rather as a design supervisor who made final decisions on each character's appearance and maintain a 
+"distinct Lunar feel".</p>
+
+<h3>Story</h3>
+
+<p>The game takes place 1000 years before <i><a href="https://en.wikipedia.org/wiki/Lunar:_The_Silver_Star">Lunar: The Silver Star</a></i>, making it the first game chronologically. The game opens with an explanation of the <i>Lunar</i> <a href="https://en.wikipedia.org/wiki/Folklore">lore</a> and how the Goddess <a href="https://en.wikipedia.org/wiki/Althena">Althena</a> created a habitable place out of a barren wasteland and sent four powerful <a href="https://en.wikipedia.org/wiki/Dragons">dragons</a> to protect it. During the time of this game, Humans and Beastmen are still at odds with one another, and live in opposing towns across the world. The game stars a delivery boy named Jian Campbell who works in the busy port town of Searis delivering parcels and packages to anyone he is assigned. His best friend and partner, Lucia, often joins him in his excursions and helps him defeat monsters that litter the land. Along their journey, they get caught up in the legend of the dragons and, eventually, must put an end to an evil Dragonmaster who seeks to use their power to rule the world.</p>
+
+<h2>Reception</h2>
+
+<p><i>Lunar: Dragon Song</i> experienced low sales during its original release in Japan, selling only 24,673 units in the region. The game received a 27 out of 40 score from Japanese <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu Weekly</a></i> magazine, whose editors found parts of the game to be "bothersome and stressful" such as losing health while dashing and having players choose either experience points or items as a battle reward, but also remarked that the game was designed for people who are moved by an "excellent" storyline and characterization.</p>
+
+<p>Critical reaction to the game's English version was similarly lukewarm, with <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> giving it "mixed" reviews on release. <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i> panned the title's unorthodox gameplay both in and out of battle, claiming that "when its fundamentals are botched this badly, not even <i>Dragon Song'</i>s semidecent story can save it". <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> similarly described the game as an "unfun and almost unplayable nightmare of gameplay design missteps", with the magazine later ranking the game eighth on its list of the "10 Worst Games of 2005" year-end review. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> conversely felt that the game was an average handheld role-playing game, but that it contained many flaws that would require "patience and an abundance of free time" to overcome. IGN said that <i>Lunar: Dragon Song</i> contains several original ideas, but fails to implement them in execution. <i><a href="https://en.wikipedia.org/wiki/1Up.com">1Up.com</a></i> similarly called it "a better-than-average handheld RPG with a likable cast, a charming story, and appealing graphics", but found it inferior in presentation to earlier <i>Lunar</i> titles, finding that it "isn't really up to the thrilling and dramatic heights the series was synonymous". <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> felt that many of the game's features lacked cohesion, remarking that it felt "convoluted where you want it to be simple, and shallow where you wish it had some depth" adding that even the most devout <i>Lunar</i> fans will have a hard time enjoying this game.</p>
+
+<p>In an import review of the North American version, <i><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a></i> commented that <i>Lunar: Dragon Song</i> could have been the DS's first great JRPG, but instead a "wasted opportunity", calling the game's battle system "comfortably the worst in 20 years of RPGs".</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

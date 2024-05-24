@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Xenoblade Chronicles 3D</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1234b947-062b-43d0-859f-cf61948d5f18/c2e539a1-652b-4e89-bc7a-821903b68fda.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1234b947-062b-43d0-859f-cf61948d5f18/4f42b7d7-506c-43b9-aa2f-501af8ee51de.png"/> Xenoblade Chronicles 3D</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo 3DS">Nintendo 3DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-10/06/2010">10/06/2010</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action RPG">Action RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Monolith Soft">Monolith Soft</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Xenoblade Chronicles</b></i> is an <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> developed by <a href="https://en.wikipedia.org/wiki/Monolith_Soft">Monolith Soft</a> and published by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>. Initially released in Japan in 2010, it was later released in the PAL regions in 2011 and in North America in 2012. A port for the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a> was released in 2015, and a remaster for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, titled <i>Xenoblade Chronicles: Definitive Edition</i>, was released in May 2020. <i>Xenoblade Chronicles</i> is the first entry in the <i><a href="https://en.wikipedia.org/wiki/Xenoblade_Chronicles">Xenoblade Chronicles</a></i> series, a subseries which forms part of the larger <i><a href="https://en.wikipedia.org/wiki/Xeno_(series)">Xeno</a></i> metaseries. Although it lacks direct narrative connections to previous <i>Xeno</i> games, like them, it incorporates aesthetic and narrative elements from both <a href="https://en.wikipedia.org/wiki/Science_fantasy">fantasy and science fiction</a>. The game features navigation through an <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> split into zones, side-quests tied to party members' affinity, and a real-time action-based battle system which incorporates Shulk's ability to see brief glimpses of the future.</p>
+
+<p><i>Xenoblade Chronicles</i> takes place on the frozen bodies of two warring titans, the Bionis and the Mechonis. The people of the Bionis, including the human-like Homs, are at <a href="https://en.wikipedia.org/wiki/Perpetual_war">perpetual war</a> with the Mechon, a mechanical race of the Mechonis. Key to the Homs' efforts in fighting against the Mechon is the Monado, a sword said to have once been wielded by the Bionis. During an attack on his colony, the main protagonist <a href="https://en.wikipedia.org/wiki/Shulk">Shulk</a> discovers his ability to wield the Monado and sets out on a quest for revenge with his best friend, Reyn, with others joining in as the game progresses.</p>
+
+<p>The concept for <i>Xenoblade Chronicles</i> originated in June 2006, when the game's executive director and lead writer, <a href="https://en.wikipedia.org/wiki/Tetsuya_Takahashi">Tetsuya Takahashi</a>, visualized and constructed a model of two giant titans frozen in place, with people living on their bodies. Development began in 2007 under the title <i>Monado: Beginning of the World</i>, though it was eventually rebranded with its current title to honor Takahashi's previous work on the <i>Xeno</i> series. The script was worked on by Takahashi, anime writer Yuichiro Takeda, and Nintendo writer Yurie Hattori. The music was handled by six different composers, including first-timer and lead composer Manami Kiyota and industry veterans <a href="https://en.wikipedia.org/wiki/Yoko_Shimomura">Yoko Shimomura</a> and <a href="https://en.wikipedia.org/wiki/Yasunori_Mitsuda">Yasunori Mitsuda</a>, with the latter also writing the ending theme, "Beyond the Sky".</p>
+
+<p>The game was announced in 2009 under its original title and released in Japan the following year. Despite releasing in Europe and in Oceania, its North American release remained unconfirmed until December 2011, when a fan campaign called <a href="https://en.wikipedia.org/wiki/Operation_Rainfall">Operation Rainfall</a> drew attention to the game. Upon release, the game was critically acclaimed as one of the best recent role-playing games, while its New Nintendo 3DS port was praised for successfully re-creating the game in a portable form. It was particularly praised for its story, which critics called innovative and surprisingly complex, and was commercially successful in both Japan and the West. In the years since its release, it has been considered to be among <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">the greatest games of all time</a>. A <a href="https://en.wikipedia.org/wiki/Spiritual_successor">spiritual successor</a> by the same development team for the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, <i><a href="https://en.wikipedia.org/wiki/Xenoblade_Chronicles_X">Xenoblade Chronicles X</a></i>, was released in April 2015.<!--No exact dates; per WP:VG/DATE--> A sequel for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <i><a href="https://en.wikipedia.org/wiki/Xenoblade_Chronicles_2">Xenoblade Chronicles 2</a>,</i> was released in December 2017. A third entry, <i><a href="https://en.wikipedia.org/wiki/Xenoblade_Chronicles_3">Xenoblade Chronicles 3</a>,</i> was released in July 2022, also on the Nintendo Switch.</p>
+
+<h3><i>Xenoblade Chronicles 3D</i></h3>
+
+<p>A port for the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a>, titled <i>Xenoblade Chronicles 3D</i>, was released worldwide in April 2015. It features <a href="https://en.wikipedia.org/wiki/StreetPass">StreetPass</a> functionality, as well as compatibility with the Shulk <a href="https://en.wikipedia.org/wiki/Amiibo">amiibo</a>. The port was originally announced in August 2014 alongside the New Nintendo 3DS. The port was co-developed by <a href="https://en.wikipedia.org/wiki/Monster_Games">Monster Games</a>, a frequent collaborator with Nintendo on well-received ports. They were requested for the job by Nintendo as the staff at Monolith Soft were already working on the next <i>Xenoblade</i> title. Development on the port started between Autumn and Winter 2013 initially for the original <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a>, but initial testing showed that the original platform lacked the memory and power to effectively run the game, since the Wii's processing capabilities were greater than the regular 3DS. Hearing about the New 3DS, it was decided to use its increased processing power to realize the game's ambition. Its increased power made the port possible, and its button layout, with the inclusion of the ZL and ZR shoulder buttons and the C-Stick, meant that the original Wii Classic Controller button layout could be used without adjustment. As part of the alterations made to the title, much of the on-screen information was moved down to the bottom Touch screen so as to de-clutter the top screen, while the layout was carefully arranged so as to maintain the feel of the original as much as possible.</p>
+
+<p>To maintain a steady <a href="https://en.wikipedia.org/wiki/Frame_rate">frame rate</a> and the seamless transitions between environments, unspecified "technical tricks" were used. They also worked hard to include 3D capacity despite the resultant technical difficulties. The most difficult part of the development was getting the game's scale to work within the new hardware. This entailed the creation of a new graphics engine with a custom visibility culling and complex <a href="https://en.wikipedia.org/wiki/Level_of_detail_(computer_graphics)">level of detail</a> systems. All of the environments were rebuilt and optimized for the new system while keeping the original aesthetic intact. The reason given for porting the game to the New 3DS rather than the Wii U home console was that the length of the game could be intimidating for the modern gamer, who was becoming more used to on-the-go, quick gaming sessions.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
