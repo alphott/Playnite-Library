@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chrono Trigger</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('4ace108c-ce01-48c2-8a96-1c13aaf9b38e/168839c5-1ec6-4946-b26f-bd5bb08dc905.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="4ace108c-ce01-48c2-8a96-1c13aaf9b38e/3ba02afa-ccc6-4a42-900d-217dcd5e7068.ico"/> Chrono Trigger</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo DS">Nintendo DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-11/03/1995">11/03/1995</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Square">Square</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Square">Square</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Chrono Trigger</b></i> (<a href="https://en.wikipedia.org/wiki/Japanese_language">Japanese</a>: クロノ・トリガー, <a href="https://en.wikipedia.org/wiki/Hepburn_romanization">Hepburn</a>: <i>Kurono Torigā</i>) is a 1995 <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Square_(video_game_company)">Square</a>. It was originally released for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a> as the first entry in the <a href="https://en.wikipedia.org/wiki/Chrono_(series)"><i>Chrono</i> series</a>. The game's <a href="https://en.wikipedia.org/wiki/Video_game_development">development team</a> included three <a href="https://en.wikipedia.org/wiki/Video_game_designer">designers</a> that Square dubbed the "Dream Team": <a href="https://en.wikipedia.org/wiki/Hironobu_Sakaguchi">Hironobu Sakaguchi</a>, creator of Square's <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy">Final Fantasy</a></i> series; <a href="https://en.wikipedia.org/wiki/Yuji_Horii">Yuji Horii</a>, creator of <a href="https://en.wikipedia.org/wiki/Enix">Enix</a>'s <i><a href="https://en.wikipedia.org/wiki/Dragon_Quest">Dragon Quest</a></i> series; and <a href="https://en.wikipedia.org/wiki/Akira_Toriyama">Akira Toriyama</a>, character designer of <i>Dragon Quest</i> and author of the <i><a href="https://en.wikipedia.org/wiki/Dragon_Ball_(manga)">Dragon Ball</a></i> manga series. In addition, <a href="https://en.wikipedia.org/wiki/Takashi_Tokita">Takashi Tokita</a> co-directed the game and co-wrote the scenario, <a href="https://en.wikipedia.org/wiki/Kazuhiko_Aoki_(video_game_designer)">Kazuhiko Aoki</a> produced the game, while <a href="https://en.wikipedia.org/wiki/Masato_Kato">Masato Kato</a> wrote most of the story. The game's plot follows a <a href="https://en.wikipedia.org/wiki/Characters_of_Chrono_Trigger">group of adventurers</a> who travel through time to prevent a global catastrophe.</p>
+
+<p><i>Chrono Trigger</i> was a critical and commercial success upon release, receiving multiple accolades from <a href="https://en.wikipedia.org/wiki/Video_game_journalism">gaming publications</a>, and is considered one of <a href="https://en.wikipedia.org/wiki/Fourth_generation_of_video_game_consoles">fourth-generation console gaming</a>'s most significant titles and among the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_ever_made">greatest video games ever made</a>. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> magazine described aspects of the game as revolutionary, including its <a href="https://en.wikipedia.org/wiki/Multiple_endings">multiple endings</a>, plot-related <a href="https://en.wikipedia.org/wiki/Side-quest">side-quests</a> focusing on <a href="https://en.wikipedia.org/wiki/Character_arc">character development</a>, unique battle system, and detailed <a href="https://en.wikipedia.org/wiki/Video_game_graphics">graphics</a>. The <a href="https://en.wikipedia.org/wiki/Music_of_Chrono_Trigger">game's soundtrack</a>, scored by <a href="https://en.wikipedia.org/wiki/Yasunori_Mitsuda">Yasunori Mitsuda</a> with assistance by veteran <i>Final Fantasy</i> composer <a href="https://en.wikipedia.org/wiki/Nobuo_Uematsu">Nobuo Uematsu</a>, has been hailed as <a href="https://en.wikipedia.org/wiki/List_of_video_game_soundtracks_considered_the_best">one of the best video game soundtracks of all time</a>. <i>Chrono Trigger</i> was the second best-selling <a href="https://en.wikipedia.org/wiki/1995_in_video_games">game of 1995</a> in Japan, and the various incarnations of the game have shipped more than 3.5 million copies worldwide.</p>
+
+<p>Distributed in the Japanese and North American markets in 1995, the game has been <a href="https://en.wikipedia.org/wiki/Chrono_Trigger#Release">re-released on several other platforms</a> with varying differences. Square published a <a href="https://en.wikipedia.org/wiki/Porting">ported version</a> by <a href="https://en.wikipedia.org/wiki/Tose_(company)">Tose</a> in Japan for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> in 1999, which was later repackaged with a <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_IV">Final Fantasy IV</a></i> port as <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_Chronicles">Final Fantasy Chronicles</a></i> (2001) exclusively in North America. A slightly enhanced <i>Chrono Trigger</i>, again ported by Tose, was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> in Japan and North America in 2008, and <a href="https://en.wikipedia.org/wiki/PAL_region">PAL regions</a> in 2009. The game has also been ported to <a href="https://en.wikipedia.org/wiki/I-mode">i-mode</a>, the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a>, the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a>, <a href="https://en.wikipedia.org/wiki/IOS">iOS</a>, and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a>. In 2018, a higher resolution version was released for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a> via <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>.</p>
+
+<h3>Nintendo DS</h3>
+
+<p>On July 2, 2008, Square Enix announced that they were planning to bring <i>Chrono Trigger</i> to the <a href="https://en.wikipedia.org/wiki/Nintendo_DS">Nintendo DS</a> handheld platform. Composer <a href="https://en.wikipedia.org/wiki/Yasunori_Mitsuda">Yasunori Mitsuda</a> was pleased with the project, exclaiming "finally!" after receiving the news from Square Enix and maintaining, "it's still a very deep, very high-quality game even when you play it today. I'm very interested in seeing what kids today think about it when they play it." Square retained Masato Kato to oversee the port, and <a href="https://en.wikipedia.org/wiki/Tose_(company)">Tose</a> to program it. Kato explained, "I wanted it to be based on the original Super NES release rather than the PlayStation version. I thought we should look at the additional elements from the PlayStation version, re-examine and re-work them to make it a complete edition. That's how it struck me and I told the staff so later on." Square Enix touted the game by displaying Akira Toriyama's original art at the 2008 <a href="https://en.wikipedia.org/wiki/Tokyo_Game_Show">Tokyo Game Show</a>.</p>
+
+<p>The DS re-release contains all of the bonus material from the PlayStation port, as well as other enhancements. The added features include a more accurate and revised translation by Tom Slattery, a dual-screen mode which clears the top screen of all menus, a self-completing map screen, and a default "run" option. It also features the option to choose between two control schemes: one mirroring the original SNES controls, and the other making use of the DS's touch screen. Masato Kato participated in development, overseeing the addition of the monster-battling Arena, two new areas, the Lost Sanctum and the Dimensional Vortex, and a new ending that further foreshadows the events of <i><a href="https://en.wikipedia.org/wiki/Chrono_Cross">Chrono Cross</a></i>. One of the areas within the Vortex uses the "Singing Mountain" song that was featured on the original <i>Chrono Trigger</i> soundtrack. Additionally, one of the dungeons absent from the original game was remade within the Vortex. These new dungeons met with mixed reviews; <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> called them "frustrating" and "repetitive", while <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> noted that "the extra quests in the game connect extremely well." It was a nominee for "Best RPG for the Nintendo DS" in <a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s 2008 video game awards. The Nintendo DS version of <i>Chrono Trigger</i> was the 22nd best-selling game of 2008 in Japan.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

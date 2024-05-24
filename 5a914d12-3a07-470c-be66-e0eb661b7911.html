@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bravely Default</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('5a914d12-3a07-470c-be66-e0eb661b7911/8c9acf85-da97-4a16-a161-16cd17a14c9d.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="5a914d12-3a07-470c-be66-e0eb661b7911/06aea1e5-dece-4eda-9b28-9843262eaada.png"/> Bravely Default</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo 3DS">Nintendo 3DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-11/10/2012">11/10/2012</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Silicon Studio">Silicon Studio</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Square Enix">Square Enix</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Bravely Default</b></i>, known in Japan as <i><b>Bravely Default: Flying Fairy</b></i>, is a <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Silicon_Studio">Silicon Studio</a> for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> <a href="https://en.wikipedia.org/wiki/Handheld_game_console">handheld console</a>. <i>Bravely Default</i> was originally released in 2012 and later rereleased as an expanded edition in 2013 subtitled <i><b>For the Sequel</b></i> in Japan. <i>For the Sequel</i> was later released in Europe, Australia, and North America in 2014 simply titled as <i>Bravely Default</i>. This expanded edition used the subtitle <i><b>Where The Fairy Flies</b></i> in territories outside of Japan. <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a> published the game in Japan, while <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> handled publishing duties overseas. The gameplay uses a <a href="https://en.wikipedia.org/wiki/Turns,_rounds_and_time-keeping_systems_in_games#Turn-based">turn-based</a> battle system and job system, in addition to incorporating options to combine job abilities and adjust battle speed and random encounter rates.</p>
+
+<p><i>Bravely Default</i> is set in the world of Luxendarc, which is kept in balance by four elemental crystals protected by the Crystal Orthodoxy, a religious group with influence across the world. The story follows the adventures of four protagonists: Agnès Oblige, vestal of the Wind Crystal, who was forced out of her duties after the crystals were consumed by darkness; Tiz Arrior, the sole survivor from a destroyed village caused by the crystals' blight; Ringabel, an amnesiac philanderer trying to uncover a mysterious journal in his possession; and Edea Lee, a defector of a large army bent on capturing Agnès. Together, the party aims to reclaim the four crystals from the darkness and confront a greater evil along the way.</p>
+
+<p>Starting development as an action role-playing sequel to <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy:_The_4_Heroes_of_Light">Final Fantasy: The 4 Heroes of Light</a></i>, it retained elements from the <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy">Final Fantasy</a></i> series while having its own story and gameplay elements. The producer of <i>The 4 Heroes of Light</i>, Tomoya Asano, returned to produce <i>Bravely Default</i>. The story's writer was Naotaka Hayashi, who was brought in from <a href="https://en.wikipedia.org/wiki/5pb.">5pb.</a> due to his work on <i><a href="https://en.wikipedia.org/wiki/Steins;Gate">Steins;Gate</a></i>. The characters designs were handled by multiple artists, including art director <a href="https://en.wikipedia.org/wiki/Akihiko_Yoshida">Akihiko Yoshida</a> and mangaka <a href="https://en.wikipedia.org/wiki/Atsushi_Ōkubo">Atsushi Ōkubo</a>. The game was influenced by western video games and <a href="https://en.wikipedia.org/wiki/Television_series">television series</a>, and individual elements were inspired by aspects of the <i><a href="https://en.wikipedia.org/wiki/Dragon_Quest">Dragon Quest</a></i> series and <i><a href="https://en.wikipedia.org/wiki/Higurashi_When_They_Cry">Higurashi When They Cry</a></i>. The music, composed by Revo of <a href="https://en.wikipedia.org/wiki/Sound_Horizon">Sound Horizon</a>, was intended to evoke the feelings of classic series such as <i>Dragon Quest</i> and <i><a href="https://en.wikipedia.org/wiki/SaGa_(series)">SaGa</a></i>.</p>
+
+<p><i>Bravely Default</i> was announced in September 2011 as part of Nintendo's 2012 lineup for the platform. In the run-up to release, multiple demos were developed, and the team adjusted the game using feedback from players. <i>For the Sequel</i> was the basis for the overseas release, being localized without any subtitle. In both Japan and overseas, <i>Bravely Default</i> met with strong sales and critical acclaim. Common praise went to the gameplay's mixture of traditional mechanics and new elements, along with its storyline, graphics and music. Main points of criticism were its repetitive late-game stages and elements of its social gameplay. <i>Bravely Default</i> spawned multiple media tie-ins and spin-off games. A direct sequel, <i><a href="https://en.wikipedia.org/wiki/Bravely_Second:_End_Layer">Bravely Second: End Layer</a></i>, was released in 2015 in Japan and 2016 overseas for the Nintendo 3DS, while another sequel set in a new world, <i><a href="https://en.wikipedia.org/wiki/Bravely_Default_II">Bravely Default II</a></i>, was released worldwide in 2021 on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>. The <i>Bravely</i> series has shipped over 3 million copies by November 2021.</p>
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
