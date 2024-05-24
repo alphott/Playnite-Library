@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sword of Mana</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('0abf3763-0ba3-4068-97d8-c9cfd85865c1/a9de307c-4638-4e87-8053-1eaea0d690e6.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="0abf3763-0ba3-4068-97d8-c9cfd85865c1/6633fbcf-8d39-49ed-a81a-77a15b13c27b.png"/> Sword of Mana</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-16/05/2024">16/05/2024</a> 17:59:47</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo Game Boy Advance">Nintendo Game Boy Advance</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-29/08/2003">29/08/2003</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action RPG">Action RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Brownie Brown">Brownie Brown</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Square Enix">Square Enix</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Square Enix">Square Enix</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Sword of Mana</b></i>, originally released in Japan as <i><b>Shin'yaku: Seiken Densetsu</b></i> (.mw-parser-output .templateruby>rt{font-variant-east-asian:ruby;font-size:85%}.mw-parser-output .templateruby.large{font-size:250%}.mw-parser-output .templateruby.large>rt{font-size:50%}新約(しんやく) 聖剣伝説(せいけんでんせつ), lit. <i>A New Testament: The Legend of the Sacred Sword</i>), is a 2003 <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing game</a> developed by <a href="https://en.wikipedia.org/wiki/Square_Enix">Square Enix</a> and <a href="https://en.wikipedia.org/wiki/Brownie_Brown">Brownie Brown</a> and published by Square Enix and <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>. It is an <a href="https://en.wikipedia.org/wiki/Video_game_remake">enhanced remake</a> of the first game in the <a href="https://en.wikipedia.org/wiki/Mana_(series)"><i>Mana</i> series</a>, the <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a> game <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_Adventure">Seiken Densetsu: Final Fantasy Gaiden</a></i>, which was released as <i>Final Fantasy Adventure</i> in North America and as <i>Mystic Quest</i> in Europe.  <i>Sword of Mana</i> was the fifth release in the series. Set in a <a href="https://en.wikipedia.org/wiki/High_fantasy">high fantasy</a> universe, the game follows an unnamed hero and heroine as they seek to defeat the Dark Lord and defend the Mana Tree from enemies who wish to misuse its power.</p>
+
+<p>While incorporating gameplay elements from the original game and generally following the same plot, <i>Sword of Mana</i> has new gameplay mechanics and a much more involved story. It removes elements of the <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy">Final Fantasy</a></i> series present in the original game as a marketing ploy, while adding in gameplay elements and artistic styles from later games in the series. The plot is modified to allow the player to follow the parallel stories of either the hero or the heroine, and the backstory and dialogue is expanded from the original. <i>Sword of Mana</i> was produced by series creator <a href="https://en.wikipedia.org/wiki/Koichi_Ishii">Koichi Ishii</a>, directed by Takeo Oin, and largely developed by employees of Brownie Brown who had previously worked on the series for <a href="https://en.wikipedia.org/wiki/Square_(video_game_company)">Square</a>.</p>
+
+<p>The game received weakly positive reviews from critics. Reviewers praised the graphics of the game, as well as its enhancements to the original version. They were generally dismissive of the plot, even with enhancements, and disliked elements of the gameplay, especially the computer-controlled ally. Critics recommended the game mainly to fans of the genre or the series. <i>Final Fantasy Adventure</i> received a second remake in 2016, <i><a href="https://en.wikipedia.org/wiki/Adventures_of_Mana">Adventures of Mana</a></i>.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

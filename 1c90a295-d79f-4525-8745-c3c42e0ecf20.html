@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dot Hack Fragment</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1c90a295-d79f-4525-8745-c3c42e0ecf20/49f6c136-ef02-4052-8a0b-5641f2956648.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1c90a295-d79f-4525-8745-c3c42e0ecf20/933ef412-680a-4c5e-a592-4990dabb0937.ico"/> Dot Hack Fragment</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 18:13:02</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-20/06/2002">20/06/2002</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action RPG">Action RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-CyberConnect2">CyberConnect2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Bandai">Bandai</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>.hack</b></i> (<a href="https://en.wikipedia.org/wiki/Help:IPA/English">/dɒt hæk/</a>) is a series of <a href="https://en.wikipedia.org/wiki/Single-player">single-player</a> <a href="https://en.wikipedia.org/wiki/Action_role-playing">action role-playing</a> video games developed for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> console by <a href="https://en.wikipedia.org/wiki/CyberConnect2">CyberConnect2</a> and published by <a href="https://en.wikipedia.org/wiki/Bandai">Bandai</a>. The four games, <i>.hack//Infection</i>, <i>.hack//Mutation</i>, <i>.hack//Outbreak</i>, and <i>.hack//Quarantine</i>, all feature a "<a href="https://en.wikipedia.org/wiki/Story_within_a_story">game within a game</a>", a fictional <a href="https://en.wikipedia.org/wiki/Massively_multiplayer_online_role-playing_game">massively multiplayer online role-playing game</a> (MMORPG) called <i>The World</i> which does not require the player to connect to the Internet. Players may transfer their characters and data between games in the series. Each game comes with an extra <a href="https://en.wikipedia.org/wiki/DVD">DVD</a> containing an episode of <i><a href="https://en.wikipedia.org/wiki/.hack//Liminality">.hack//Liminality</a></i>, the accompanying <a href="https://en.wikipedia.org/wiki/Original_video_animation">original video animation</a> (OVA) series which details fictional events that occur concurrently with the games.</p>
+
+<p>The games are part of a <a href="https://en.wikipedia.org/wiki/Multimedia_franchise">multimedia franchise</a> called <i><a href="https://en.wikipedia.org/wiki/.hack#Project_.hack">Project .hack</a></i>, which explores the mysterious origins of <i>The World</i>. Set after the events of the anime series, <i><a href="https://en.wikipedia.org/wiki/.hack//Sign">.hack//Sign</a></i>, the games focus on a player character named Kite and his quest to discover why some users have become <a href="https://en.wikipedia.org/wiki/Coma">comatose</a> in the real world as a result of playing <i>The World</i>. The search evolves into a deeper investigation of the game and its effects on the stability of the <a href="https://en.wikipedia.org/wiki/Internet">Internet</a>.</p>
+
+<p>Critics gave the series mixed reviews. It was praised for its unique setting and its commitment to preserve the <a href="https://en.wikipedia.org/wiki/Suspension_of_disbelief">suspension of disbelief</a>, as well as the <a href="https://en.wikipedia.org/wiki/Character_creation">character designs</a>. However, it was criticized for uneven <a href="https://en.wikipedia.org/wiki/Pacing_(narrative)">pacing</a> and a lack of improvement between games in the series. The commercial success of the franchise led to the production of <i><a href="https://en.wikipedia.org/wiki/.hack_(video_game_series)#.hack//frägment">.hack//frägment</a></i>—a Japan-only <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> of the series with <a href="https://en.wikipedia.org/wiki/Online_game">online capabilities</a>—and <i><a href="https://en.wikipedia.org/wiki/.hack//G.U.">.hack//G.U.</a></i>, another video game trilogy which was released for the PlayStation 2 between 2006 and 2007. A remastered collection of the latter was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> in 2017, titled <i>.hack//G.U. Last Recode</i>. The collection was later released on the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> on March 11, 2022.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

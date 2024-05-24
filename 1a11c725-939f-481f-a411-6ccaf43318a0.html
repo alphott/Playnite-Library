@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mega Man X</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1a11c725-939f-481f-a411-6ccaf43318a0/4cd6f34b-82cb-4571-bd45-b1b0e284dd4a.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1a11c725-939f-481f-a411-6ccaf43318a0/3869d22f-a266-4efe-bf27-510387e44f64.ico"/> Mega Man X</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:45</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-17/12/1993">17/12/1993</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-67">67</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platformer">Platformer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Capcom">Capcom</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Mega Man X</b></i> is an <a href="https://en.wikipedia.org/wiki/Action_game">action</a>-<a href="https://en.wikipedia.org/wiki/Platformer">platform</a> game developed and published by <a href="https://en.wikipedia.org/wiki/Capcom">Capcom</a> for the <a href="https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System">Super Nintendo Entertainment System</a>. It was the first <i>Mega Man</i> game for the <a href="https://en.wikipedia.org/wiki/History_of_video_game_consoles_(fourth_generation)">16-bit</a> console and the first game in the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X">Mega Man X</a></i> series, a spin-off to the <a href="https://en.wikipedia.org/wiki/Mega_Man_(original_series)">original <i>Mega Man</i> series</a> that began on the Super NES's predecessor, the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a>. <i>Mega Man X</i> was released in Japan on December 17, 1993 and was released in both North America and Europe the following year. Taking place a century after the original <i>Mega Man</i> series, <i>Mega Man X</i> is set in a futuristic world populated by both humans and "Reploids", robots capable of thinking, feeling, and growing like their human creators. Because of these complex attributes, many Reploids are prone to destructive, renegade activity and are thereafter referred to as "Mavericks". The plot of the game follows the protagonist <a href="https://en.wikipedia.org/wiki/X_(Mega_Man)">X</a>, an android member of a military task force called the "Maverick Hunters". With the help of his partner <a href="https://en.wikipedia.org/wiki/Zero_(Mega_Man)">Zero</a>, X must thwart the plans of <a href="https://en.wikipedia.org/wiki/List_of_Mega_Man_characters#Sigma">Sigma</a>, a powerful Maverick leader wishing to bring about <a href="https://en.wikipedia.org/wiki/Human_extinction">human extinction</a>.</p>
+
+<p>With the transition to more advanced gaming hardware, series artist <a href="https://en.wikipedia.org/wiki/Keiji_Inafune">Keiji Inafune</a> explained that the development of <i>Mega Man X</i> involved reinventing <i>Mega Man</i> through gameplay expansion and a more mature storyline while still maintaining the basic concepts on which the franchise was built. Much like the NES <i>Mega Man</i> games that came before it, <i>Mega Man X</i> is a standard action-platform game where the player takes control of the eponymous character and must complete a set of eight, initial stages in any order desired. Defeating the <a href="https://en.wikipedia.org/wiki/Boss_(video_gaming)">boss</a> character at the end of each stage grants the player one new weapon that can then be toggled and used at will for the remainder of the game. However, <i>Mega Man X</i> adds a number of new features and makes radical changes to the original gameplay mechanics of previous releases in the series. These include allowing the player to dash along the ground, scale walls, and obtain armor attachments which grant special abilities.</p>
+
+<p><i>Mega Man X</i> has met with positive reviews for its gameplay, sound, and graphics, as well as its attempt to augment the aging <i>Mega Man</i> franchise. It is considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a>. A longterm commercial success on the SNES, <i>Mega Man X</i> has since been <a href="https://en.wikipedia.org/wiki/Porting">ported</a> to <a href="https://en.wikipedia.org/wiki/Personal_computer">personal computers</a> (PCs) and mobile devices, included in the North American <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X_Collection">Mega Man X Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> (PS2), and released on the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> download service for the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, the <a href="https://en.wikipedia.org/wiki/Wii_U">Wii U</a>, and the <a href="https://en.wikipedia.org/wiki/New_Nintendo_3DS">New Nintendo 3DS</a>. The game also received a <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> on the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> (PSP) titled <i><b><a href="https://en.wikipedia.org/wiki/Mega_Man_Maverick_Hunter_X">Mega Man Maverick Hunter X</a></b></i>. <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> re-released <i>Mega Man X</i> in September 2017 as part of the company's <a href="https://en.wikipedia.org/wiki/Super_NES_Classic_Edition">Super NES Classic Edition</a>, and a limited physical re-release for the SNES in celebration of <i>Mega Man'</i>s 30th Anniversary due for release in September 2018 and published by <a href="https://en.wikipedia.org/wiki/Iam8bit">iam8bit</a>. The game is also included in the <i><a href="https://en.wikipedia.org/wiki/Mega_Man_X_Legacy_Collection">Mega Man X Legacy Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, and <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
