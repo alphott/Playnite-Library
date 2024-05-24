@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>WWE SmackDown! vs. Raw 2006</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('b7bdd9dd-4cab-486a-8b57-e19f2bba30da/6b1a6553-094b-4f78-a24c-38c152bac05f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="b7bdd9dd-4cab-486a-8b57-e19f2bba30da/2a2400f5-60f5-4c9a-ad0e-bbe749ac4d1f.png"/> WWE SmackDown! vs. Raw 2006</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-11/11/2005">11/11/2005</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-66">66</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Fighting">Fighting</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sports">Sports</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Yuke's">Yuke's</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-THQ">THQ</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Yuke's">Yuke's</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>WWE SmackDown! vs. Raw 2006</b></i> (also known as <i><b>Exciting Pro Wrestling 7</b></i> in Japan) is a <a href="https://en.wikipedia.org/wiki/Professional_wrestling">professional wrestling</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> and developed by <a href="https://en.wikipedia.org/wiki/Yuke's">Yuke's</a> that was released on the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> by <a href="https://en.wikipedia.org/wiki/THQ">THQ</a> in 2005. It is part of the <i><a href="https://en.wikipedia.org/wiki/WWE_2K">WWE SmackDown vs. Raw</a></i> video game series based on the <a href="https://en.wikipedia.org/wiki/Professional_wrestling_promotion">professional wrestling promotion</a> <a href="https://en.wikipedia.org/wiki/WWE">World Wrestling Entertainment</a> (WWE), and is the successor to the 2004 game <a href="https://en.wikipedia.org/wiki/WWE_SmackDown!_vs._Raw">of the same name</a>. <i>SmackDown! vs. Raw 2006</i> was also the first game in the series to be released on PlayStation Portable and the last game in the <i>SmackDown!/SmackDown! vs. Raw</i> series that was <a href="https://en.wikipedia.org/wiki/PlayStation">PlayStation</a> exclusive.</p>
+
+<p>The main focus of <i>2006</i> is to bring more realism and authenticity to the series with many new features, breaking away from the arcade-like gameplay of earlier installments. The game sees the additions of the new <a href="https://en.wikipedia.org/wiki/Professional_wrestling_match_types#Container-based_variations">Buried Alive</a> and Fulfill Your Fantasy matches, and the inclusion of two new modes in <a href="https://en.wikipedia.org/wiki/Professional_wrestling_authority_figures#General_Managers">General Manager</a> and Create-An-Entrance.</p>
+
+<p><i>SmackDown! vs. Raw 2006</i> went on to become best selling game for the PlayStation 2 console out of the entire series. A <a href="https://en.wikipedia.org/wiki/Steelbook">steelbook</a> version of the game was released exclusively in Australia. The game was succeeded by <i><a href="https://en.wikipedia.org/wiki/WWE_SmackDown_vs._Raw_2007">WWE SmackDown vs. Raw 2007</a></i> in 2006.</p>
+
+<h2>Gameplay</h2>
+
+<h3>Match gameplay</h3>
+
+<p>A new momentum bar was introduced to determine the flow of the match, replacing the old <a href="https://en.wikipedia.org/wiki/Face_(professional_wrestling)">clean</a>/<a href="https://en.wikipedia.org/wiki/Heel_(professional_wrestling)">dirty</a> and <i>SmackDown!</i> meters. If the player chooses their wrestler to fight clean, he/she will be portrayed as a <a href="https://en.wikipedia.org/wiki/Face_(professional_wrestling)">face</a>. If they choose to fight dirty, he/she will be portrayed as a <a href="https://en.wikipedia.org/wiki/Heel_(professional_wrestling)">heel</a>. The player also has to keep an eye on their stamina bar, which drains as the wrestler fights; the more elaborate the offense, the more tired the wrestler will be. The player must regenerate their stamina bar to prevent becoming completely exhausted and unable to perform. However, this is an optional feature and can be easily removed in the game's options menu. Each character also has a new stamina attribute, meaning those with a low stamina rating will tire out more easily. Also included is a new <a href="https://en.wikipedia.org/wiki/Hardcore_wrestling">Hardcore</a> attribute, allowing those rated high to inflict more damage to their opponent with weapons.</p>
+
+<p>Grapples have been vastly improved, with each character having more specialized grapple types than the previous game's unchangeable group of four grapples. Each character has choice of three out of seven grapples: Power, Speed, Technical, Brawler, Martial Arts, Luchadore, and Old School. Each character also has a Clean/Dirty grapple category and a Submission grapple category, bringing the total number of grapples to five. A new powerful version of the <a href="https://en.wikipedia.org/wiki/Professional_wrestling_throws#Irish_whip">Irish whip</a> has been included, giving more offense to the opponent, but at the price of draining more stamina.</p>
+
+<p>The game includes <a href="https://en.wikipedia.org/wiki/The_Great_American_Bash_(2004)">The Great American Bash (2004)</a>, <a href="https://en.wikipedia.org/wiki/Vengeance_(2004)">Vengeance (2004)</a>, <a href="https://en.wikipedia.org/wiki/SummerSlam_(2004)">SummerSlam (2004)</a>, <a href="https://en.wikipedia.org/wiki/Unforgiven_(2004)">Unforgiven (2004)</a>, <a href="https://en.wikipedia.org/wiki/No_Mercy_(2004)">No Mercy (2004)</a>, <a href="https://en.wikipedia.org/wiki/Taboo_Tuesday_(2004)">Taboo Tuesday (2004)</a>, <a href="https://en.wikipedia.org/wiki/Survivor_Series_(2004)">Survivor Series (2004)</a>, <a href="https://en.wikipedia.org/wiki/Armageddon_(2004)">Armageddon (2004)</a>, <a href="https://en.wikipedia.org/wiki/New_Year's_Revolution_(2005)">New Year's Revolution (2005)</a>, <a href="https://en.wikipedia.org/wiki/Royal_Rumble_(2005)">Royal Rumble (2005)</a>, <a href="https://en.wikipedia.org/wiki/No_Way_Out_(2005)">No Way Out (2005)</a>, <a href="https://en.wikipedia.org/wiki/WrestleMania_21">WrestleMania 21</a>, <a href="https://en.wikipedia.org/wiki/Backlash_(2005)">Backlash (2005)</a>, <a href="https://en.wikipedia.org/wiki/Judgment_Day_(2005)">Judgment Day (2005)</a>, and <a href="https://en.wikipedia.org/wiki/ECW_One_Night_Stand_(2005)">ECW One Night Stand (2005)</a> PPV arenas, as well as the <a href="https://en.wikipedia.org/wiki/WrestleMania_IX">WrestleMania IX</a> arena. There are also arenas based on each WWE television show (<a href="https://en.wikipedia.org/wiki/WWE_Raw">Raw</a>, <a href="https://en.wikipedia.org/wiki/WWE_SmackDown">SmackDown!</a>, <a href="https://en.wikipedia.org/wiki/WWE_Heat">Heat</a>, and <a href="https://en.wikipedia.org/wiki/WWE_Velocity">Velocity</a>).</p>
+
+<p>The arena crowd has also been graphically improved, with fully 3D characters replacing the mixture of 3D and 2D characters seen in the previous games.</p>
+
+<h3>Roster</h3>
+
+<p><i>WWE SmackDown! vs. Raw 2006</i> features the video game debuts of 20 superstars, as well as the returns of <a href="https://en.wikipedia.org/wiki/Hulk_Hogan">Hulk Hogan</a> (in his 1980s, <a href="https://en.wikipedia.org/wiki/New_World_Order_(professional_wrestling)">nWo "Hollywood"</a>, and 2000s versions) and <a href="https://en.wikipedia.org/wiki/Stone_Cold_Steve_Austin">Stone Cold Steve Austin</a>; both men had been left out from the previous game (and in Hogan's case, <i><a href="https://en.wikipedia.org/wiki/WWE_SmackDown!_Here_Comes_the_Pain">WWE SmackDown! Here Comes the Pain</a></i>) due to their respective sabbaticals from the company.</p>
+
+<h3>Match types</h3>
+
+<p><i>WWE SmackDown! vs. Raw 2006</i> includes an improved <a href="https://en.wikipedia.org/wiki/Steel_cage_match">steel cage match</a>, now allowing the player to escape through the cage's door. The Bra and Panties match has been replaced by a Fulfill Your Fantasy match, which is based on the costume-based diva match that occurred at the <a href="https://en.wikipedia.org/wiki/WWE_Cyber_Sunday">Taboo Tuesday</a> pay-per-view event. Unlike the real event which is more <a href="https://en.wikipedia.org/wiki/Battle_royal_(professional_wrestling)">battle royal</a>–based, this version involves divas stripping their opponents to their bra and panties, spanking each other and hitting each other with pillows instead. In addition, in Exhibition and in General Manager mode, this match can only take place in the SummerSlam arena.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Professional_wrestling_match_types#Container-based_variations">Buried Alive match</a>, a feature requested by players for several years, finally makes its debut. The gameplay of the "Buried Alive" match is actually more reminiscent of a heavily improved <a href="https://en.wikipedia.org/wiki/Professional_wrestling_match_types#Container-based_variations">casket match</a> from <i><a href="https://en.wikipedia.org/wiki/WWF_SmackDown!_2:_Know_Your_Role">WWF SmackDown! 2: Know Your Role</a></i>, in that the player had to trap their opponent in a casket to show a <a href="https://en.wikipedia.org/wiki/Cut_scene">cut scene</a> of the burial. Backstage fights are also improved and now include random people (referees, officials, and WWE personnel), who can be interacted with. In total, 100 different match types are available.</p>
+
+<h3>Game modes</h3>
+
+<p>The series' trademark Season mode lasts for two in-game years, one for the <i>Raw</i> brand and one for the <i>SmackDown!</i> brand. The objective of the mode is to win both brands' two main championships, the <a href="https://en.wikipedia.org/wiki/WWE_Championship">WWE Championship</a> (Raw) and the <a href="https://en.wikipedia.org/wiki/World_Heavyweight_Championship_(WWE,_2002–2013)">World Heavyweight Championship</a> (SmackDown!). The mode features 100 different motion-captured cinematic cut scenes, real-time storytelling, and improved voice acting. Players have a choice of five original voices for created superstars. A new 3D customizable <a href="https://en.wikipedia.org/wiki/Changeroom#Locker_rooms">locker room</a> is also included.</p>
+
+<p>In contrast to the game's predecessor, some of the in-game legends also have voice-overs and are made playable in Season mode. In an interview, THQ designer Bryan Williams confirmed that only 32 superstars (which included Stone Cold Steve Austin, Mankind, and Hulk Hogan) could be used in season mode. Some of the standard characters in the game cannot be used in Season mode. These wrestlers include Steven Richards, Ric Flair, and Eugene.</p>
+
+<p>General Manager mode, which could be compared to the <i><a href="https://en.wikipedia.org/wiki/Extreme_Warfare">Extreme Warfare</a></i> games and <i><a href="https://en.wikipedia.org/wiki/Fire_Pro_Wrestling">Final Fire Pro Wrestling's</a></i> Management of the Ring mode, is included for the first time. In this mode, the player takes the role of <a href="https://en.wikipedia.org/wiki/Professional_wrestling_authority_figures#General_Managers">General Manager</a> for either the <i>SmackDown!</i> or <i>Raw</i> brand. Players begin by picking one of the two brands, followed by a choice of simulating or participating in a <a href="https://en.wikipedia.org/wiki/WWE_draft">draft</a>, where a player can pick a total of 20 Superstars. The player then allocates the championships before beginning the season. This mode goes into depth, with <a href="https://en.wikipedia.org/wiki/E-mail">e-mail</a> capabilities, the ability to <a href="https://en.wikipedia.org/wiki/Glossary_of_professional_wrestling_terms#Book">book</a> matches and statistics of how the fans reacted to the show, among other features. When <a href="https://en.wikipedia.org/wiki/WrestleMania">WrestleMania</a> rolls around, the General Manager of the Year is awarded, along with some unlockable features.</p>
+
+<p>As in the previous game, online play is available for those with a <a href="https://en.wikipedia.org/wiki/PlayStation_2_Expansion_Bay">Sony Network Adapter</a>. The title belts (including Create-A-Belt creations) can be defended online via a "virtual WWE Championship" with career leader boards and a permanent ID system that tracks all user stats. Players are also able to trade wrestlers created in the Create-A-Superstar mode with each other online. All arenas are also available for online play, including the unlockable WrestleMania IX Arena.</p>
+
+<h3>Create modes</h3>
+
+<p>The game sports a variety of create modes. Create-A-Belt is a returning feature, with players now able to create Tag Team belts. Along with the created belts is the inclusion of title belts used in WWE during 2005, the WWE, World Heavyweight, <a href="https://en.wikipedia.org/wiki/WWE_Intercontinental_Championship">Intercontinental</a>, <a href="https://en.wikipedia.org/wiki/WWE_United_States_Championship">United States</a>, <a href="https://en.wikipedia.org/wiki/WWE_Raw_Tag_Team_Championship">WWE Tag Team</a>, <a href="https://en.wikipedia.org/wiki/World_Tag_Team_Championship_(WWE)">World Tag Team</a>, <a href="https://en.wikipedia.org/wiki/WWE_Women's_Championship_(1956–2010)">Women's</a>, and <a href="https://en.wikipedia.org/wiki/WWE_Cruiserweight_Championship_(1996–2007)">Cruiserweight</a> championships. Ted DiBiase's <a href="https://en.wikipedia.org/wiki/Million_Dollar_Championship">Million Dollar Championship</a> and the <a href="https://en.wikipedia.org/wiki/WWE_Hardcore_Championship">WWE Hardcore Championship</a> can also be won and defended in the game. The game also allows the player to defend and challenge for any of the titles in the game in Exhibition mode, a feature which was missing in previous games (after <i>Smackdown 2: Know Your Role).<sup><a href="https://en.wikipedia.org/wiki/WWE_SmackDown!_vs._Raw_2006#cite_note-IGN4-4">[4]</a></sup></i></p>
+
+<p>The Create-A-Superstar mode is much the same as the previous installments in this series. <i>SmackDown! vs. Raw 2006</i> adds a few new features, such as new items in the makeup category to give the player's created superstar more realistic facial features (such as wrinkles, a cleft chin, acne, and scars). Also included are new shirts and pants, which, while unchangeable in color, look more realistic (as opposed to the "painted on" look of shirts from previous games).</p>
+
+<p>The Create-A-Move-Set mode, removed a lot of moves but added some new ones.</p>
+
+<p>The Create-A-Stable mode has five pre-made stables such as <a href="https://en.wikipedia.org/wiki/La_Résistance_(professional_wrestling)">La Résistance</a>. This mode gives players a chance to make wrestler 'groups' of 2-5 wrestlers, give a name for the stable, make an entrance (but not as advanced as the Create-An-Entrance mode) for the stable, and customize their teamwork attributes, deciding how well they perform as a team in the ring.</p>
+
+<p>The game also includes a new Create-An-Entrance mode, allowing the player to customize a wrestler's entrance, down to details such as <a href="https://en.wikipedia.org/wiki/Pyrotechnics">pyrotechnics</a>, arena lighting, and camera angles. The one-minute limit for all entrances that was enforced in previous games is now abolished. However, it received some criticism in comparison to sister game <i><a href="https://en.wikipedia.org/wiki/WWE_Day_of_Reckoning_2">WWE Day of Reckoning 2</a></i> which had more options, no loading times, and was easier to use.</p>
+
+<h3>PlayStation Portable exclusive features</h3>
+
+<p>For the first time in the <i>SmackDown!</i> series, a game is also available on the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> (PSP). Although it is very similar to the PS2 version, there are special features that are exclusive to this version that the PS2 version did not bear. Because of this, to unlock the full features of each game, <a href="https://en.wikipedia.org/wiki/USB">USB</a> connectivity between the PS2 and PSP is needed.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Jake_Roberts">Jake "The Snake" Roberts</a> is an exclusive PSP Legend and can only be played in the PS2 version by connecting the PSP to the PS2. However, before the PSP game was released, cheat devices were discovered that allowed Roberts to be unlocked. Other notable differences between the PS2 and PSP versions include the lack of in-ring commentary and the inclusion of voiceovers from the more popular wrestlers. The only major problem seen by most gamers were the game's loading times, which were described as "abysmally long" by <a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a>. They were so long that there was a warning about the load times when a created superstar is chosen for a match.</p>
+
+<p>The PSP version includes some features that were not included in the PS2 version. These features include three exclusive <a href="https://en.wikipedia.org/wiki/Minigame">minigames</a> that are playable from the start. All of these minigames offer single-player and multiplayer modes. In multiplayer mode, players can make use of PSP's <a href="https://en.wikipedia.org/wiki/Wi-Fi">Wi-Fi</a> functionality. Each mode allows up to four players to join in and play over a local connection.</p>
+
+<p>The first minigame, <i>WWE Game Show</i>, tests the knowledge of wrestling fans by offering 500 multi-layered wrestling questions. The <i>WWE Game Show</i> covers every wrestling topic imaginable including costumes, trends, <a href="https://en.wikipedia.org/wiki/Music_in_professional_wrestling">music</a>, finishers, styles, <a href="https://en.wikipedia.org/wiki/History_of_WWE">history</a>, <a href="https://en.wikipedia.org/wiki/Feud_(professional_wrestling)">feuds</a>, and more. Most questions include excerpts of songs and have players guess the tune or players are shown a video clip and must guess the match the clip is from. The questions range from easy to extremely difficult. Other minigames include a <a href="https://en.wikipedia.org/wiki/Poker">poker</a> game and <a href="https://en.wikipedia.org/wiki/Nick_Dinsmore">Eugene's</a> airplane game in which the player navigates Eugene around the ring in the fastest time.</p>
+
+<h2>Reception</h2>
+
+<p>The game received "generally favorable" reviews on both platforms, according to <a href="https://en.wikipedia.org/wiki/Review_aggregator">review aggregator</a> <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>.</p>
+
+<p>The game was praised by some critics for its depth of content. A <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> reviewer mentioned that the large number of content makes it an easy choice for any wrestling enthusiast, and called it the best wrestling game available for the system. Comparisons with the game and the highly acclaimed <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a> game <i><a href="https://en.wikipedia.org/wiki/WWF_No_Mercy_(video_game)">WWF No Mercy</a></i> were made, with some reviewers putting the game on par with <i>No Mercy</i>. An <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> reviewer commented that "there's no other wrestling game since <i>No Mercy</i> that offers this much replay, value, or depth", while a Netjak reviewer said that <i>WWF No Mercy</i> on the Nintendo 64 ruled as the best wrestling game, but <i>WWE SmackDown! vs. Raw 2006</i> put a new standard for the genre. In Japan, <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> gave the PlayStation 2 version a score of three eights and one seven for a total of 31 out of 40.</p>
+
+<p>However, there were some complaints for the game's limitations of game modes. Critics such as <i><a href="https://en.wikipedia.org/wiki/X-Play">X-Play</a>'</i>s reviewer felt that the General Manager mode "does not go as far as it should--no underhanded options--but it's a great start", while an eToychest reviewer said that the Season mode is a welcome addition in the gameplay, but noticed the lack of replayability due to the limit placed on possible story arcs.</p>
+
+<p>From the game's release up until December 2006, the game sold 3.3 million copies. The PlayStation 2 version received a "Platinum" sales award from the <a href="https://en.wikipedia.org/wiki/Entertainment_and_Leisure_Software_Publishers_Association">Entertainment and Leisure Software Publishers Association</a> (ELSPA), indicating sales of at least 300,000 copies in the United Kingdom. In October 2006, the game was added to <a href="https://en.wikipedia.org/wiki/List_of_Sony_Greatest_Hits_games">Sony's Greatest Hits</a> collection.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> nominated <i>WWE SmackDown! vs. Raw 2006</i> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Fighting_Game_of_the_Year">Fighting Game of the Year</a>" at the <a href="https://en.wikipedia.org/wiki/10th_Annual_Interactive_Achievement_Awards">10th Annual Interactive Achievement Awards</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

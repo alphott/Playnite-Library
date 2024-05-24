@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metal Gear Solid - Integral</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('b25da7cd-c4f9-4b4c-91d3-5ace8d145003/a9c18fe4-190d-443e-863e-dcce268b4eea.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="b25da7cd-c4f9-4b4c-91d3-5ace8d145003/e226edf4-137e-4229-945b-f091096be706.png"/> Metal Gear Solid - Integral</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 4:00:26</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation">Sony PlayStation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-24/06/1999">24/06/1999</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-89">89</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Konami Computer Entertainment Japan">Konami Computer Entertainment Japan</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Metal Gear Solid</b></i> is an <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> in 1998. It was directed, produced, and written by <a href="https://en.wikipedia.org/wiki/Hideo_Kojima">Hideo Kojima</a>, and follows the <a href="https://en.wikipedia.org/wiki/MSX2">MSX2</a> video games <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_(video_game)">Metal Gear</a></i> and <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_2:_Solid_Snake">Metal Gear 2: Solid Snake</a></i>, which Kojima also worked on. It was unveiled at the 1996 <a href="https://en.wikipedia.org/wiki/Tokyo_Game_Show">Tokyo Game Show</a> and then demonstrated at trade shows including the 1997 <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">Electronic Entertainment Expo</a>; its Japanese release was originally planned for late 1997, before being delayed to 1998.</p>
+
+<p>Players control <a href="https://en.wikipedia.org/wiki/Solid_Snake">Solid Snake</a>, a soldier who infiltrates a nuclear weapons facility to neutralize the terrorist threat from <a href="https://en.wikipedia.org/wiki/FOXHOUND">FOXHOUND</a>, a renegade special forces unit. Snake must liberate hostages and stop the terrorists from launching a nuclear strike. Cinematic <a href="https://en.wikipedia.org/wiki/Cutscenes">cutscenes</a> were rendered using the in-game engine and graphics, and <a href="https://en.wikipedia.org/wiki/Voice_acting">voice acting</a> is used throughout.</p>
+
+<p><i>Metal Gear Solid</i> sold more than seven million copies worldwide and shipped 12 million demos. It scored an average of 94/100 on the aggregate website <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>. It is regarded as <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">one of the greatest and most important video games of all time</a> and helped popularize the stealth genre and in-engine cinematic cutscenes. It was followed by an expanded version for PlayStation and <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, <i>Metal Gear Solid: Integral</i> (1999)<i>,</i> and a <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a>, <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid:_The_Twin_Snakes">Metal Gear Solid: The Twin Snakes</a></i> (2004). It produced numerous sequels, starting with <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_2:_Sons_of_Liberty">Metal Gear Solid 2: Sons of Liberty</a></i> (2001), and media adaptations including a radio drama, comics, and novels. In May 2023, Konami announced <a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid:_Master_Collection"><i>Metal Gear Solid: Master Collection Vol. 1</i></a>, a compilation of games including the original version of <i>Metal Gear Solid</i>, which was released for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> on October 24, 2023.</p>
+
+<h3><i>Integral</i></h3>
+
+<p>Released on June 25, 1999, for the PlayStation in Japan, <i>Metal Gear Solid: Integral</i> is an expanded edition of the game that features the added content from the American and European versions. It replaces the Japanese voices from the original version with the English dub, offering players a choice between Japanese and English subtitles during cutscenes and CODEC conversations (item descriptions, mission logs, and other text are still in Japanese). Further additional content to the main game include an alternate "sneaking suit" outfit for Meryl (which she wears when Snake is dressed in the tuxedo), a "Very Easy" difficulty setting where the player starts the mission armed with a suppressor-equipped <a href="https://en.wikipedia.org/wiki/MP5A5">MP5</a> submachine gun with infinite ammo (substituting the FAMAS rifle in Snake's inventory), an eighth Codec frequency featuring commentary from the development team (unvoiced and in Japanese text only) on every area and boss encounter, hidden music tracks, an alternate game mode where the player controls Snake from a first-person perspective (on Normal difficulty only), an option for alternative patrol routes for enemies, and a downloadable <a href="https://en.wikipedia.org/wiki/PocketStation">PocketStation</a> minigame. The Torture Event was also made easier, reducing the number of rounds to three per session on all five difficulty settings.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Virtual_reality">VR</a> training mode is now stored on a separate third disc, known as the "VR Disc", and has been expanded into 300 missions. These new set of missions are divided into four main categories: Sneaking, Weapons, Advanced, and Special. The first three categories feature standard training exercises that test the player's sneaking, shooting, and combat skills, while the fourth category contains less conventional tests involving murder mysteries, giant genome soldiers, and flying saucers. One particular set of missions has the player controlling the Cyborg Ninja, unlocked by either completing a minigame on the PocketStation and uploading the data to the VR Disc or by achieving the Fox rank on the main game. Completing all 300 missions will unlock a concept artwork of <a href="https://en.wikipedia.org/wiki/Metal_Gear_(weapon)#Metal_Gear_RAY">Metal Gear RAY</a>, a mech that would later appear in <i>Metal Gear Solid 2: Sons of Liberty</i>. Additional content includes preview trailers of <i>Metal Gear Solid</i> from trade events and a photoshoot mode where the player can take photographs of fully expressive polygonal models of Mei Ling and Dr. Naomi after completing the main game. <i><a href="https://en.wikipedia.org/wiki/Famitsu">Famitsu</a></i> magazine rated <i>Metal Gear Solid: Integral</i> a 34 out of 40.</p>
+
+<p>The VR Disc from <i>Integral</i> was released by itself during the same year in other regions as <i>Metal Gear Solid: VR Missions</i> in North America on September 23 and as <i>Metal Gear Solid: Special Missions</i> in the PAL region on October 29. While the content of both, <i>VR Missions</i> and <i>Special Missions</i>, are virtually identical to the VR Disc, the unlocking requirements for the Ninja missions and the photoshoot mode were changed accordingly, so that save data from the main game was no longer required. The <i>Special Missions</i> version also adds an additional requirement in which the user must also own a copy of the original <i>Metal Gear Solid</i> in PAL format in order to start the game - after booting <i>Special Missions</i> on the console, the player will be asked to switch the disc with the first disc from <i>Metal Gear Solid</i> to load data before asking the player to switch back to the <i>Special Missions</i> disc to proceed through the rest of the game.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

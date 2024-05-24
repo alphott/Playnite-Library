@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metal Gear Solid 3D - Snake Eater</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('aa43e3f8-bda1-45a4-b74d-f425ef173ded/0a310459-450f-4d3e-bfa9-11c27663fef0.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="aa43e3f8-bda1-45a4-b74d-f425ef173ded/6a8f5ec3-f616-49aa-a617-fa6c2a11e672.png"/> Metal Gear Solid 3D - Snake Eater</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo 3DS">Nintendo 3DS</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-17/11/2004">17/11/2004</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-94">94</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Stealth">Stealth</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Konami Computer Entertainment Japan">Konami Computer Entertainment Japan</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Metal Gear Solid 3: Snake Eater</b></i> is a 2004 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure</a> <a href="https://en.wikipedia.org/wiki/Stealth_game">stealth</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>. It was released in late 2004 in North America and Japan, and in early 2005 in Europe and Australia. It was the fifth <i><a href="https://en.wikipedia.org/wiki/Metal_Gear">Metal Gear</a></i> game written and directed by <a href="https://en.wikipedia.org/wiki/Hideo_Kojima">Hideo Kojima</a> and serves as a prequel to the entire <i>Metal Gear</i> series. An expanded edition, titled <i><b>Metal Gear Solid 3: Subsistence</b></i>, was released in Japan in late 2005, then in North America, Europe and Australia in 2006. A <a href="https://en.wikipedia.org/wiki/Video_game_remaster">remastered</a> version of the game, <i><b>Metal Gear Solid 3: Snake Eater - HD Edition</b></i>,  was later included in the <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_HD_Collection">Metal Gear Solid HD Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, and <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a>, while a reworked version, titled <i><b>Metal Gear Solid: Snake Eater 3D</b></i>, was released for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> in 2012. The <i>HD Edition</i> of the game was included on the <a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid:_Master_Collection"><i>Metal Gear Solid: Master Collection Vol. 1</i></a> compilation for <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> on October 24, 2023. The same year, Konami announced a <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a>, entitled <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_Delta:_Snake_Eater">Metal Gear Solid Delta: Snake Eater</a></i>, for <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a>.</p>
+
+<p>Set in 1964, 31 years before the events of the original <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_(video_game)">Metal Gear</a></i>, the story centers on the FOX operative codenamed <a href="https://en.wikipedia.org/wiki/Big_Boss_(Metal_Gear)">Naked Snake</a> as he attempts to rescue Russian rocket scientist Nikolai Stepanovich Sokolov, sabotage an experimental superweapon, and assassinate his defected former boss. While previous games were set in a primarily <a href="https://en.wikipedia.org/wiki/Urban_area">urban</a> environment, <i>Snake Eater</i> adopts a 1960s <a href="https://en.wikipedia.org/wiki/Soviet_Union">Soviet</a> jungle setting, with the <a href="https://en.wikipedia.org/wiki/High_tech">high-tech</a>, near-future trappings of previous <i>Metal Gear Solid</i> games replaced with wilderness. While the environment has changed, the game's focus remains on stealth and <a href="https://en.wikipedia.org/wiki/Espionage">infiltration</a>, while retaining the series' self-referential, <a href="https://en.wikipedia.org/wiki/Fourth_wall">fourth-wall</a>-breaking sense of humor. The story of <i>Snake Eater</i> is told through numerous <a href="https://en.wikipedia.org/wiki/Cutscene">cutscenes</a> and radio conversations.</p>
+
+<p>Considered one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games of all time</a>, <i>Metal Gear Solid 3</i> was met with critical acclaim and was a commercial success, having sold more than four million copies worldwide as of March 2010. The game received praise due to its story, protagonist, cutscenes, and new features, though the camo system had a more mixed response. Criticism befell on the game's camera and frame rate.</p>
+
+<h3><i>Snake Eater 3D</i></h3>
+
+<p>At <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo_2010">Electronic Entertainment Expo 2010</a>, Konami displayed a technical demo for the <a href="https://en.wikipedia.org/wiki/Nintendo_3DS">Nintendo 3DS</a> entitled <i>Metal Gear Solid 3D: Snake Eater – The Naked Sample</i>. The demo's subtitle "The Naked Sample" was meant to convey its purpose as just a sample of the 3DS hardware, with no plans to bring a game into production at that point. Series producer <a href="https://en.wikipedia.org/wiki/Hideo_Kojima">Hideo Kojima</a> stated at the time that if a <i>Metal Gear</i> game for the 3DS was actually made they would consider some elements from the <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> title <i><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid:_Peace_Walker">Metal Gear Solid: Peace Walker</a></i>, including the game's cooperative gameplay system. Later in 2010, Konami announced a full <i>Metal Gear</i> title for release on the 3DS, which was revealed at Nintendo World 2011 to be <i>Metal Gear Solid: Snake Eater 3D</i>. It was released on February 21, 2012, in North America and March 8, 2012, worldwide.</p>
+
+<p>Due to the limited interface of the 3DS, as well as to take advantage of the touchscreen, <i>3D</i> has unique controls when compared to other games in the <i>Metal Gear</i> series. While the game has been heavily criticized for these control changes, use of the <a href="https://en.wikipedia.org/wiki/Circle_Pad_Pro">Circle Pad Pro</a> peripheral has been cited for alleviating many of the control issues of the 3DS. This is done by restoring camera movement to the second analog stick, adding ZL and ZR buttons for aiming and attacking, and allowing the face buttons to be used in a manner more in line with all other releases in the <i>Metal Gear</i> series.</p>
+
+<p><i>3D</i> also has certain optional in-game differences that affect play, such as the concise over the shoulder third-person view and the addition of crouch-walking. Firing in this third-person view substitutes an open cross-hair for the standard down-the-barrel sighting of the standard FPS view. This method of aiming can seem less precise but does allow for a greater margin of error in accuracy. <i>3D</i> makes use of the 3DS console's gyroscope, which is used to maintain balance when walking across a bridge or standing on tree branches. The camouflage system has also been updated, allowing the player to make use of the 3DS' camera to make a custom camouflage pattern. The port features numerous graphical improvements over the initial <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> version including better character models and the addition of normal mapping. Despite this, the frame rate has been criticized for falling far below the other versions of <i>Snake Eater</i>. <i>Snake Eater 3D</i> has met with positive reviews, averaging 78/100 at <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a> based on 46 reviews.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
