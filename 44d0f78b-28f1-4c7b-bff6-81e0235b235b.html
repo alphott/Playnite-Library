@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crystal Beans: From Dungeon Explorer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('44d0f78b-28f1-4c7b-bff6-81e0235b235b/ad08e67d-a322-4c10-b4ad-05459354dd07.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="44d0f78b-28f1-4c7b-bff6-81e0235b235b/87f64bb4-799e-41e1-a128-38ad06e1fcd4.png"/> Crystal Beans: From Dungeon Explorer</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 18:08:07</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo SNES">Nintendo SNES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-27/10/1995">27/10/1995</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action RPG">Action RPG</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Dungeon crawler">Dungeon crawler</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Hack and slash/Beat 'em up">Hack and slash/Beat 'em up</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Birthday">Birthday</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Hudson Soft">Hudson Soft</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Dungeon Explorer II</b></i> is an <a href="https://en.wikipedia.org/wiki/Action_role-playing_game">action role-playing</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and originally published by <a href="https://en.wikipedia.org/wiki/Hudson_Soft">Hudson Soft</a> for the <a href="https://en.wikipedia.org/wiki/TurboDuo">TurboDuo</a> in Japan on March 26, 1993, and in North America by Turbo Technologies in October of the same year. A sequel to 1989's <i><a href="https://en.wikipedia.org/wiki/Dungeon_Explorer_(1989_video_game)">Dungeon Explorer</a></i>, it is the second installment in the eponymous franchise.</p>
+
+<p>Set a century after the fall of alien <a href="https://en.wikipedia.org/wiki/King">king</a> Natas in the original <i>Dungeon Explorer</i>, players assume the role of one of the eight <a href="https://en.wikipedia.org/wiki/Main_character">main characters</a> tasked with recovering the Ora stone from the evil <a href="https://en.wikipedia.org/wiki/Magician_(fantasy)">magician</a> Fades, who stole it from king Earl II to resurrect Natas in order to save the land of Oddesia from destruction while also rescuing <a href="https://en.wikipedia.org/wiki/Princess">princess</a> Miriam of Solis, who was taken as hostage by a <a href="https://en.wikipedia.org/wiki/Monster">monster</a>. Though it was initially launched for the TurboDuo, <i>Dungeon Explorer II</i> was later re-released through download services for various <a href="https://en.wikipedia.org/wiki/Video_game_console">consoles</a>.</p>
+
+<p><i>Dungeon Explorer II</i> was met with mostly positive reception from critics and reviewers alike since its initial release on the TurboDuo, with praise directed towards the graphics, audio, gameplay and <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Dungeon Explorer II</i> is an action role-playing game with <a href="https://en.wikipedia.org/wiki/Dungeon_crawl">dungeon crawl</a> and <a href="https://en.wikipedia.org/wiki/Hack_and_slash">hack and slash</a> elements that is played in a <a href="https://en.wikipedia.org/wiki/Video_game_graphics#Top-down_perspective">top-down perspective</a> like its predecessor. Players assume the role of one of eight characters tasked with recovering the Ora stone from Fades, an evil magician who stole it from king Earl II to resurrect the deceased alien king Natas, in order to save the land of Oddesia from destruction. They must also rescue princess Miriam of Solis, who was taken as hostage by a monster. Like its predecessor, each character belongs to a specific class and their abilities vary primarily in their black and white magic as well as statistics. However, each character can be upgraded into new classes. Lives are shared between players and once all lives are lost, the <a href="https://en.wikipedia.org/wiki/Game_over">game is over</a>, though more can be obtained by playing a gambling <a href="https://en.wikipedia.org/wiki/Minigame">minigame</a> against the <a href="https://en.wikipedia.org/wiki/Grim_Reaper">Grim Reaper</a>. Like the first entry, the game supports five players simultaneously. A <a href="https://en.wikipedia.org/wiki/Password">password</a> system is also used.</p>
+
+<h2>Synopsis</h2>
+
+<h3>Plot</h3>
+
+<p><i>Dungeon Explorer II</i> takes place a century after the events occurred in the original <i>Dungeon Explorer</i>. After the death of alien king Natas, the Ora stone was in the hands of people from Oddesia once again, restoring peace across the land and preventing evil from entering the for many years until Fades, a faithful follower of Natas who resurrected him after killing king Earl II and stole the Ora stone from him, leading Oddesia into the path of destruction as a result. Around the same time, princess Miriam of Solis was captured and taken as hostage by a monster known as Mynos the Man-Bull while visiting Ardeen. A group of eight characters are tasked with retrieving the Ora stone to save the land of Oddesia, while rescuing Miriam from her captivity.</p>
+
+<h3>Characters</h3>
+
+<p><i>Dungeon Explorer II</i> initially features eight playable characters at the start, while more playable characters can be unlocked by performing certain tasks during gameplay:</p>
+
+<h2>Development and release</h2>
+
+<p><i>Dungeon Explorer II</i> was first previewed through <a href="https://en.wikipedia.org/wiki/Video_game_magazine">video game magazines</a> in 1992, while its release date was postponed several times before release. The <a href="https://en.wikipedia.org/wiki/Soundtrack#Video_game_soundtracks">soundtrack</a> was composed by Yoshio Tsuru of Compozilla, although he is not named as such in the credits of the game. Turbo Technologies handled the English translation and localization, while American publisher <a href="https://en.wikipedia.org/wiki/Working_Designs">Working Designs</a> were responsible for the English voice acting.</p>
+
+<p><i>Dungeon Explorer II</i> was first published by <a href="https://en.wikipedia.org/wiki/Hudson_Soft">Hudson Soft</a> for the TurboDuo in Japan on March 26, 1993, and in North America by Turbo Technologies on October of the same year. On May 21, albums containing music tracks from the game were published exclusively in Japan by Hudson Soft. Due to its release towards the end of the <a href="https://en.wikipedia.org/wiki/Video_game_accessory#Add-ons/Peripherals">add-on</a>'s lifecycle, the North American release has since become one of the more expensive titles on the <a href="https://en.wikipedia.org/wiki/Video_game#Platforms">platform</a>, with copies of fetching over <a href="https://en.wikipedia.org/wiki/US$">US$</a>350 on the secondary video game collecting market. The title has received multiple re-releases in recent years on various <a href="https://en.wikipedia.org/wiki/Digital_distribution">digital distribution</a> platforms such as the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> and <a href="https://en.wikipedia.org/wiki/Nintendo_eShop">Nintendo eShop</a>.</p>
+
+<h3>Crystal Beans from Dungeon Explorer</h3>
+
+<p>A heavily modified version of <i>Dungeon Explorer II</i> titled <i>Crystal Beans from Dungeon Explorer</i> was developed for the <a href="https://en.wikipedia.org/wiki/Super_Famicom">Super Famicom</a> and was released in Japan on October 27, 1995.</p>
+
+<h2>Reception</h2>
+
+<p><i>Dungeon Explorer II</i> garnered mostly positive reception from critics since its initial release on the TurboDuo. Public reception was also positive; Readers of <i><a href="https://en.wikipedia.org/wiki/PC_Engine_Fan">PC Engine Fan</a></i> voted to give the game a 23.53 out of 30 score and ranking at the number 63 spot in a poll, indicating a large popular following.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i> criticized <i>Dungeon Explorer</i>'s graphics for repetitive backgrounds and a "cartoony" style, and said the game's music is bizarrely out-of-place, likening it to <a href="https://en.wikipedia.org/wiki/Polka">polka</a> party music and "<a href="https://en.wikipedia.org/wiki/Love's_Theme">Love's Theme</a>" by <a href="https://en.wikipedia.org/wiki/The_Love_Unlimited_Orchestra">The Love Unlimited Orchestra</a>. They praised the voice acting and "menacing" sound effects, and said that though the enemies and bosses are both excessively easy to defeat, the length of the game is enough to satisfy RPG enthusiasts. In contrast to <i>GamePro</i>, <i><a href="https://en.wikipedia.org/wiki/Larry_Flynt_Publications#Other_magazines">DuoWorld</a></i> said the music "fits the evil tone of the game well" and "is so good, it's hard to believe you're playing a video game." They also praised the five-player support and the gambling minigame, and while agreeing that the combat is not particularly difficult, argued that figuring out which characters must be talked to in order to progress the adventure is very challenging.</p>
+
+<p><i><a href="https://en.wikipedia.org/wiki/GameFan">GameFan</a></i>'s four reviewers praised its audiovisual presentation, combination of action and strategy, addictive gameplay and five-player support. <i>Joypad</i>'s Grégoire Hellot and Jean-François Morisse commended the graphics, character animations, sound design, controls and multiplayer but criticized its lack of originality. <i><a href="https://en.wikipedia.org/wiki/Computer#History">Mega Fun</a></i>'s Stefan Hellert and Martin Weidner felt that the visuals were similar to the first game but gave positive remarks to the atmospheric soundscape and multiplayer but criticized its light role-playing elements and repetitive gameplay. <i><a href="https://en.wikipedia.org/wiki/VideoGames_&amp;_Computer_Entertainment#VideoGames_-_The_Ultimate_Gaming_Magazine">VideoGames</a></i>' Nikos Constant liked its multiplayer component and gambling minigame but criticized its graphics, sound and gameplay.</p>
+
+<p>In a retrospective review, <i><a href="https://en.wikipedia.org/wiki/Allgame">Allgame</a></i> said that <i>Dungeon Explorer II</i> "delivers a storyline of epic proportions wrapped around a very enjoyable action game." They particularly praised the range of possibilities and strategies for character development, particularly during multiplayer games.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
