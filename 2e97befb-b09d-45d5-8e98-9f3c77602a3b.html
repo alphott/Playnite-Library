@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Grand Theft Auto V</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('2e97befb-b09d-45d5-8e98-9f3c77602a3b/9de1180c-c224-402e-9b89-89abec596556.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="2e97befb-b09d-45d5-8e98-9f3c77602a3b/78b2728f-5b94-4122-8444-477d46a20b35.png"/> Grand Theft Auto V</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 19:07:05</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 3">Sony PlayStation 3</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-17/09/2013">17/09/2013</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-97">97</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Action-adventure">Action-adventure</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rockstar North">Rockstar North</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Rockstar Games">Rockstar Games</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Take-Two Interactive">Take-Two Interactive</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Grand Theft Auto V</b></i><!-- Please don't add the abbreviation "GTA V" here as it isn't used throughout the article and therefore isn't needed. --> is a 2013 <a href="https://en.wikipedia.org/wiki/Action-adventure_game">action-adventure game</a> developed by <a href="https://en.wikipedia.org/wiki/Rockstar_North">Rockstar North</a> and published by <a href="https://en.wikipedia.org/wiki/Rockstar_Games">Rockstar Games</a>. It is the seventh main entry in the <a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto"><i>Grand Theft Auto</i> series</a>, following 2008's <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV">Grand Theft Auto IV</a></i>, and the fifteenth instal<!-- British English -->ment overall. Set within the fictional state of San Andreas, based on <a href="https://en.wikipedia.org/wiki/Southern_California">Southern California</a>, the <a href="https://en.wikipedia.org/wiki/Single-player_video_game">single-player</a> story follows three <a href="https://en.wikipedia.org/wiki/Protagonist">protagonists</a>—retired <a href="https://en.wikipedia.org/wiki/Bank_robber">bank robber</a> Michael De Santa (<a href="https://en.wikipedia.org/wiki/Ned_Luke">Ned Luke</a>), street <a href="https://en.wikipedia.org/wiki/Gangster">gangster</a> Franklin Clinton (<a href="https://en.wikipedia.org/wiki/Shawn_Fonteno">Shawn Fonteno</a>), and drug dealer and <a href="https://en.wikipedia.org/wiki/Gunrunner">gunrunner</a> <a href="https://en.wikipedia.org/wiki/Trevor_Philips">Trevor Philips</a> (<a href="https://en.wikipedia.org/wiki/Steven_Ogg">Steven Ogg</a>), and their attempts to commit heists while under pressure from a corrupt government agency and powerful criminals. Players <a href="https://en.wikipedia.org/wiki/Nonlinear_gameplay">freely roam</a> San Andreas's <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> countryside and fictional city of Los Santos, based on <a href="https://en.wikipedia.org/wiki/Los_Angeles">Los Angeles</a>.</p>
+
+<p>The game world is navigated on foot and by vehicle, from either a <a href="https://en.wikipedia.org/wiki/Virtual_camera_system#Third-person_view">third-person</a> or <a href="https://en.wikipedia.org/wiki/First-person_(video_games)">first-person</a> perspective. Players control the protagonists throughout single-player and switch among them, both during and outside missions. The story is centred on the heist sequences, and many missions involve shooting and driving gameplay. A "wanted" system governs the aggression of law enforcement response to players who commit crimes. In <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_Online">Grand Theft Auto Online</a></i>, the game's <a href="https://en.wikipedia.org/wiki/Online_multiplayer">online multiplayer</a> mode, up to 30 players engage in a variety of different <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> and competitive game modes.</p>
+
+<p>Shared between many of Rockstar's studios worldwide, <a href="https://en.wikipedia.org/wiki/Development_of_Grand_Theft_Auto_V">the game's development</a> began around the time of <i>Grand Theft Auto IV</i>'s release. The developers drew influence from many of their previous projects (such as <i><a href="https://en.wikipedia.org/wiki/Red_Dead_Redemption">Red Dead Redemption</a></i> and <i><a href="https://en.wikipedia.org/wiki/Max_Payne_3">Max Payne 3</a></i>) and designed the game around three lead protagonists to innovate on the core structure of its predecessors. Much of the development work constituted the open world's creation, and several team members conducted field research around California to capture footage for the design team. <a href="https://en.wikipedia.org/wiki/Music_of_Grand_Theft_Auto_V">The game's soundtrack</a> features an original score composed by a team of producers who collaborated over several years. <i>Grand Theft Auto V</i> was released in September 2013 for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> and <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a>, in November 2014 for the <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a> and <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, in April 2015 for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, and in March 2022 for the <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a> and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a>.</p>
+
+<p>Extensively marketed and widely anticipated, the game broke industry sales records and became the fastest-selling entertainment product in history, earning $800 million in its first day and $1 billion in its first three days. It received critical acclaim, with praise directed at its multiple-protagonist design, open world, presentation and gameplay. However, its depiction of violence and women caused controversies. Several <a href="https://en.wikipedia.org/wiki/Video_game_journalism">gaming publications</a> awarded the game year-end accolades including <a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a> awards. In retrospect, it is considered one of <a href="https://en.wikipedia.org/wiki/History_of_video_game_consoles_(seventh_generation)">seventh</a> and <a href="https://en.wikipedia.org/wiki/History_of_video_game_consoles_(eighth_generation)">eighth generation console gaming</a>'s most significant titles and among the <a href="https://en.wikipedia.org/wiki/Best_video_games_ever_made">best video games ever made</a>. It is the <a href="https://en.wikipedia.org/wiki/List_of_best-selling_video_games">second-best-selling video game of all time</a> with over 195 million copies shipped, and one of the most financially successful entertainment products of all time, with over $8.5 billion in worldwide revenue. Its successor, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI">Grand Theft Auto VI</a></i>, is scheduled to be released in 2025.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
