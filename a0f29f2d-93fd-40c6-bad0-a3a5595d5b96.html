@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tom Clancy&#39;s Rainbow Six</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('a0f29f2d-93fd-40c6-bad0-a3a5595d5b96/db4d0bae-36bd-4f15-aa1b-c9c7b532acca.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="a0f29f2d-93fd-40c6-bad0-a3a5595d5b96/d1ff708f-7f20-4944-87fb-da4c6f88664d.ico"/> Tom Clancy&#39;s Rainbow Six</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 4:00:26</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation">Sony PlayStation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-21/08/1998">21/08/1998</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-85">85</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Tactical">Tactical</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Crawfish Interactive">Crawfish Interactive</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Rebellion Developments">Rebellion Developments</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Red Storm Entertainment">Red Storm Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Red Storm Entertainment">Red Storm Entertainment</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Take-Two Interactive">Take-Two Interactive</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Tom Clancy's Rainbow Six</b></i> is a 1998 <a href="https://en.wikipedia.org/wiki/Tactical_shooter">tactical shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed and published by <a href="https://en.wikipedia.org/wiki/Red_Storm_Entertainment">Red Storm Entertainment</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, with later ports for the <a href="https://en.wikipedia.org/wiki/Nintendo_64">Nintendo 64</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a>, <a href="https://en.wikipedia.org/wiki/Classic_Mac_OS">Mac OS</a>, <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a>, and <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a>. It is the first installment in the <a href="https://en.wikipedia.org/wiki/Tom_Clancy's_Rainbow_Six"><i>Rainbow Six</i></a> series. Based on the <a href="https://en.wikipedia.org/wiki/Tom_Clancy">Tom Clancy</a> <a href="https://en.wikipedia.org/wiki/Rainbow_Six_(novel)">novel of the same name</a>, the game follows Rainbow, a secret international <a href="https://en.wikipedia.org/wiki/Counterterrorism">counterterrorist</a> organization, and the conspiracy they unravel as they handle a seemingly random spike in <a href="https://en.wikipedia.org/wiki/Terrorism">terrorism</a>.</p>
+
+<p>In <a href="https://en.wikipedia.org/wiki/Single-player_video_game">singleplayer</a>, the player advances through a series of missions in a campaign. Before each mission, the player is briefed on the situation, selects and organizes their operatives and equipment, and plans their movement through the level; during missions, the player controls an operative leading computer-controlled teammates as they follow the player's plan. In <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a>, players cooperate in <a href="https://en.wikipedia.org/wiki/Player_versus_environment">player versus environment</a> missions or battle to complete objectives in <a href="https://en.wikipedia.org/wiki/Player_versus_player">player versus player</a> matches. The game features realistic gameplay factors, weapon lethality, and consequences for failure, forcing players to plan their approach carefully and promoting <a href="https://en.wikipedia.org/wiki/Replay_value">replayability</a> for more streamlined completion.</p>
+
+<p><i>Rainbow Six</i> began as a concept by Red Storm following their formation in 1996. The game was developed in parallel with the <i>Rainbow Six</i> novel, with a design philosophy of realism and strategy guiding all aspects of development; however, numerous setbacks stymied the game's development and forced the developers to <a href="https://en.wikipedia.org/wiki/Crunch_(video_games)">crunch</a>. Though his name is in the game's title, Tom Clancy's involvement in <i>Rainbow Six</i>'s development was very minimal. Red Storm developed the PC version, while all other ports were developed by their respective companies.</p>
+
+<p><i>Rainbow Six</i> was released on August 21, 1998 to widespread critical acclaim, though the console ports received relatively lower ratings than the PC version. For most releases, praise was directed toward gameplay, multiplayer, immersion, and the game's combination of <a href="https://en.wikipedia.org/wiki/Strategy_video_game">strategy</a> and <a href="https://en.wikipedia.org/wiki/Action_game">action</a>, while criticism mainly centered on AI issues, glitches, and the graphics and controls of some ports. The game sold over 200,000 copies in its first year of release and continued to sell hundreds of thousands more copies well into the early 2000s. <i>Rainbow Six</i> was nominated for numerous accolades and has been deemed one of the best video games of 1998. It is considered a milestone in the history of <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooters</a> and made a lasting impact on the then-fledgling <a href="https://en.wikipedia.org/wiki/Tactical_shooter">tactical shooter</a> genre.</p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Expansion_pack">expansion pack</a>, <i>Tom Clancy's Rainbow Six Mission Pack: Eagle Watch</i>, was released on January 26, 1999. A sequel, <i><a href="https://en.wikipedia.org/wiki/Tom_Clancy's_Rainbow_Six:_Rogue_Spear">Tom Clancy's Rainbow Six: Rogue Spear</a></i>, was released in 1999. A loose <a href="https://en.wikipedia.org/wiki/Mobile_game">mobile game</a> remake, <i><a href="https://en.wikipedia.org/wiki/Tom_Clancy's_Rainbow_Six:_Shadow_Vanguard">Tom Clancy's Rainbow Six: Shadow Vanguard</a></i>, was released in 2011.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
