@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Doom</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('3343860d-9b59-43ea-94d6-49668a795bcb/95bcf56b-8fc1-4fd2-8af2-633ed20db5a6.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="3343860d-9b59-43ea-94d6-49668a795bcb/943c455e-ec8c-4225-93d1-acea31f0ad9b.png"/> Doom</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-08/05/2024">08/05/2024</a> 16:21:40</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation">Sony PlayStation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-16/11/1995">16/11/1995</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-67">67</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-First-person shooter">First-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-id Software">id Software</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-id Software">id Software</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Doom</b></i> is a <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> game developed and published by <a href="https://en.wikipedia.org/wiki/Id_Software">id Software</a>. Released on December 10, 1993, for <a href="https://en.wikipedia.org/wiki/DOS">DOS</a>, it is the first installment in the <a href="https://en.wikipedia.org/wiki/Doom_(franchise)"><i>Doom</i> franchise</a>. The player <a href="https://en.wikipedia.org/wiki/Player_character">assumes the role</a> of a <a href="https://en.wikipedia.org/wiki/Space_marine">space marine</a>, later unofficially referred to as <a href="https://en.wikipedia.org/wiki/Doomguy">Doomguy</a>, fighting through hordes of undead humans and invading <a href="https://en.wikipedia.org/wiki/Demon">demons</a>. The game begins on the <a href="https://en.wikipedia.org/wiki/Moons_of_Mars">moons of Mars</a> and finishes in <a href="https://en.wikipedia.org/wiki/Hell">hell</a>, with the player traversing each level to find its exit or defeat its <a href="https://en.wikipedia.org/wiki/Final_boss_(video_games)">final boss</a>. It is an early example of <a href="https://en.wikipedia.org/wiki/3D_graphics">3D graphics</a> in video games, and has enemies and objects as 2D images, a technique sometimes referred to as <a href="https://en.wikipedia.org/wiki/2.5D">2.5D</a> graphics.</p>
+
+<p><i>Doom</i> was the third major independent release by id Software, after <i><a href="https://en.wikipedia.org/wiki/Commander_Keen">Commander Keen</a></i> (1990–1991) and <i><a href="https://en.wikipedia.org/wiki/Wolfenstein_3D">Wolfenstein 3D</a></i> (1992). In May 1992, id started developing a darker game focused on fighting demons with technology, using a new 3D <a href="https://en.wikipedia.org/wiki/Game_engine">game engine</a> from the lead programmer, <a href="https://en.wikipedia.org/wiki/John_Carmack">John Carmack</a>. The designer <a href="https://en.wikipedia.org/wiki/Tom_Hall">Tom Hall</a> initially wrote a science fiction plot, but he and most of the story were removed from the project, with the final game featuring an action-heavy design by <a href="https://en.wikipedia.org/wiki/John_Romero">John Romero</a> and <a href="https://en.wikipedia.org/wiki/Sandy_Petersen">Sandy Petersen</a>. Id published <i>Doom</i> as a set of three episodes under the <a href="https://en.wikipedia.org/wiki/Shareware">shareware</a> model, marketing the full game by releasing the first episode free. A retail version with an additional episode was published in 1995 by <a href="https://en.wikipedia.org/wiki/GT_Interactive">GT Interactive</a> as <i>The Ultimate Doom</i>.</p>
+
+<p><i>Doom</i> was a critical and commercial success, earning a reputation as <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">one of the best</a> and most influential video games of all time. It sold an estimated 3.5 million copies by 1999, and up to 20 million people are estimated to have played it within two years of launch. It has been termed the "father" of first-person shooters and is regarded as one of the most important games in the genre. It has been cited by video game historians as shifting the direction and public perception of the medium as a whole, as well as sparking the rise of online games and communities. It led to an array of imitators and <a href="https://en.wikipedia.org/wiki/Video_game_clone">clones</a>, as well as a robust <a href="https://en.wikipedia.org/wiki/Doom_modding">modding</a> scene and the birth of <a href="https://en.wikipedia.org/wiki/Speedrunning">speedrunning</a> as a community. Its high level of <a href="https://en.wikipedia.org/wiki/Graphic_violence">graphic violence</a> led to controversy from a range of groups. <i>Doom</i> <a href="https://en.wikipedia.org/wiki/List_of_Doom_ports">has been ported</a> to a variety of platforms both officially and unofficially and has been followed by several games in the series, including <i><a href="https://en.wikipedia.org/wiki/Doom_II">Doom II</a></i> (1994), <i><a href="https://en.wikipedia.org/wiki/Doom_64">Doom 64</a></i> (1997), <i><a href="https://en.wikipedia.org/wiki/Doom_3">Doom 3</a></i> (2004), <i><a href="https://en.wikipedia.org/wiki/Doom_(2016_video_game)">Doom</a></i> (2016), and <i><a href="https://en.wikipedia.org/wiki/Doom_Eternal">Doom Eternal</a></i> (2020), as well as the films <i><a href="https://en.wikipedia.org/wiki/Doom_(film)">Doom</a></i> (2005) and <i><a href="https://en.wikipedia.org/wiki/Doom:_Annihilation">Doom: Annihilation</a></i> (2019).</p>
+
+<h3>Ports</h3>
+
+<p>In 1995, id created an expanded version of <i>Doom</i> for the retail market with a fourth episode of levels, which was published by <a href="https://en.wikipedia.org/wiki/GT_Interactive">GT Interactive</a> as <i>The Ultimate Doom</i>. <i>Doom</i> has also been ported to numerous different platforms, independent from id Software. The first port of <i>Doom</i> was an unofficial port to Linux, released by id programmer Dave Taylor in 1994; it was hosted by id but not supported or made official. Microsoft attempted to hire id to port <i>Doom</i> to Windows in 1995 to promote Windows as a gaming platform, and Microsoft CEO <a href="https://en.wikipedia.org/wiki/Bill_Gates">Bill Gates</a> briefly considered buying the company. When id declined, Microsoft made its own licensed port, with a team led by <a href="https://en.wikipedia.org/wiki/Gabe_Newell">Gabe Newell</a>. One promotional video for Windows 95 had Gates digitally superimposed into the game.</p>
+
+<p>Other official ports of <i>Doom</i> were released for the <a href="https://en.wikipedia.org/wiki/32X">32X</a> and <a href="https://en.wikipedia.org/wiki/Atari_Jaguar">Atari Jaguar</a> in 1994, <a href="https://en.wikipedia.org/wiki/SNES">SNES</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> in 1995, <a href="https://en.wikipedia.org/wiki/3DO_Interactive_Multiplayer">3DO</a> in 1996, <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a> in 1997, <a href="https://en.wikipedia.org/wiki/Acorn_Computers">Acorn</a> <a href="https://en.wikipedia.org/wiki/Risc_PC">Risc PC</a> in 1998, <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> in 2001, <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> in 2006, <a href="https://en.wikipedia.org/wiki/IOS">iOS</a> in 2009, and <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, and <a href="https://en.wikipedia.org/wiki/Android_(operating_system)">Android</a> in 2019. Some of these became bestsellers even many years after the initial release. The ports did not all have the same content, with some having fewer levels, such as the 32X port created by John Carmack, which was released with only two-thirds of the game's levels in order to meet the console's launch date, while the PlayStation port includes <i>The Ultimate Doom</i> and <i>Doom II</i>. The source code for <i>Doom</i> was released under a non-commercial license in 1997, and freely released under the <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GNU General Public License</a> in 1999. Due to the release of its source code, <i>Doom</i> has been unofficially ported to numerous platforms. These ports include esoteric devices such as smart thermostats, pianos, and <i>Doom</i> itself, which led to variations of a long-running <a href="https://en.wikipedia.org/wiki/Internet_meme">meme</a>, "Can it run <i>Doom</i>?" and "It runs <i>Doom</i>".</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

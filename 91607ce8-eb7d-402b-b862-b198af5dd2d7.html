@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Thing</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('91607ce8-eb7d-402b-b862-b198af5dd2d7/68746d92-589c-4b0f-b8d8-23135da78a54.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="91607ce8-eb7d-402b-b862-b198af5dd2d7/598354bb-dd1d-4d67-894b-e90ad6553388.png"/> The Thing</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 18:26:10</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-20/08/2002">20/08/2002</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Survival horror">Survival horror</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Third-person shooter">Third-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Konami">Konami</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>The Thing</b></i> is a 2002 <a href="https://en.wikipedia.org/wiki/Squad-based">squad-based</a> <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a> <a href="https://en.wikipedia.org/wiki/Survival_horror">survival horror</a> video game developed by Computer Artworks and co-published by <a href="https://en.wikipedia.org/wiki/Vivendi_Universal_Games">Vivendi Universal Games</a> under the <a href="https://en.wikipedia.org/wiki/Black_Label_Games">Black Label Games</a> label and <a href="https://en.wikipedia.org/wiki/Konami">Konami</a>. It was released for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>, and <a href="https://en.wikipedia.org/wiki/Xbox">Xbox</a>. <a href="https://en.wikipedia.org/wiki/GameCube">GameCube</a> and <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a> versions were also planned, but both were cancelled early in development.</p>
+
+<p>Set as a sequel to <a href="https://en.wikipedia.org/wiki/John_Carpenter">John Carpenter</a>'s 1982 <a href="https://en.wikipedia.org/wiki/The_Thing_(1982_film)">film of the same name</a>, the story focuses on Captain Blake, a member of a <a href="https://en.wikipedia.org/wiki/United_States_Army_Special_Forces">United States Army Special Forces</a> team sent to the <a href="https://en.wikipedia.org/wiki/Antarctic">Antarctic</a> outpost featured in the film to determine what has happened to the research team, only to find himself caught in an invisible fight for survival against the titular shape-shifting alien, who seemingly has regained life despite being destroyed at the end of the film. Other survivors encountered and ordered by Blake assist the battle against the creature's different forms, all while being fully aware that they can trust nobody. The game was endorsed by Carpenter, who has a <a href="https://en.wikipedia.org/wiki/Cameo_appearance">cameo appearance</a> in the game.</p>
+
+<p><i>The Thing</i> was a commercial success; selling over one million units worldwide across all platforms, and received generally positive reviews. A sequel was in the early stages of development, but was canceled when Computer Artworks went into <a href="https://en.wikipedia.org/wiki/Receivership">receivership</a> in 2003.</p>
+
+<h2>Gameplay</h2>
+
+<p>The basic <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a> in <i>The Thing</i> is that of a traditional <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a>; the <a href="https://en.wikipedia.org/wiki/Player_character">player character</a>, Blake, can run and shoot, <a href="https://en.wikipedia.org/wiki/Strafing_(gaming)">strafe</a>, crouch, interact with the environment, interact with <a href="https://en.wikipedia.org/wiki/Non-player_character">NPCs</a> and use items, such as <a href="https://en.wikipedia.org/wiki/Flashlight">flashlights</a>, <a href="https://en.wikipedia.org/wiki/Fire_extinguisher">fire extinguishers</a> or <a href="https://en.wikipedia.org/wiki/Flare">flares</a>. The player also has the option to enter <a href="https://en.wikipedia.org/wiki/First_person_(video_games)">first-person mode</a> for more accurate targeting during combat. When in first-person mode, however, the character cannot move, except to side-step a little to the left and right. Weaponry includes <a href="https://en.wikipedia.org/wiki/Pistol">pistols</a>, <a href="https://en.wikipedia.org/wiki/Hand_grenade">grenades</a>, <a href="https://en.wikipedia.org/wiki/Sniper_rifle">sniper rifles</a>, <a href="https://en.wikipedia.org/wiki/Flamethrower">flamethrowers</a>, <a href="https://en.wikipedia.org/wiki/Shotgun">shotguns</a>, <a href="https://en.wikipedia.org/wiki/Submachine_gun">submachine guns</a>, <a href="https://en.wikipedia.org/wiki/Assault_rifle">assault rifles</a>, <a href="https://en.wikipedia.org/wiki/Grenade_launcher">grenade launchers</a> and fixed <a href="https://en.wikipedia.org/wiki/Heavy_machine_gun">heavy machine guns</a>. Other items featured in the game are <a href="https://en.wikipedia.org/wiki/Health_(gaming)">health packs</a>, <a href="https://en.wikipedia.org/wiki/Explosive_material">explosives</a>, <a href="https://en.wikipedia.org/wiki/Ammunition">ammunition</a>, portable <a href="https://en.wikipedia.org/wiki/Blood_test">blood test</a>-kits and <a href="https://en.wikipedia.org/wiki/Epinephrine">adrenaline injections</a>.</p>
+
+<p>Enemies come in three main varieties. "Scuttlers" are small Things formed from the limbs and appendages of infected personnel. They are fast, but weak, and can be killed simply by shooting. "Walkers" are larger than scuttlers, and much stronger. To kill them, the player must weaken them using gunfire before then using the flamethrower, as only fire can completely kill them. Bosses are larger and much more powerful than Walkers, and although each one requires a specific strategy to defeat, the principle is the same; weaken it with gunfire before burning it.</p>
+
+<p>One of the main features of <i>The Thing</i>'s gameplay is the inclusion of multiple NPCs who join Blake at various points throughout the game. At any one time, the player can control up to four characters; Blake and three NPCs. There are three types of NPC in the game; <a href="https://en.wikipedia.org/wiki/Engineer">engineers</a>, <a href="https://en.wikipedia.org/wiki/Soldier">soldiers</a> and <a href="https://en.wikipedia.org/wiki/Medic">medics</a>. Engineers can repair <a href="https://en.wikipedia.org/wiki/Distribution_board">fuse boxes</a>, which control locked doors, computers and <a href="https://en.wikipedia.org/wiki/Saved_game">save points</a>. Soldiers have more health, and are better shots than engineers or medics. They are thus more suited to combat. Medics are capable of healing both Blake and any other injured NPCs, and carry unlimited health packs. The player can issue basic commands to each NPC, such as ordering them to follow Blake, ordering them to remain where they are, ordering them to give Blake their weapon, and, in the case of engineers, ordering them to fix a fuse box.</p>
+
+<p>NPC <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> is determined primarily by the "Fear/trust system". The trust system determines whether the NPCs will follow Blake's orders and join him in combat. To do so, the player must ensure the NPC trusts Blake, and does not suspect him of being a Thing. NPCs have four levels of trust; red, amber, green and 100%. Red means they are convinced Blake is a Thing and will attack him. Amber means they are not sure if he is a Thing, and although they won't attack him, they won't follow his orders. Green means they trust him and will follow his orders. 100% means they have complete faith in him, will follow his orders, and even if he attacks another NPC, they will support him. To gain the trust of NPCs, Blake can give them weapons and ammo, heal them, put himself at risk to protect them, or use a blood test kit on himself to prove he is not a Thing. Actions which deplete trust include accidentally shooting teammates, taking away teammate's weapons or ammo, or pointing a weapon at them for a sustained period of time to force them to do something.</p>
+
+<p>The fear system dictates how scared a given NPC is. There are three levels of fear; normal, scared and "Crack-up". When an NPC enters "Crack-up" mode, Blake has only a limited amount of time to reduce their fear level, or the NPC will kill themselves, attack Blake and other NPCs, attack the environment, or die of a heart attack. Each NPC responds differently to different surroundings; for example, medics tend to scare easier than soldiers. Generally, however, fear increases when entering rooms covered in blood, entering dark locations, finding particularly disfigured corpses, being attacked by multiple enemies, and hearing enemies but not being able to see them. When an NPC is scared, it affects their performance; soldiers become less accurate, engineers take longer to repair fuse boxes and medics don't heal characters as quickly. Blake can reduce fear by giving NPCs adrenaline, topping up their ammo, moving away from particular locations, or successfully defeating enemies.</p>
+
+<p>The game also features an infection system, which determines whether or not an NPC is infected by the Thing. Although most NPCs are scripted to transform into a Thing at specific points in the game, they can also be infected at any time prior to this. When the team comes under attack by enemies, the possibility of infection is based upon a <a href="https://en.wikipedia.org/wiki/Probability">probability</a> system whereby any teammate who comes into direct contact with an enemy can be infected. Although infection does not alter their immediate behavior, it will result in them turning into a walker-Thing after a set period of time, at which point they will attack the team.</p>
+
+<p>The Windows PC port features patches that fix issues present on the consoles. Furthermore, "Patch 1.2 adds a very handy mouse-look mode, which makes the game play more like a modern PC game."</p>
+
+<h2>Plot</h2>
+
+<p>The game begins at U.S. Outpost 31 in <a href="https://en.wikipedia.org/wiki/Antarctica">Antarctica</a>, a short time after the events of <a href="https://en.wikipedia.org/wiki/The_Thing_(1982_film)">the film</a>. Two teams of <a href="https://en.wikipedia.org/wiki/Special_Forces_(United_States_Army)">U.S. Special Forces</a> have arrived to investigate the U.S. camp and the nearby Norwegian camp. <a href="https://en.wikipedia.org/wiki/Captain_(United_States)">Captain</a> J.F. Blake (voiced by Per Solli) is the leader of Bravo Team, who are investigating the U.S. camp, whilst Alpha Team, under the command of Captain Pierce, investigate the Norwegian camp. Both teams are under the overall command of <a href="https://en.wikipedia.org/wiki/Colonel_(United_States)">Colonel</a> Whitley (<a href="https://en.wikipedia.org/wiki/William_B._Davis">William B. Davis</a>), who is in constant communication via radio. Whilst investigating Outpost 31, Bravo Team soon discover the small <a href="https://en.wikipedia.org/wiki/Spacecraft">spacecraft</a> made by the Blair-Thing and a <a href="https://en.wikipedia.org/wiki/Tape_recorder">tape recorder</a> with a message from <a href="https://en.wikipedia.org/wiki/R.J._MacReady">R.J. MacReady</a>, resigned to their fate. They then find information detailing how the base has been infiltrated by an <a href="https://en.wikipedia.org/wiki/Extraterrestrial_life">extraterrestrial lifeform</a> that is capable of imitating the physical appearance and characteristics of any living <a href="https://en.wikipedia.org/wiki/Organism">organism</a> it assimilates. They also find the body of Childs, one of the two survivors at the end of the film, who has died from <a href="https://en.wikipedia.org/wiki/Hypothermia">hypothermia</a>. The film's other survivor, MacReady, is nowhere to be found. Under orders from Whitley, Bravo Team set up <a href="https://en.wikipedia.org/wiki/C-4_(explosive)">C-4 explosives</a> throughout the facility, which are detonated remotely, destroying the outpost.</p>
+
+<p>Whilst the rest of Bravo Team are airlifted to safety, Blake heads to the Norwegian camp to locate and reinforce Alpha Team, with whom contact has been lost. He soon learns they have been attacked and scattered by a horde of "scuttlers"; small limbs and appendages of much larger Things. Eventually Blake finds Pierce. However, he has become paranoid, believing everyone to be infected and demanding Blake agrees to a <a href="https://en.wikipedia.org/wiki/Blood_test">blood test</a> to prove he is still human. Blake does so, and he and Pierce set out to find a way to reestablish communication with Whitley. However, they are soon separated, and with no other choice, Blake continues on, finding the radio room, but discovering someone has stolen the radio and fled into a nearby warehouse.</p>
+
+<p>En route to the warehouse, Blake encounters Pierce in an <a href="https://en.wikipedia.org/wiki/Observatory">observatory</a>. However, he is infected, and rather than allow himself to turn into a Thing, Pierce shoots himself in the head. Blake continues to pursue the man with the radio, eventually discovering that he is a Thing. Blake kills him, and takes the radio. Moving on, he enters the "Pyron" sub-facility beneath the Norwegian base, learning of a company called Gen-Inc., who have installed a research team under the command of Dr. Sean Faraday (<a href="https://en.wikipedia.org/wiki/John_Carpenter">John Carpenter</a>). Gen-Inc. had been conducting biological experiments on the Things when their team was infected, and now only a few survivors remain within the facility. Blake rescues Faraday and attempts to leave. However, he is prevented from doing so by Whitley, who shoots him with a <a href="https://en.wikipedia.org/wiki/Tranquillizer_gun">tranquillizer gun</a>, and reveals to Faraday that he has infected himself with the Thing <a href="https://en.wikipedia.org/wiki/Gene">gene</a>, claiming it to be controllable, something of which he is living proof, and therefore demonstrating its capability as a weapon. When Faraday attempts to eradicate the Thing <a href="https://en.wikipedia.org/wiki/Virus">virus</a>, Whitley kills him.</p>
+
+<p>Blake awakens in the now abandoned "Strata" research facility, and learns that his <a href="https://en.wikipedia.org/wiki/Cell_(biology)">cells</a> have a unique resistance to infection by the Thing virus. After escaping his confinement, he unearths a government conspiracy whereby Gen-Inc. isolated a <a href="https://en.wikipedia.org/wiki/Microbiology">microbiological</a> form of the Thing called the "Cloud virus", which was intended for use in <a href="https://en.wikipedia.org/wiki/Biological_warfare">biological warfare</a>. However, the Thing infected everyone at the facility. Blake learns that Whitley was in charge of the entire operation, and has injected himself with a strain of the virus known as "Cloud Virus B4" in an attempt to cure his terminal <a href="https://en.wikipedia.org/wiki/Cancer">cancer</a>.</p>
+
+<p>Blake fights his way through the facility, battling numerous <a href="https://en.wikipedia.org/wiki/Black_operation">black ops</a> under Whitley's command, as well as many Things. Learning that Whitley plans to distribute the Thing virus around the world using a fleet of airplanes, he is able to destroy them before they take off. Eventually, Blake confronts Whitley himself. He sets him on fire, but Whitley is unhurt. He explains that an airlift team is on its way and when it arrives, he will begin global infection. Whitley flees further into the base, pursued by Blake. At the partly excavated site of the original Thing's spaceship, Whitley transforms into a massive Thing creature. Blake encounters a helicopter pilot, who helps him defeat the Whitley-Thing. As the helicopter flies away from the base, the pilot reveals himself to be R.J. MacReady.</p>
+
+<h2>Development</h2>
+
+<p>In 2000, when <a href="https://en.wikipedia.org/wiki/Universal_Interactive">Universal Interactive</a> began looking through <a href="https://en.wikipedia.org/wiki/Universal_Studios">Universal Studios</a>' back-catalogue of feature films with potential for adaptation as video game franchises, they quickly decided one of the most lucrative such <a href="https://en.wikipedia.org/wiki/Intellectual_property">intellectual properties</a> was the 1982 film directed by <a href="https://en.wikipedia.org/wiki/John_Carpenter">John Carpenter</a>, <i><a href="https://en.wikipedia.org/wiki/The_Thing_(1982_film)">The Thing</a></i>. The film was based on the 1938 <a href="https://en.wikipedia.org/wiki/John_W._Campbell">John W. Campbell</a> short story "<a href="https://en.wikipedia.org/wiki/Who_Goes_There%3F">Who Goes There?</a>", which had already been filmed by <a href="https://en.wikipedia.org/wiki/Howard_Hawks">Howard Hawks</a> in 1951 as <i><a href="https://en.wikipedia.org/wiki/The_Thing_from_Another_World">The Thing from Another World</a></i>. Carpenter's version was the most widely known iteration of the story, however, and the ambiguous ending to the film was seen as particularly attractive in terms of a video game which could explore what happens <i>after</i> the events of the film. Universal and <a href="https://en.wikipedia.org/wiki/Konami">Konami</a> announced the game on September 20, 2000, before development had begun, confirming it would not be an adaptation of the film, but a sequel. They also revealed the game would be released for "<a href="https://en.wikipedia.org/wiki/Sixth_generation_of_video_game_consoles">next generation consoles</a>", of which only the <a href="https://en.wikipedia.org/wiki/Xbox_(console)">Xbox</a> was initially confirmed, as well as the <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a> and <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, the Handheld version was rumored to support with the Mobile Game Boy Adapter device (although both versions were quietly canceled early in production).</p>
+
+<p>Based upon Computer Artworks' 2000 video game <i><a href="https://en.wikipedia.org/wiki/Evolva">Evolva</a></i>, Universal invited them to make a pitch for the game. For the pitch, Computer Artworks reskinned a level from <i>Evolva</i> with an Antarctic theme and a Thing-like creature as a boss fight. The pitch impressed Universal sufficiently, and the deal was signed. According to the game's director, William Latham, "Universal were very good to work with. They told us to come up with original ideas. It wasn't like a <i><a href="https://en.wikipedia.org/wiki/Harry_Potter_(film_series)">Harry Potter</a></i> license. There weren't strict guidelines, as long as we retained the quality of the original work." Drawing inspiration from <i><a href="https://en.wikipedia.org/wiki/Aliens_(film)">Aliens</a></i>, the 1956 version of <i><a href="https://en.wikipedia.org/wiki/Invasion_of_the_Body_Snatchers">Invasion of the Body Snatchers</a></i>, <i><a href="https://en.wikipedia.org/wiki/Half-Life_(video_game)">Half-Life</a></i> and <a href="https://en.wikipedia.org/wiki/Area_51">Area 51</a> conspiracy theories, Computer Artworks began work on the game in November 2000. On January 16, they announced the game would also be released for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Windows</a>, with a release date slated for mid-2002. The game was first shown at Universal Interactive's "Gamer's Day" on August 13, where it was confirmed it would also be coming to <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>. A non-playable demo was shown, and a Q&amp;A session was held with the developers. Universal revealed details of the fear/trust and infection systems, which they said would form an integral aspect of the basic <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a>.</p>
+
+<p>A playable demo for the PlayStation 2 was released on March 25, 2002. In an interview with <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> on April 1, Universal Interactive producer Peter Wanat explained "the trust-fear dynamic was born out of the film and the simple fact that we needed to give the main character <a href="https://en.wikipedia.org/wiki/Non-player_character">NPCs</a> to interact with. That whole not knowing who is human and who is "the thing" was a big part of the movie and worked for the game really well." Wanat cited games such as <i><a href="https://en.wikipedia.org/wiki/Resident_Evil_(1996_video_game)">Resident Evil</a></i>, <i><a href="https://en.wikipedia.org/wiki/Silent_Hill_(video_game)">Silent Hill</a></i>, <i><a href="https://en.wikipedia.org/wiki/Grand_Theft_Auto_III">Grand Theft Auto III</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Max_Payne_(video_game)">Max Payne</a></i> as influences. However, he stated;</p>
+
+<p>Speaking in 2014, Latham reiterated Wanat's claims that the fear/trust and infection systems came from a desire to reproduce a strong element from the film;</p>
+
+<p>Similarly, <a href="https://en.wikipedia.org/wiki/Game_design#Game_designer">designer</a> Andrew Curtis said;</p>
+
+<p>Originally the game was to be more <a href="https://en.wikipedia.org/wiki/Open_world">open world</a> based, with the possibility that each NPC could turn into a Thing at any moment completely randomized. Curtis also hoped the player could get to the end of the game with many, perhaps all, of the NPCs still alive. However, this kind of open-endedness proved impossible to implement, with Curtis, pointing out "It was of course very naïve as it caused huge problems with the squad command menu and dynamically balancing the encounters and resources required for the NPC." Ultimately, NPC characters were scripted to change into Things at specific points, irrespective of the player's actions. This led to a much criticized aspect of the game; the player can test an NPC to find he is human only for him to change into a Thing mere seconds later. <a href="https://en.wikipedia.org/wiki/Game_programmer">Programmer</a> Diarmid Campbell explains;</p>
+
+<p>Similarly, Latham states "We had to scale it back. There were a few cheats to make it entertaining. We tried to mimic human behavior, but at the end of the day it didn't matter too much how you treated your teammates."</p>
+
+<p><i>The Thing</i> also features a vocal ending theme "After Me", performed by <a href="https://en.wikipedia.org/wiki/Memphis,_Tennessee">Memphis</a>-based <a href="https://en.wikipedia.org/wiki/Nu_metal">Nu metal</a> band <a href="https://en.wikipedia.org/wiki/Saliva_(band)">Saliva</a>, from its second studio album <a href="https://en.wikipedia.org/wiki/Every_Six_Seconds">Every Six Seconds</a>.</p>
+
+<p>In August 2002, Vivendi Universal formed a new publishing division called Black Label Games; a label which Ken Cron (Vivendi Universal Games CEO) stated "will focus on delivering innovative, high-quality titles to satisfy the growing consumer appetite for increasingly sophisticated content." The game transitioned from Universal Interactive over to the new label.</p>
+
+<p>The console versions are co-published with Konami, with Vivendi Universal handling distribution.</p>
+
+<h2>Reception</h2>
+
+<p><i>The Thing</i> received "generally favorable reviews" on all three platforms; the PlayStation 2 version holds an aggregate score of 78 out of 100 on <a href="https://en.wikipedia.org/wiki/Metacritic">Metacritic</a>, based on twenty-seven reviews; the Xbox version a 78 out of 100, based on twenty-one reviews; and the PC version a 77 out of 100, based on nineteen reviews.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Eurogamer">Eurogamer</a>'s Kristan Reed scored the PlayStation 2 version a 5 out of 10, arguing of the trust/fear system "It is nowhere near as much of a neat gameplay innovation as the hype had some people believe [...] As a squad based game it would work far better if you ever had to care a great deal for anyone's survival. As it is, most of the team seem to split off once a level's over (or turn into aliens at pre-determined moments during it), so you're left merely using each NPC as a means of progression." He was also critical of the <a href="https://en.wikipedia.org/wiki/Video_game_graphics">graphics</a>, which he argued "look old school, with bad <a href="https://en.wikipedia.org/wiki/Texture_mapping">texturing</a>, uninteresting <a href="https://en.wikipedia.org/wiki/Particle_system">particle effects</a>, and vanilla architecture." He concluded, "If you can pick up <i>The Thing</i> cheap you won't be too disappointed; it's by no means a bad game, but it's all the more disappointing thanks to the fact that it could and should have been brilliant."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/GameSpy">GameSpy</a>'s Tom Chick scored the PC version a 3 out of 5, writing "<i>The Thing</i> starts out strong, but it's the sort of game you don't have to feel bad about not finishing. Of course, you're paying for a full game, so if dollar value is your main criteria, you might be better off renting John Carpenter's movie, reading the original short story, and then having a laugh at the walking carrot in the 1951 version." Tom Ham scored both the PlayStation 2 and Xbox versions a 4 out of 5, writing "not only is the game a solid action-adventure frenzy, it also manages to tell a tale that is truly chilling. Combined with topnotch graphics, incredible use of sound, and a very cool trust/fear interface, <i>The Thing</i> manages to do what so many movie licensed games have failed to do -- succeed."</p>
+
+<p><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a>'s Erik Wolpaw scored the PC version a 7.7 out of 10, and although he was very critical of the trust/fear system and the controls, he concluded "<i>The Thing</i> is kind of short, it's not especially effective at making you feel afraid, its most intriguing gameplay elements are somewhat extraneous, and it suffers from a wonky control scheme. Yet, thanks to some high production values and consistently interesting action scenes, <i>The Thing</i> rises above these flaws. It could have been great, but in light of the checkered history of movie-licensed games, being good at all is a pretty impressive achievement." Ryan MacDonald scored the PlayStation 2 version an 8.4 out of 10, writing "When you look at everything the game offers in terms of its gameplay, presentation, and story, it's hard not to appreciate <i>The Thing</i> whether you're a fan of the film it's based on or just a fan of the survival horror genre in general." He also scored the Xbox version an 8.4 out of 10, calling it "The best of the three, combining sharp graphics similar to those found in the PC version with the superior console-style control found in the PlayStation 2 version." <i>GameSpot</i> later named <i>The Thing</i> the second-best Xbox game of September 2002.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/IGN">IGN</a>'s Douglass C. Perry scored the PlayStation 2 and Xbox versions an 8.3 out of 10. Although he was critical of the scripted nature of the infection system, he concluded "The deeper you play, the more satisfying and challenging it becomes, and the more it draws you in. <i>The Thing</i> is well-paced, designed with an excellent variety of levels [...] Everything is consistent with the movie, the theme of which has been handled with exquisite care and thought. With the exception of the blood test goofs and the rather thin storyline, <i>The Thing</i> warrants your time and money." Steve Polak scored the PC version an 8.5 out of 10, writing "<i>The Thing</i> is, for the most part, an immersive and enjoyable game. The visuals and sound are top-notch and the sense of desperation you feel when you are stuck outside and about to succumb to the elements or being hunted by packs of the foul creatures is very real. The squad-based elements and the way you keep your men from losing their minds also adds to the depth of the play experience."</p>
+
+<h3>Sales and awards</h3>
+
+<p>The game was a commercial success, selling over one million units worldwide. At the 2003 <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a>, <i>The Thing</i> won the "Game Innovation Spotlight" award. It was nominated for <i>GameSpot</i>'s annual "Best Action Adventure Game on Xbox" award, which went to <i><a href="https://en.wikipedia.org/wiki/Tom_Clancy's_Splinter_Cell_(video_game)">Tom Clancy's Splinter Cell</a></i>. During the <a href="https://en.wikipedia.org/wiki/6th_Annual_Interactive_Achievement_Awards">6th Annual Interactive Achievement Awards</a>, <i>The Thing</i> received a nomination for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Action_Game_of_the_Year">Computer Action/Adventure Game of the Year</a>" by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a>.</p>
+
+<h2>Canceled sequel</h2>
+
+<p>A sequel went into development after the first game proved a critical and commercial success, but it was canceled when Computer Artworks went into <a href="https://en.wikipedia.org/wiki/Receivership">receivership</a> in October 2003. According to Diarmid Campbell, "We had the contract in place to make the sequel and were pretty excited about it. We had a very cool prototype of 'dynamic infection' and some really imaginative thing 'burst-outs'. I particularly liked the one where the person would split in half and their top half would jump to the ceiling and start swinging around like an <a href="https://en.wikipedia.org/wiki/Orangutan">orangutan</a> with his <a href="https://en.wikipedia.org/wiki/Human_gastrointestinal_tract">intestines</a> turned into tentacles." However, the project never developed beyond the <a href="https://en.wikipedia.org/wiki/Proof_of_concept">proof of concept</a> stage, with Computer Artworks producing some <a href="https://en.wikipedia.org/wiki/Concept_art">concept art</a>, showing locations and enemies, and two short demo videos, but nothing else.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
