@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Oddworld - Abe&#39;s Exoddus</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e07e5e31-9419-43c9-9b55-0ecb7e5b0606/192ee509-a809-42e8-bad3-1a40164c63b6.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e07e5e31-9419-43c9-9b55-0ecb7e5b0606/643d7fcc-ce97-44c2-8fe5-9111f6d4677b.png"/> Oddworld - Abe&#39;s Exoddus</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 18:48:22</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation">Sony PlayStation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-17/11/1998">17/11/1998</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platformer">Platformer</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Puzzle">Puzzle</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Oddworld Inhabitants">Oddworld Inhabitants</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-GT Interactive">GT Interactive</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Oddworld Inhabitants">Oddworld Inhabitants</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Oddworld: Abe's Exoddus</b></i> is a <a href="https://en.wikipedia.org/wiki/Platform_game">platform video game</a> developed by <a href="https://en.wikipedia.org/wiki/Oddworld_Inhabitants">Oddworld Inhabitants</a> and published by <a href="https://en.wikipedia.org/wiki/GT_Interactive">GT Interactive</a>. Although the game is a sequel to the video game <i><a href="https://en.wikipedia.org/wiki/Oddworld:_Abe's_Oddysee">Oddworld: Abe's Oddysee</a></i>, it is considered a spin-off title in the <i>Oddworld</i> series, and not part of the main <i><a href="https://en.wikipedia.org/wiki/Oddworld">Oddworld Quintology</a></i>. It was released in November 1998 for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> <a href="https://en.wikipedia.org/wiki/Video_game_console">video game console</a> and in December 1998 for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a>. A <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a> version, titled <i><a href="https://en.wikipedia.org/wiki/Oddworld_Adventures_2">Oddworld Adventures 2</a></i>, was released in 2000. The PlayStation version was re-released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> in October 2009.</p>
+
+<p>The game continues the story of <a href="https://en.wikipedia.org/wiki/Abe_(Oddworld)">Abe</a>, charting his efforts to save his fellow Mudokons from another plot by the Glukkons to exploit them. Abe discovers that the Glukkons are enslaving Mudokons, this time to produce a drink called Soulstorm Brew, which uses Mudokon bones and tears as its ingredients. The player assumes the role of Abe, embarking on a quest to halt production of SoulStorm Brew.</p>
+
+<p>The game was released to similar critical acclaim as the first title. Reviews praised the game's ability to allow the player to <a href="https://en.wikipedia.org/wiki/Saved_game#Save_states">quick save</a><!-- a quick save is a common thing, no need for the game's own QuikSave spelling --> anywhere they liked, a feature that was not present in <i>Abe's Oddysee</i>, while noting that it was very similar to that title. The game won multiple awards upon release.</p>
+
+<p>On March 14, 2016, it was announced that <a href="https://en.wikipedia.org/wiki/Oddworld_Inhabitants">Oddworld Inhabitants</a> are working on a follow-up to <i><a href="https://en.wikipedia.org/wiki/Oddworld:_New_'n'_Tasty!">Oddworld: New 'n' Tasty!</a></i> (a 2014 <i>Abe's Oddysee</i> remake) titled <i><a href="https://en.wikipedia.org/wiki/Oddworld:_Soulstorm">Oddworld: Soulstorm</a></i>. The game page confirms that this title is inspired by <i>Abe's Exoddus</i> and that the new game is going to be a re-imagining of <i>Abe's Exoddus</i>.</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Abe's Exoddus</i> is a <a href="https://en.wikipedia.org/wiki/Video_game_graphics">two-dimensional</a> platform game, with many of its elements taken from the previous title, <i>Abe's Oddysee</i>. The game is split into screens; when the player moves into the edge of the screen, the environment is replaced, just like in the previous title. Most screens include various puzzles that must be solved through the use of Abe's unique abilities: "GameSpeak", possession, controlling mine cars, activation or deactivation of mines or levers, and rocks, grenades, or bones that can be picked up and used for different purposes. Normal abilities include creeping, walking, running, rolling, hoisting, jumping, and crouching, all of which have specific application and make up a necessary arsenal of moves.</p>
+
+<p>The game features no <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">user interface</a> or <a href="https://en.wikipedia.org/wiki/Head-up_display_(video_gaming)">heads-up display</a>. Information is conveyed to the player through instructive screens that can be activated by the player character, or through scrolling messages in the background. Characters do not have <a href="https://en.wikipedia.org/wiki/Health_(gaming)">hit points</a>; instead, being attacked (such as being shot or mauled) or touching a hazard (such as a bone drill or an exploding mine) or falling either from high places or into a pit generally causes instant death. However, the player has unlimited lives, and upon death will <a href="https://en.wikipedia.org/wiki/Spawning_(gaming)#Spawn_point">re-spawn</a> at the last <a href="https://en.wikipedia.org/wiki/Saved_game">checkpoint</a> they reached. <i>Abe's Exoddus</i> includes an option to <a href="https://en.wikipedia.org/wiki/Saved_game#Save_states">quick save</a><!-- a quick save is a common thing, no need for the game's own QuikSave spelling --> which allows the player to designate their own checkpoints, a feature which was not present in <i>Abe's Oddysee</i> due to programming conflicts and which attracted criticism of that title.</p>
+
+<p>While the focus of the gameplay is surmounting screens, there is a secondary focus on rescuing enslaved Mudokons. GameSpeak is a pivotal ability in this respect; by pressing combinations of buttons, the player character will utter short phrases that can be used to control allied <a href="https://en.wikipedia.org/wiki/Non-player_character">non-player characters</a>—to pull extra levers, to follow the player character, or simply to wait.</p>
+
+<p>Unlike the first game, Mudokons have emotional states and status ailments that affect how they respond to Abe. Mudokons may be angry, wired, <a href="https://en.wikipedia.org/wiki/Depression_(mood)">depressed</a>, sick, or blind, and each state must be dealt with differently by the player. Angry, wired or depressed characters can be consoled through specific GameSpeak commands. An "angry" Mudokon (who flash red whenever they speak) will either repeatedly slap nearby Mudokons or work dangerous traps and can be told to "stop it", though Abe must tell them he is "sorry" to calm them down. If a "depressed" Mudokon (blue) witnesses too many deaths of other Mudokons or if he is slapped, he will start to hit himself in the head and eventually commit suicide. Abe again can prevent this by saying "stop it" and remove the ailment by telling them he's "sorry". Both angry and depressed Mudokons will not follow Abe if he tells them to. Clouds of laughing gas will turn Mudokons "wired" (lime), causing them to hyperactively run in Abe's direction and in some cases make it more difficult to get past enemies and obstacles. They will only calm down when slapped but the slap will have no effect if done within the gas cloud. "Sick" Mudokons will not respond to any GameSpeak command whatsoever (aside from being slapped) and can only be cured with a special chant, obtained when Abe finds a helper character. Blind Mudokons (distinguished by pale skin and, story-wise, with their eyes sewn shut to keep them from knowing what they were digging up in the Necrum Mines) will keep walking in the direction of Abe's voice, and must be told to "wait" before they walk into a hazard.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Spirit_possession">Possession</a> is the player character's ability to take control of certain characters in the same screen by chanting. When a character is possessed, the player can use their abilities and weapons to find otherwise unreachable areas or levers, kill enemies, or as part of solving puzzles. However, when possessing a character, the player character remains immobile and vulnerable to attack. Possessing a Slig in particular sometimes has to use voice commands to solve puzzles. This is done with an "Ackack!" which the game refers to as 'BS'  "Ay!" which is referred to in the game as 'S'BS' and a laugh. The whistling passwords have been removed from the previous game.</p>
+
+<p>The player can abandon possession of a creature at any time. Scrabs or Paramites will be released without harm when abandoned, while Industrialists (Sligs and Glukkons) will burst into pieces. If the player character has drunk Soulstorm Brew, they will be able to possess their own <a href="https://en.wikipedia.org/wiki/Flatulence">fart</a>, which can then be used as a flying explosive and will detonate either when control is abandoned, or after a period of time.</p>
+
+<p>Mudokon slaves (including blind ones) are rescued through Bird Portals. If the player character chants when in the same screen as a Bird Portal, the portal will activate, and any nearby Mudokon slaves will run through it, disappearing. Rescuing Mudokons is not usually crucial to progressing through the game; however, rescuing at least 150 is necessary to get the good ending, and many secret areas revolve around rescuing a few Mudokons in particularly complex situations. There is an alternative ending known as the 'Maximum Casualties' ending. If the player kills all 278 Mudokons, the player is awarded with invincibility.</p>
+
+<p>The player can also gain the ability to turn into the Shrykull, a Mudokon supernatural demigod. Abe acquired this power at a late stage in <i>Abe's Oddysee</i>. The ability is earned by sending a certain number of Mudokons through a Bird Portal at once, denoted by a number circulating with the birds. With the ability, the player can enter a screen with enemies or explosives, chant to transform into the Shrykull, and vaporize all enemies and hazards on the screen. Afterward, the player character reverts into their Mudokon form. Achieving the ability and doing such is necessary to get past certain points in the game. The player can only turn into the Shrykull once each time they earn the ability, so where and when they choose to use it is important.</p>
+
+<h3>Allies, enemies and wildlife</h3>
+
+<p>Allies in the game include Mudokons, humanoid species encountered as rescuable slaves and helpers. Normally, they will follow any GameSpeak-given order, but as described above, some Mudokons will be emotional and must be consoled by the player character first. The player character can also possess other creatures, in order to gain help with a task. For example, when possessing a <a href="https://en.wikipedia.org/wiki/Oddworld#Oddworld_species">Paramite</a>, the player character can use GameSpeak to communicate with other Paramites, in much the same way as Mudokons. Scrabs also have minor abilities of GameSpeak, but are limited to shrilling, which activates the ability to attack.</p>
+
+<p>Enemies in the game primarily consist of Sligs, semi-robotic creatures who will attempt to kill the player character on sight. Although most have mechanical legs and carry <a href="https://en.wikipedia.org/wiki/Machine_gun">machine guns</a>, some Sligs wear helicopter flight packs and launch <a href="https://en.wikipedia.org/wiki/Grenade">grenades</a>. Some Sligs choose to sleep without wearing mechanical legs, in which case they are vulnerable until they can obtain a set. Sligs can be possessed by the player character, who can then control the Slig and utilize its weapon. Sligs cannot see in dark shadows, which create natural hiding places for the player character. Sligs are often accompanied by Slogs, bipedal doglike creatures that chase and attack the player character on sight. Slogs can be commanded if the player possesses a Slig, and can be ordered to attack and kill enemies. Sloggies are the puppy form of Slogs, and are slower but just as deadly if the player character encounters them. Slogs and Sloggies can be distracted with bones.</p>
+
+<p>Other enemies include Greeters, robotic security guards originally designed for public speaking and advertising, until they began to attack their customers. Greeters have <a href="https://en.wikipedia.org/wiki/Motion_detector">motion detectors</a>, and if the player character or another Mudokon triggers a Greeter's detector, the Greeter will give chase and attempt to kill the victim with an electric charge.</p>
+
+<p>Glukkons feature as the game's primary antagonists. Glukkons are tall-foreheaded, humanoid creatures who are ruthless, malevolent businessmen. They walk on their arms as their feet are located upon their chest, and as a result they are physically defenseless and rely on Sligs to protect and serve them. They are the owners and bosses of the industries Abe visits throughout the game, and the masters of the Mudokon and Slig slaves. Glukkons can be possessed by the player, and can be made to command Sligs through GameSpeak, either to kill other characters, or to pull levers and move platforms.</p>
+
+<p>Animals and wildlife consist of the <a href="https://en.wikipedia.org/wiki/Oddworld#Oddworld_species">Scrabs</a> and aforementioned Paramites, both <a href="https://en.wikipedia.org/wiki/Carnivore">carnivorous</a> predators that are encountered in the burial vaults of Necrum. Scrabs are highly territorial and chase any other life form on sight. Should they encounter another Scrab, a short fight ensues in which one is killed. Paramites are <a href="https://en.wikipedia.org/wiki/Pack_hunter">pack hunters</a>, and when the player encounters a single Paramite, the Paramite will flee and not attack the player unless they are cornered. When encountered in groups of two or more, Paramites will pursue and attack the player. Paramites can be distracted with chunks of meat.</p>
+
+<p>Other wildlife include the Fleeches, wormlike creatures that live in the Oddworld underworld. When woken from sleep, they will chase the player character and any other Mudokons, attacking with their long tongues before swallowing the victim whole. Fleeches fear Scrabs and Paramites and try to avoid them whenever possible. Fleeches are the only enemy that cannot kill Abe in one hit and it is possible to run away from Fleeches while they are attacking before they hit Abe enough to kill him. They are also the only enemies that can navigate up platform edges. Slurgs, the lowest form of life on Oddworld, are often found alongside Fleeches, as when stepped on by the player character, Slurgs emit a noise that wakes Fleeches from sleep. They can also be eaten by possessed Paramites without disturbing any nearby sleeping Fleeches.</p>
+
+<h2>Story</h2>
+
+<p>The game opens with the Mudokons celebrating the destruction of RuptureFarms and their rescue by former slave-turned-hero Abe. However, the celebrations cause Abe to fall from a stage and lose consciousness. While unconscious, he receives a vision from three Mudokon spirits, who inform him that the Glukkons are using Mudokon slaves to <a href="https://en.wikipedia.org/wiki/Exhumation">exhume</a> the bones of their dead at the Necrum, the ancient burial grounds of the Mudokons. Upon awakening, Abe leaves for Necrum with a group of fellow Mudokons to uncover what the Glukkons are up to, and quickly discover the burial grounds have been turned into mines, with many Mudokons blinded to prevent them knowing what they are extracting.</p>
+
+<p>After initially being separated from his friends, Abe reunites with them at a vending machine that dispenses a new drink called Soulstorm Brew. Despite his protest, his friends -who are desperate to quench their thirst- swiftly begin drinking every bottle of Brew from the vendo and fall sick from doing so. Abe quickly discovers that the Brew is made from the bones of the Mudokons, and proceeds to sabotage the mines. In order to heal his sick friends, he soon finds himself forced to locate the <a href="https://en.wikipedia.org/wiki/Burial_vault_(tomb)">burial vaults</a> of Necrum and liberate its trapped Mudokon spirits. In doing so, Abe is granted the power of healing by the three spirits who contacted him, allowing him to heal his sick friends, who in turn help him to head for the FeeCo Depot - a large shipment and transportation hub.</p>
+
+<p>Upon arriving, Abe learns that three high-ranking Glukkons have sealed off the entrance to the Soulstorm Brewery to prevent him sabotaging it. To unlock access, he quickly tracks down each Glukkon, possesses them, and uses them to unlock each security measure they control. Travelling to the Brewery, Abe soon discovers the Brew not only uses Mudokon bones, but also their tears, which are extracted from slaves by machines that repeatedly electrocute them. While safely rescuing the victims, Abe discovers the Brewery can be destroyed by overloading its main boiler. Upon doing so, the ending received is determined by the number of Mudokons saved by the player: if less than 150, Abe's friends gang up on him for not helping the slaves, and leave him attached to a tear extractor, causing him to be killed as a result, ending the game from there; if 150 or more are rescued, Abe succeeds in destroying the Brewery, and is given a hero's welcome upon his safe return, whereupon Abe vows to seek out other Mudokon slaves, while one of his friends opens a rehab clinic for Mudokons recovering from the Brew, resulting in the events of <i><a href="https://en.wikipedia.org/wiki/Oddworld:_Munch's_Oddysee">Munch's Oddysee</a></i>.</p>
+
+<h2>Development</h2>
+
+<p>Following the overwhelming success of <i>Abe's Oddysee</i>, <a href="https://en.wikipedia.org/wiki/GT_Interactive">GT Interactive</a>, the publishers of <i>Abe's Oddysee</i> and <i>Abe's Exoddus</i>, pushed for a sequel to be made by <a href="https://en.wikipedia.org/wiki/Christmas">Christmas</a> 1998. In order to meet this deadline, <i>Abe's Exoddus</i> was made to run on the same game engine as <i>Abe's Oddysee</i>, and was completed in nine months. <a href="https://en.wikipedia.org/wiki/Lorne_Lanning">Lorne Lanning</a>, the <a href="https://en.wikipedia.org/wiki/Video_game_producer">director</a> of both games, stated that "we killed ourselves getting <i>Abe's Exoddus</i> done in nine months. It was brutal."</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Game_Boy_Color">Game Boy Color</a> port was released as <i><a href="https://en.wikipedia.org/wiki/Oddworld_Adventures_2">Oddworld Adventures 2</a></i>, developed by <a href="https://en.wikipedia.org/wiki/Saffire_(company)">Saffire</a> and published by <a href="https://en.wikipedia.org/wiki/GT_Interactive">GT Interactive</a> in November <a href="https://en.wikipedia.org/wiki/1999_in_video_gaming">1999</a>. The game is a significantly cut-down version of <i>Abe's Exoddus</i>, with only a few similar levels and an absence of plot.</p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Video_game_console_emulator">emulated</a> version of the PlayStation version was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> via <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> on October 22, 2009 in North America and on June 2, 2010 in Europe.</p>
+
+<h2>Reception</h2>
+
+<p>In January 1999, the Verband der Unterhaltungssoftware Deutschland presented the PlayStation version of <i>Oddworld: Abe's Exoddus</i> with a "Gold" award, indicating sales of at least 100,000 units across Germany, Austria and Switzerland.</p>
+
+<p><i>Abe's Exoddus</i> received mostly positive reviews upon its release. <i><a href="https://en.wikipedia.org/wiki/Edge_(magazine)">Edge</a></i> praised Abe's range of abilities because they can be used in "lateral [and] unrelated" ways, but criticized the general gameplay for being similar to its predecessor. In contrast, <a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a> stated, "though the <i>Exoddus</i> gameplay is essentially more of the same, it's more of a good thing". <i><a href="https://en.wikipedia.org/wiki/PC_Zone">PC Zone</a></i> praised the game's cutscenes, stating that "the cut-scenes are brilliantly created (especially in the sound department)". <a href="https://en.wikipedia.org/wiki/IGN">IGN</a> gave particular praise to the game's graphics: "The 3D characters are better looking than the previous iteration, and more animated backgrounds and moving parts liven up the slightly old formula".</p>
+
+<p>Criticism varied between reviews. GameSpot's sole criticism was of the game's two-player mode, stating that "the waiting game just doesn't parallel the egocentric fun of keeping this title to yourself". <i>PC Zone</i> focused on the game's difficulty, stating that "it's too f**king hard ... You sometimes start to dread moving into a (obviously harder) new area of the game". IGN criticised <a href="https://en.wikipedia.org/wiki/Trial_and_error">trial and error</a> gameplay, stating that "the same trial-and-error scheme is frustrating as a thorn in your heel. Several areas simply leave you stranded, and you have to start over."</p>
+
+<p>Despite these criticisms, the game won many awards, including the <a href="https://en.wikipedia.org/wiki/Electronic_Entertainment_Expo">E3</a> Showstopper award from GamePro in 1998, the E3 Best of Show Winners List, the Best Action/Adventure PSX Game award from Next Level Holiday Guide in 1999, and the 1998 Best PSX Adventure Game award from Game Revolution in 1999. It was nominated for <a href="https://en.wikipedia.org/wiki/CNET">CNET Gamecenter</a>'s 1999 "Best Arcade Game" award, which ultimately went to <i><a href="https://en.wikipedia.org/wiki/Rayman_2:_The_Great_Escape">Rayman 2: The Great Escape</a></i>. In the United States, the computer version of <i>Abe's Exoddus</i> sold 9,499 copies during 1999.</p>
+
+<p>In order to further market the game developer Oddworld Inhabitants submitted a 15-minute short film of looped cinematics for the '<a href="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Animated_Short_Film">Best Animated Short Film</a>' category of the <a href="https://en.wikipedia.org/wiki/71st_Academy_Awards">71st Academy Awards</a>. The game's cinematics reportedly cost around $2 million to develop, about half of the game's total development budget. Though the film failed to meet the shortlist CEO of Oddworld <a href="https://en.wikipedia.org/wiki/Sherry_McKenna?action=edit&amp;redlink=1">Sherry McKenna</a> stated the pioneering move was done in order to increase the video game industry's reputation in the animation field:</p>
+
+<p>During the <a href="https://en.wikipedia.org/wiki/2nd_Annual_Interactive_Achievement_Awards">2nd Annual Interactive Achievement Awards</a>, the game was named a finalist by the <a href="https://en.wikipedia.org/wiki/Academy_of_Interactive_Arts_&amp;_Sciences">Academy of Interactive Arts &amp; Sciences</a> for "<a href="https://en.wikipedia.org/wiki/D.I.C.E._Award_for_Adventure_Game_of_the_Year">Console Adventure Game of the Year</a>" and "Console Game of the Year", which ultimately lost both awards to <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Ocarina_of_Time">The Legend of Zelda: Ocarina of Time</a></i>.</p>
+
+<h2>Related games</h2>
+
+<p><i><a href="https://en.wikipedia.org/wiki/Oddworld:_Soulstorm">Oddworld: Soulstorm</a></i>, which is "a complete story retake" of the game according to Oddworld Inhabitants, released in April 2021 for Windows, PlayStation 4 and <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
