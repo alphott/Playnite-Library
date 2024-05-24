@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Super Mario Bros.</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('16272c8e-edd6-4167-a475-034289e0bd94/858ae735-5ec4-459a-b227-8f878306169f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="16272c8e-edd6-4167-a475-034289e0bd94/d00a1f03-d158-48ee-a312-8e6ec62f04f6.ico"/> Super Mario Bros.</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Nintendo Entertainment System">Nintendo Entertainment System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-13/09/1985">13/09/1985</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Platformer">Platformer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Nintendo R&D4">Nintendo R&D4</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nintendo">Nintendo</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Super Mario Bros.</b></i> is a <a href="https://en.wikipedia.org/wiki/Platform_game">platform game</a> developed and published in 1985 by <a href="https://en.wikipedia.org/wiki/Nintendo">Nintendo</a> for the <a href="https://en.wikipedia.org/wiki/Famicom">Famicom</a> in Japan and for the <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System">Nintendo Entertainment System</a> (NES) in North America. It is the successor to the 1983 arcade game <i><a href="https://en.wikipedia.org/wiki/Mario_Bros.">Mario Bros.</a></i> and the first game in the <i><a href="https://en.wikipedia.org/wiki/Super_Mario">Super Mario</a></i> series. Following a US test market release for the NES, it was converted to international <a href="https://en.wikipedia.org/wiki/Arcade_game">arcades</a> on the <a href="https://en.wikipedia.org/wiki/Nintendo_VS._System">Nintendo VS. System</a> in early 1986. The NES version received a wide release in North America that year and in <a href="https://en.wikipedia.org/wiki/PAL_regions">PAL regions</a> in 1987.</p>
+
+<p>Players control <a href="https://en.wikipedia.org/wiki/Mario">Mario</a>, or his brother <a href="https://en.wikipedia.org/wiki/Luigi">Luigi</a> in the multiplayer mode, to explore the <a href="https://en.wikipedia.org/wiki/Mushroom_Kingdom">Mushroom Kingdom</a> to rescue <a href="https://en.wikipedia.org/wiki/Princess_Peach">Princess Toadstool</a> from King Koopa (later named <a href="https://en.wikipedia.org/wiki/Bowser">Bowser</a>). They traverse <a href="https://en.wikipedia.org/wiki/Side-scrolling_video_game">side-scrolling</a> stages while avoiding hazards such as enemies and pits with the aid of <a href="https://en.wikipedia.org/wiki/Power-up">power-ups</a> such as the Super Mushroom, Fire Flower, and <a href="https://en.wikipedia.org/wiki/Starman_(Mario)">Starman</a>.</p>
+
+<p>The game was designed by <a href="https://en.wikipedia.org/wiki/Shigeru_Miyamoto">Shigeru Miyamoto</a> and <a href="https://en.wikipedia.org/wiki/Takashi_Tezuka">Takashi Tezuka</a> as "a grand culmination" of the Famicom team's three years of game mechanics and programming, drawing from their experiences working on <i><a href="https://en.wikipedia.org/wiki/Devil_World">Devil World</a></i> and the side-scrollers <i><a href="https://en.wikipedia.org/wiki/Excitebike">Excitebike</a></i> and <i><a href="https://en.wikipedia.org/wiki/Kung-Fu_Master_(video_game)">Kung Fu</a></i> to advance their previous work on platforming "<a href="https://en.wikipedia.org/wiki/Platform_game">athletic games</a>" such as <i><a href="https://en.wikipedia.org/wiki/Donkey_Kong_(arcade_game)">Donkey Kong</a></i> and <i>Mario Bros.</i> The design of the first level, <a href="https://en.wikipedia.org/wiki/World_1-1">World 1-1</a>, is a <a href="https://en.wikipedia.org/wiki/Tutorial_(video_gaming)">tutorial</a> for platform gameplay.</p>
+
+<p><i>Super Mario Bros.</i> is frequently cited as one of the <a href="https://en.wikipedia.org/wiki/Greatest_video_games_of_all_time">greatest video games of all time</a>, and is particularly admired for its precise controls. It has been re-released on most Nintendo systems, and is one of the <a href="https://en.wikipedia.org/wiki/Bestselling_games_of_all_time">bestselling games of all time</a>, with more than 58 million copies sold worldwide. It is credited alongside the NES as one of the key factors in reviving the video game industry after the <a href="https://en.wikipedia.org/wiki/Video_game_crash_of_1983">1983 crash</a>, and helped popularize the side-scrolling platform game genre. <a href="https://en.wikipedia.org/wiki/Koji_Kondo">Koji Kondo</a>'s <a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._theme">soundtrack</a> is one of the earliest and most popular in video games, making music a centerpiece of game design and has since been considered <a href="https://en.wikipedia.org/wiki/List_of_video_game_soundtracks_considered_the_best">one of the best video game soundtracks of all time</a> as a result. Mario has become prominent in popular culture, and <i>Super Mario Bros.</i> began a <a href="https://en.wikipedia.org/wiki/Mario_(franchise)">multimedia franchise</a> including a long-running <a href="https://en.wikipedia.org/wiki/Super_Mario">game series</a>, an <a href="https://en.wikipedia.org/wiki/The_Super_Mario_Bros._Super_Show!">animated television series</a>, a Japanese <a href="https://en.wikipedia.org/wiki/Super_Mario_Bros.:_The_Great_Mission_to_Rescue_Princess_Peach!">anime feature film</a>, a <a href="https://en.wikipedia.org/wiki/Super_Mario_Bros._(film)">live-action feature film</a> and an <a href="https://en.wikipedia.org/wiki/The_Super_Mario_Bros._Movie">animated feature film</a>.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
