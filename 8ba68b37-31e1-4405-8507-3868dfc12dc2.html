@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Persona 3 FES</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8ba68b37-31e1-4405-8507-3868dfc12dc2/96f2251d-391f-4bc4-a440-3a580b27eb75.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8ba68b37-31e1-4405-8507-3868dfc12dc2/c27ce132-825b-4eac-a515-de85001b5e4f.png"/> Persona 3 FES</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-21/02/2024">21/02/2024</a> 3:22:44</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-19/04/2007">19/04/2007</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-92">92</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-RPG">RPG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Atlus">Atlus</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Atlus">Atlus</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Atlus USA">Atlus USA</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Ghostlight">Ghostlight</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Koei">Koei</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sega">Sega</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-THQ">THQ</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Persona 3</b></i>, released outside Japan as <i><b>Shin Megami Tensei: Persona 3</b></i>, is a 2006 <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> developed by <a href="https://en.wikipedia.org/wiki/Atlus">Atlus</a> that is the fourth main installment in the <i><a href="https://en.wikipedia.org/wiki/Persona_(series)">Persona</a></i> series, which is part of the larger <i><a href="https://en.wikipedia.org/wiki/Megami_Tensei">Megami Tensei</a></i> franchise. It was originally released for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> in Japan in 2006 and in North America in 2007. It has received several enhanced re-releases and ports: <i><b>Persona 3 FES</b></i>, an extended version featuring a new playable <a href="https://en.wikipedia.org/wiki/Epilogue">epilogue</a> and other changes, was released for the PlayStation 2 in Japan in 2007 and worldwide in 2008. An abridged <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> version, <i><b>Persona 3 Portable</b></i>, was released in Japan in 2009, North America in 2010, and Europe in 2011, and ported to the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>, <a href="https://en.wikipedia.org/wiki/PlayStation_4">PlayStation 4</a>, <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>, <a href="https://en.wikipedia.org/wiki/Xbox_One">Xbox One</a>, and <a href="https://en.wikipedia.org/wiki/Xbox_Series_X/S">Xbox Series X/S</a> in 2023. <i><a href="https://en.wikipedia.org/wiki/Persona_3_Reload">Persona 3 Reload</a></i>, a <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> of the core game for PlayStation 4, <a href="https://en.wikipedia.org/wiki/PlayStation_5">PlayStation 5</a>, Windows, Xbox One, and Xbox Series X/S, was released on February 2, 2024.</p>
+
+<p>In <i>Persona 3</i>, the player assumes the role of <a href="https://en.wikipedia.org/wiki/Protagonist_(Persona_3)">a high school student</a> who joins the "Specialized Extracurricular Execution Squad" (SEES), a group of students investigating a temporal anomaly known as the "Dark Hour", during which its members can enter Tartarus, a tower containing monsters called Shadows. They battle the Shadows using a physical manifestation of their psyche called a <a href="https://en.wikipedia.org/wiki/Persona_(series)#Personas">Persona</a>, which they summon by firing a gun-like object called an "Evoker" at their head. <i>Persona 3</i> incorporates elements of <a href="https://en.wikipedia.org/wiki/Role-playing_game">role-playing</a> and <a href="https://en.wikipedia.org/wiki/Simulation_video_game">simulation</a> games, as the game's protagonist progresses day by day through a school year and forms relationships that improve their Personas' strength in battle.</p>
+
+<p>Reception towards <i>Persona 3</i> was mainly positive; critics enjoyed its social elements, while some found its combat and environments repetitive. <i>Persona 3 FES</i>'s epilogue was said to give narrative closure to the original game, although it was criticized for not featuring its simulation aspects. <i>Persona 3</i> has also seen other related media, including the <a href="https://en.wikipedia.org/wiki/Fighting_game">fighting games</a> <i><a href="https://en.wikipedia.org/wiki/Persona_4_Arena">Persona 4 Arena</a></i> and <i><a href="https://en.wikipedia.org/wiki/Persona_4_Arena_Ultimax">Persona 4 Arena Ultimax</a>,</i> the rhythm game <i><a href="https://en.wikipedia.org/wiki/Persona_3:_Dancing_in_Moonlight_and_Persona_5:_Dancing_in_Starlight">Persona 3: Dancing in Moonlight</a></i>, soundtrack albums, musical concerts, <a href="https://en.wikipedia.org/wiki/Radio_drama_in_Japan">radio dramas</a>, a <a href="https://en.wikipedia.org/wiki/Manga">manga</a>, a loosely connected <a href="https://en.wikipedia.org/wiki/Persona:_Trinity_Soul">anime series</a>, and an <a href="https://en.wikipedia.org/wiki/Persona_3_The_Movie:_No._1,_Spring_of_Birth">episodic animated film series</a>.</p>
+
+<h3><i>Persona 3 FES</i></h3>
+
+<p><i>Persona 3 FES</i> is an add-on disc for <i>Persona 3</i> containing updates to the original game, a new Hard difficulty option, as well as a new <a href="https://en.wikipedia.org/wiki/Epilogue">epilogue</a> in which the player controls <a href="https://en.wikipedia.org/wiki/List_of_Persona_3_characters#Aigis">Aigis</a>. <i>FES</i> was released in Japan on April 19, 2007, as both a stand-alone game and a cheaper "Append" disc that requires having the original game to be played. Overseas, the combined edition was published in North America by <a href="https://en.wikipedia.org/wiki/Atlus_USA">Atlus USA</a> on April 22, 2008, and in Europe by <a href="https://en.wikipedia.org/wiki/Koei">Koei</a> on October 17, 2008.<sup>[<i><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></i>]</sup> According to the game's director, Katsura Hashino, the subtitle "Fes" is derived from the word "festival". This version of the game was re-released as a PS2 Classic on PSN for the <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> in 2012. Players of the original Persona 3 are given the option of transferring certain data from the original version's save file, such as the player's compendium, social-related stats, and maxed social link items.</p>
+
+<p><i>Persona 3 FES</i> was first released alongside the original game in two forms: the "Regular Edition" — containing both the "director's cut" version of <i>Persona 3</i>, and the new epilogue on a standalone disc, and the "Append Edition", which has the same content but requires the original Persona 3 disc to be inserted before playing initially, and after creating save data it can be played alone. <i>Persona 3</i> and its expansion were released simultaneously in Japan on April 19, 2007. At the time, Atlus had no apparent plans to release <i>FES</i> outside Japan. Confirmation did not come until February 2008, when the game's North American release date was revealed to be April 22, 2008. An exclusive <a href="https://en.wikipedia.org/wiki/Amazon.com">Amazon.com</a> limited edition bundle was released on November 28, 2008, containing the <i>FES</i> edition of the game along with the same <i>Art of Persona 3</i> artbook and <i>Persona 3</i> soundtrack disc that were packaged with the North American release of the original game. The <i>FES</i> edition of the game was also released on PSN on April 10, 2012.</p>
+
+<p>The expansion to <i>Persona 3</i>, in addition to adding new content to the main game (now referred to as <i>The Journey</i>, or <i>Episode Yourself</i> in the Japanese version), includes a new epilogue to the original story titled <i>The Answer</i>, or <i>Episode Aegis</i> in the Japanese version. The core gameplay of <i>The Answer</i> is similar to that of <i>The Journey</i>, although the daily life system has been removed with the player no longer attending school.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
