@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Phantasy Star</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('49ab7c0a-d71f-408e-9139-e020072a94d1/e6f3ef06-95c9-49d1-b9dc-577aa376fbc2.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="49ab7c0a-d71f-408e-9139-e020072a94d1/febefca9-5fea-4ea3-bbe3-49bbe0d13951.png"/> Phantasy Star</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-22/05/2024">22/05/2024</a> 19:17:50</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-22/05/2024">22/05/2024</a> 19:34:00</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sega Master System">Sega Master System</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-20/12/1987">20/12/1987</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Sega">Sega</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sega">Sega</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Tec Toy">Tec Toy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Phantasy Star</b></i> is a <a href="https://en.wikipedia.org/wiki/Role-playing_video_game">role-playing video game</a> (RPG) developed by <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> and released for the <a href="https://en.wikipedia.org/wiki/Master_System">Master System</a> in 1987. One of the earliest <a href="https://en.wikipedia.org/wiki/History_of_Eastern_role-playing_video_games">Japanese RPGs</a> for consoles, <i>Phantasy Star</i> tells the story of <a href="https://en.wikipedia.org/wiki/Alis_Landale">Alis</a> on her journey to defeat the evil ruler of her star system, King Lassic, after her brother dies at his hands. She traverses between planets, gathering a party of fighters and collecting the items she needs to avenge her brother's death and return peace to the star system. The gameplay features traditional Japanese RPG elements including <a href="https://en.wikipedia.org/wiki/Random_encounter">random encounters</a> and <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a>. All the characters have predefined personalities and abilities, a unique element compared to the customizable characters of other RPGs of the era.</p>
+
+<p>Sega launched the development of <i>Phantasy Star</i> so their Master System could compete with the burgeoning popularity of console RPGs, particularly <i><a href="https://en.wikipedia.org/wiki/Dragon_Quest_(video_game)">Dragon Quest</a></i> (1986) on the <a href="https://en.wikipedia.org/wiki/Famicom">Famicom</a>. Designer Kotaro Hayashida and programmer <a href="https://en.wikipedia.org/wiki/Yuji_Naka">Yuji Naka</a> formed a team, staffed by a large number of women for the time, including graphic designer <a href="https://en.wikipedia.org/wiki/Rieko_Kodama">Rieko Kodama</a>. The team wanted <i>Phantasy Star</i> to be a unique RPG experience, so they added elements like 3D <a href="https://en.wikipedia.org/wiki/Dungeon_crawling">dungeon crawling</a>, a female protagonist, and ample animation. The game's setting was a fusion between <a href="https://en.wikipedia.org/wiki/Medieval_fantasy">medieval fantasy</a> and <a href="https://en.wikipedia.org/wiki/Science_fiction">science fiction</a>, an idea inspired by <i><a href="https://en.wikipedia.org/wiki/Star_Wars">Star Wars</a></i>. The team had to use several techniques to fit all their content on a four <a href="https://en.wikipedia.org/wiki/Megabit">megabit</a> cartridge, a large game size for the time.</p>
+
+<p>The game was released for the Master System two days after <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_(video_game)">Final Fantasy</a></i> arrived for the competing Famicom. It was praised for its grand sense of adventure due to its advanced visual effects and deep gameplay. The battery backup system drew praise but also contributed to the game's notably high retail price which made it difficult for some critics to recommend. The game was re-released on several platforms in the following years, including <a href="https://en.wikipedia.org/wiki/Phantasy_Star_Collection">a series of <i>Phantasy Star</i> compilations</a>. In 2003, a <a href="https://en.wikipedia.org/wiki/Video_game_remake">remake</a> titled <i>Phantasy Star Generation 1</i> was released for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>.</p>
+
+<p><i>Phantasy Star</i> is considered a landmark RPG for its use of predetermined characters and a <a href="https://en.wikipedia.org/wiki/Science_fantasy">science fantasy</a> setting. Sega launched <a href="https://en.wikipedia.org/wiki/Phantasy_Star">a series of sequels</a>, some of which were developed by staff who worked the original. Kodama directed <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_IV:_The_End_of_the_Millennium">Phantasy Star IV: The End of the Millennium</a></i> (1993) and Naka produced <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_Online">Phantasy Star Online</a></i> (2000).</p>
+
+<h2>Gameplay</h2>
+
+<p><i>Phantasy Star</i> is a traditional <a href="https://en.wikipedia.org/wiki/Japanese_role-playing_game">Japanese role-playing game</a>. It alters between a <a href="https://en.wikipedia.org/wiki/Top-down_perspective">top-down perspective</a> when the player is exploring the overworld, and changes to a <a href="https://en.wikipedia.org/wiki/First-person_(gaming)">first-person</a> view when engaged in battle or exploring dungeons. The dungeons are long and twisted, and require the player to map most of them on paper. When exploring the overworld, the player can venture into a town to buy items and weapons. Outside the towns, monsters may randomly engage the player in battle. The player controls the main character <a href="https://en.wikipedia.org/wiki/Alis_Landale">Alis</a>, and as the game progresses, other characters are recruited to her party: a wizard named Noah, a warrior Odin, and a talking cat-like creature named Myau. Each character has different strengths, weaknesses, and abilities. The party has a shared inventory of items and equipment.</p>
+
+<p>When encountering enemies, all party members enter into battle. Battles are handled using a menu system which allows the player to fight or attempt to talk and negotiate with an enemy. When an enemy is defeated, party members gain <a href="https://en.wikipedia.org/wiki/Experience_point">experience points</a> and are rewarded with a treasure chest that may contain money or a booby trap. As the characters gain experience points, they increase in level, gaining access to new magic spells and raising their offensive and defensive statistics.</p>
+
+<h2>Plot</h2>
+
+<p><i>Phantasy Star</i> is set in the Algol star system which consists of three planets: the lush and green Palma, the arid and barren Motavia, and the icy and desolate Dezoris. Algol is ruled by King Lassic, who while originally benevolent, becomes a cruel, sociopathic tyrant. After a string of harsh political changes, small pockets of rebellion emerge but are mostly ineffective against Lassic's iron rule. One such rebel named Nero is killed by Lassic's forces, and his sister Alis swears revenge. Alis builds a party of adventurers including a warrior named Odin, a wizard named Noah, and a catlike creature named Myau. Together, they embark on an adventure spanning the three planets, meeting with townspeople, battling enemies, and finding special items that will help in the fight against Lassic. Eventually, the party engages and defeats Lassic, after which an ethereal voice tells them to return to Motavia. There, they encounter a more evil force, Dark Falz, and after destroying him, finally return peace to the Algol system.</p>
+
+<h2>Development</h2>
+
+<h3>Background</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Role-playing_video_game">Role-playing games</a> (RPG) were beginning to gain popularity with console players in Japan in the late 1980s. Many Japanese game designers were inspired by Western RPGs such as <a href="https://en.wikipedia.org/wiki/Ultima_(series)"><i>Ultima</i></a> and <i><a href="https://en.wikipedia.org/wiki/Wizardry">Wizardry</a>.</i> <a href="https://en.wikipedia.org/wiki/Enix">Enix</a>'s <i><a href="https://en.wikipedia.org/wiki/Dragon_Quest">Dragon Quest</a></i> series was proving to be very popular on the <a href="https://en.wikipedia.org/wiki/Famicom">Famicom</a>, inspiring other developers to design similar games. <a href="https://en.wikipedia.org/wiki/Falcom">Falcom</a> began development on <i><a href="https://en.wikipedia.org/wiki/Ys_I:_Ancient_Ys_Vanished">Ys I: Ancient Ys Vanished</a></i>, as <a href="https://en.wikipedia.org/wiki/Square_(video_game_company)">Square</a> was doing the same with <i><a href="https://en.wikipedia.org/wiki/Final_Fantasy_(video_game)">Final Fantasy</a></i>. Around the release of <i><a href="https://en.wikipedia.org/wiki/Dragon_Quest_II">Dragon Quest II</a></i> in January 1987, <a href="https://en.wikipedia.org/wiki/Sega">Sega</a> felt they needed an RPG for their <a href="https://en.wikipedia.org/wiki/Master_System">Master System</a> to compete in this emerging market. They believed they could not rely on third-party support because Sega's hardware market share was only one-tenth that of Nintendo's. They looked internally and found designer Kotaro Hayashida and programmer <a href="https://en.wikipedia.org/wiki/Yuji_Naka">Yuji Naka</a> were interested in creating an RPG. They had previously been recognized for their work within Sega — Hayashida for <i><a href="https://en.wikipedia.org/wiki/Alex_Kidd_in_Miracle_World">Alex Kidd in Miracle World</a></i> (1986), and Naka for his <a href="https://en.wikipedia.org/wiki/8-bit">8-bit</a> home console conversions of arcade games like <i><a href="https://en.wikipedia.org/wiki/Out_Run">Out Run</a></i> and <i><a href="https://en.wikipedia.org/wiki/Space_Harrier">Space Harrier</a></i>. With Sega's approval, Hayashida and Naka began forming a team to develop an RPG.</p>
+
+<p>The team consisted of around ten people. Hayashida was lead designer and Naka was lead programmer. Other staff members from <i>Miracle World</i> joined the project including lead graphic designer <a href="https://en.wikipedia.org/wiki/Rieko_Kodama">Rieko Kodama</a>, and composer Tokuhiko Uwabo. There were more women on the development team than was typical at the time. Among them were Kodama, who drew most of the artwork, designer Miki Morimoto, who did much of the <a href="https://en.wikipedia.org/wiki/Playtesting">playtesting</a> and enemy statistics configuration, and Chieko Aoki, who wrote the game's original story and script. Aoki had already been working on an original story with most of the dialogue already completed, and this became the first draft for the RPG project. The game would be character designer <a href="https://en.wikipedia.org/wiki/Naoto_Ohshima">Naoto Ohshima</a>'s first project at Sega. Although there was no team director, Hayashida believes he had the largest role in shaping the game as lead designer and scenario writer, although Ohshima recalls Naka leading the project. The name "Phantasy Star" was formed after Naka took the word "Fantasy" from a song he enjoyed titled "Nagisa no Fantasy" by <a href="https://en.wikipedia.org/wiki/Noriko_Sakai">Noriko Sakai</a>. The team shared the same room, so they could see each other's work. They were given the freedom to build the game how they wanted without restrictions, which Hayashida believes led to them enjoying themselves more and producing a higher quality game in the end.</p>
+
+<h3>Production</h3>
+
+<p>The team wanted <i>Phantasy Star</i> to be different from other RPGs. They took many new approaches to the design of the game and its art to provide a unique experience. One approach was with the setting. The team was strongly influenced by <i><a href="https://en.wikipedia.org/wiki/Star_Wars">Star Wars</a></i> and how it combined Western culture with Japanese touches, such as how clothing resembled <a href="https://en.wikipedia.org/wiki/Judo">judo</a> uniforms, and <a href="https://en.wikipedia.org/wiki/Lightsaber">lightsabers</a> were used like <a href="https://en.wikipedia.org/wiki/Katana">samurai swords</a>. Kodama took this approach and designed the world of <i>Phantasy Star</i> using a <a href="https://en.wikipedia.org/wiki/Science_fiction">science fiction</a> motif mixed with <a href="https://en.wikipedia.org/wiki/Medieval_fantasy">medieval fantasy</a> elements. Rather than use an <a href="https://en.wikipedia.org/wiki/Airship">airship</a> to navigate over mountainous landscape, something common in other games, they added in a vehicle that could mow down impassable terrain. The team also added detailed event scenes, and animated monsters to help set the game apart. Their philosophy was to use extensive animation, so the ocean and walkways on the world map are always moving. Because the Master System could not draw large <a href="https://en.wikipedia.org/wiki/Sprite_(computer_graphics)">sprites</a>, some parts of large characters were drawn to the background and only the animated portions were drawn as sprites.</p>
+
+<p>Another unique addition to <i>Phantasy Star</i> was the 3D dungeons. They became a central concept in the game's early planning stages, in part because the Famicom was incapable of handling them. The team drew inspiration from Western <a href="https://en.wikipedia.org/wiki/Dungeon_crawl">dungeon crawling</a> RPGs like <i>Wizardry</i> and wanted to add animated navigation to help the player know their location and orientation more easily. Naka had experimented with creating dungeons inspired by these RPGs. Typically these scenes were rendered in small boxes, so Naka was motivated to engineer a full-screen dungeon that could be used for an action game or an RPG. Originally the artists were drawing full 2D backgrounds using a 3D perspective, but the number of frames necessary to achieve the animated effect used too much space on the cartridge. Naka solved this by programming true <a href="https://en.wikipedia.org/wiki/Wire-frame_model">wireframe</a> 3D dungeons. The artists then used a program by Naka to superimpose their art on top of the wireframes. They also saved three-quarters of the memory they would normally need by making each quadrant of the screen identical. The new dungeons scrolled faster than expected and needed to be slowed down.</p>
+
+<p>The female heroine, Alis, was a sharp contrast compared with the typical male protagonists of other RPGs. Kodama had designed female characters before but never one in a strong and prominent role. This was an uncommon portrayal when games at the time usually had a <a href="https://en.wikipedia.org/wiki/Damsel_in_distress">damsel in distress</a>. Kodama went through about a dozen designs until she achieved a strong but feminine character, one with whom female gamers could empathize. Noah was also designed by Kodama, as a mysterious and intelligent character. In the original draft, Noah was an androgynous character and would become male or female depending on how the player progressed. Eventually, it was decided the character would be male. Ohshima designed Odin because Kodama did not enjoy drawing muscular men. Kodama envisioned the visual contrast between Noah and Odin as comparable to that between <a href="https://en.wikipedia.org/wiki/Raistlin_Majere">Raistlin Majere</a> and <a href="https://en.wikipedia.org/wiki/Caramon_Majere">Caramon Majere</a> in the <i><a href="https://en.wikipedia.org/wiki/Dragonlance">Dragonlance</a></i> book series. Ohshima was also responsible for a third of the monster designs, at most. The lead monster designer enjoyed classic fantasy monsters such as <a href="https://en.wikipedia.org/wiki/Golem">golems</a> and <a href="https://en.wikipedia.org/wiki/Medusa">Medusa</a>, so these types of characters appeared in the final game. Myau was designed by Takako Kawaguchi.</p>
+
+<p>At four <a href="https://en.wikipedia.org/wiki/Megabit">megabits</a>, the game's data was large for the time. <i>Phantasy Star</i> was only the second game for the Master System to use a chip this large. It was one of four games where it would be used. In spite of the chip's capacity, the team made many compromises to save space. The original story featured four planets, but this was reduced to three. The artists had to make compromises with the backgrounds and battle animations. Background scenes were mirrored vertically to save space. This created inconsistencies with shadowing. There were plans for a password system to save progress, but this was cut due to memory limitations; batteries were used instead. The team wanted to have a password feature as a <a href="https://en.wikipedia.org/wiki/Failsafe">failsafe</a> in case saving the data corrupted it as was often the case in <a href="https://en.wikipedia.org/wiki/Playtests">playtests</a>. Instead, Naka programmed a backup of the save data that could be used to restore a corrupted save file.</p>
+
+<p>Composer Uwabo noted that the game was developed during the <a href="https://en.wikipedia.org/wiki/Japanese_asset_price_bubble">Japanese economic bubble</a>, which fueled his enthusiasm which he believes is reflected in the music. The game was compatible with the Master System <a href="https://en.wikipedia.org/wiki/Frequency_modulation_synthesis">FM synthesis</a> expansion unit which housed a <a href="https://en.wikipedia.org/wiki/Yamaha_YM2413">Yamaha YM2413</a> chip that added nine more mono channels to the console's <a href="https://en.wikipedia.org/wiki/Programmable_sound_generator">programmable sound generator</a> (PSG), the <a href="https://en.wikipedia.org/wiki/Texas_Instruments_SN76489">SN76489</a>. The expansion gave the soundtrack a wider range and heavier bass. The unit was not released outside Japan.</p>
+
+<h2>Release</h2>
+
+<p><i>Phantasy Star</i> was first released in Japan for the Master System on December 20, 1987, two days after <i>Final Fantasy</i> was released for the Famicom. The game was released in the West in November 1988, introducing players outside Japan to the emerging JRPG scene, having been localized before <i>Dragon Quest</i> or <i>Final Fantasy</i>. It was the most expensive game for the Master System in every market, its price being driven by the large 4 megabit chip, the save battery, and a concurrent chip shortage across the industry. In Japan, the game was difficult to find in stores. Sega often got requests from fans for a <a href="https://en.wikipedia.org/wiki/Mega_Drive">Mega Drive</a> port, so they eventually shipped a limited release for the Mega Drive as part of a contest in 1994 under the title <i>Phantasy Star Fukkokuban</i> exclusively released in Japan. This version was identical to the Master System version but lacked FM sound enhancements. <a href="https://en.wikipedia.org/wiki/Tectoy">Tectoy</a> translated the Master System version to Portuguese and released it in Brazil in 1991. Since the original Western release retained the text formatting of the Japanese version, it used fewer characters than a proper English translation required. In 2008, fans modified the text engine to fit longer lines of dialogue, and released a newly translated version with the Japanese FM soundtrack as well.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Phantasy_Star_Collection">A series of <i>Phantasy Star</i> compilations</a> were released for the <a href="https://en.wikipedia.org/wiki/Sega_Saturn">Sega Saturn</a>, <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance</a>, and <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a>. The Saturn version was released in 1998. It includes both <a href="https://en.wikipedia.org/wiki/Hiragana">hiragana</a> and <a href="https://en.wikipedia.org/wiki/Katakana">katakana</a> alphabets, an improvement from the original which had only katakana due to limited memory. The 2008 PlayStation 2 version is based on the Saturn version and has additional features. The Game Boy Advance compilation was a straight emulation and was the only compilation released outside Japan. <i>Phantasy Star</i> also appeared in emulated form on <i><a href="https://en.wikipedia.org/wiki/Sonic's_Ultimate_Genesis_Collection">Sonic's Ultimate Genesis Collection</a></i> for the <a href="https://en.wikipedia.org/wiki/Xbox_360">Xbox 360</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>, and on the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a> via the <a href="https://en.wikipedia.org/wiki/Virtual_Console">Virtual Console</a> in 2009. In 2018, a port developed by <a href="https://en.wikipedia.org/wiki/M2_(game_developer)">M2</a> was released through the <i><a href="https://en.wikipedia.org/wiki/Sega_Ages">Sega Ages</a></i> label for the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a>. This version includes enhancements such as options to make the game easier and faster, guides for items, spells, and monsters, the FM soundtrack, hiragana support, and a dungeon auto-mapping feature. Naka's tricky programming efficiencies to save memory in the original proved difficult for the programmers handling the port.</p>
+
+<p><i>Phantasy Star</i> was <a href="https://en.wikipedia.org/wiki/Video_game_remake">remade</a> for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> as <i>Phantasy Star Generation: 1</i> and released on August 28, 2003, in Japan. It was the inaugural release in the <i><a href="https://en.wikipedia.org/wiki/Sega_Ages">Sega Ages 2500</a></i> series, Sega's budget label for re-releasing old games for the PlayStation 2. The remake features new graphics, <a href="https://en.wikipedia.org/wiki/Real-time_computer_graphics">real-time</a> 3D dungeons, new music, and more <a href="https://en.wikipedia.org/wiki/Cutscene">cutscenes</a> with extended dialogue. The battles now depict all the characters. <a href="https://en.wikipedia.org/wiki/Conspiracy_Entertainment">Conspiracy Entertainment</a> planned an American release as part of a <i>Phantasy Star Trilogy</i> pack, including remakes of <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_II">Phantasy Star II</a></i> and <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_IV:_The_End_of_the_Millennium">IV</a></i> but it never happened. After the remake of <i>II</i> was released in Japan, the remake of <i>IV</i> was canceled, thus the trilogy set was also canceled. The two remakes were released on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> in Japan as <a href="https://en.wikipedia.org/wiki/List_of_PlayStation_2_Classics_for_PlayStation_3">PS2 Classics</a> in 2014. A complete fan translation of <i>Phantasy Star Generation: 1</i> was released by fan site Phantasy Star Cave.</p>
+
+<h2>Reception</h2>
+
+<p><i>Phantasy Star</i> was well received. <i><a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a></i> called it "the big shot in the arm for Sega [...] who was, at that time, being buried under a ton of NES titles and aggressive marketing". <i><a href="https://en.wikipedia.org/wiki/Electronic_Game_Player">Electronic Game Player</a></i> felt the game was leading the industry into a new era of console RPGs. <i><a href="https://en.wikipedia.org/wiki/Sega_Pro">Sega Pro</a></i> called it the best RPG on the Master System, and <i><a href="https://en.wikipedia.org/wiki/Zzap!64">Zzap!</a></i> called it a must-have for RPG fans. <i><a href="https://en.wikipedia.org/wiki/Boys'_Life">Boys' Life</a></i> wrote that along with <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda">The Legend of Zelda</a></i> series, "<i>Phantasy Star</i> may represent the future of home video games" by combining "the graphic quality of arcade games with the complexity of computer games". <i><a href="https://en.wikipedia.org/wiki/Computer_and_Video_Games">Computer and Video Games</a></i> felt it was a massive and sprawling game, and were left impressed visually and aurally.</p>
+
+<p>The game was commended for its strategy, puzzles, and challenge. <i><a href="https://en.wikipedia.org/wiki/VideoGames_&amp;_Computer_Entertainment">VideoGames &amp; Computer Entertainment</a></i> and <i><a href="https://en.wikipedia.org/wiki/Sega_Power">S: The Sega Magazine</a></i> praised the game for being easy to play and not relying on quick action reflexes. Critics liked the variety of monsters and the combat system. <i>Computer Gaming World</i> wrote that "not since <i><a href="https://en.wikipedia.org/wiki/Dungeon_Master_(video_game)">Dungeon Master</a></i> had such a good and explicit graphic combat system been seen". <i><a href="https://en.wikipedia.org/wiki/Computer_Entertainer">Computer Entertainer</a></i> felt the game's large scope and deep gameplay was more typically seen in computer games than on consoles. This large scope made critics thankful for the cart's battery back-up, an unusual hardware feature at the time. The save battery and complex gameplay led some critics to compare <i>Phantasy Star</i> to <i><a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda_(video_game)">The Legend of Zelda</a></i> (1986).</p>
+
+<p>Critics praised the game for its presentation, building a grand sense of adventure and atmosphere. <i>VideoGames &amp; Computer Entertainment</i> commended the mix of science fiction and fantasy elements, and felt it had a grander scale than other RPGs. <i>Electronic Game Player</i> wrote that the atmosphere was "simply breathtaking by current video game standards". The graphics were enjoyed by many reviewers, especially for their vivid colors and animation; the monster animations, in particular, received considerable positive attention. Many reviewers enjoyed the dungeons, thinking the lighting and perspective effects made for a realistic presentation. <i>Electronic Game Player</i> called <i>Phantasy Star</i> a "visual tour-de-force" and "so technologically superior in graphics, that the Nintendo titles pale by comparison". <i>Zzap!</i> called it a technical achievement considering the Master System's hardware limitations. It was awarded Best Graphics for 1988 by <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>'s Player's Choice Awards.</p>
+
+<p>The game was difficult to recommend for some because of its high price. <i>Computer Entertainer</i> found the purchase difficult to justify as it was the highest price they had ever seen for a game on any cartridge-based system or disk-based computer. <i>Computer and Video Games</i> felt they could only recommend it for hardcore RPG fans for this reason. <i>VideoGames &amp; Computer Entertainment</i>, however, called it "such a remarkable video game that it may justify its existence as the most expensive cartridge on the shelf."</p>
+
+<h3>Retrospective reviews</h3>
+
+<p><i>Phantasy Star</i> was reviewed again for its re-releases. Most critics continued to hold the graphics in high regard. <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> and <i>G-Force</i> wrote that the graphics pushed the Master System to its limits, and helped set the game apart in its time. <i>RPGFan</i> and <i><a href="https://en.wikipedia.org/wiki/Nintendo_Life">Nintendo Life</a></i> called the 3D dungeons "revolutionary". <i>Nintendo Life</i> felt that the graphics did show their age, but noted that it "looks much better than an 8-bit RPG has any right to and it easily surpasses any NES effort of the era". <i>1UP.com</i> and <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> agreed, writing that it outclassed both the original <i>Final Fantasy</i> and <i>Dragon Quest</i>. Some critics commented that the game felt too standard compared to modern RPGs. Some also felt it was more difficult and dull than modern offerings due to heavier <a href="https://en.wikipedia.org/wiki/Grinding_(gaming)">grinding</a>. The Game Boy Advance version was commended for being a good emulation but criticized for poor sound and missed opportunities for enhancements. <i>Nintendo World Report</i> praised the Switch release for adding FM sound and enhancements to make for a more streamlined experience.</p>
+
+<h2>Legacy</h2>
+
+<p><i>Phantasy Star</i> is considered a landmark RPG; it has been called "revolutionary", "pioneering", and "ahead of its time". It is credited with helping to define the genre and introduce the West to console RPGs. <i>IGN</i> wrote: "<i>Phantasy Star</i> was the game that defined an entire generation's early experiences with the RPG genre as a whole, a role-playing adventure without equal at the time of its initial debut [...] a time when competition was virtually non-existent in the category". It has been called one of the best games on the Master System. <i>Nintendo Life</i> called it a <a href="https://en.wikipedia.org/wiki/Killer_app">killer app</a> which "not only tested the hardware but also the boundaries and expectations of the genre". <i><a href="https://en.wikipedia.org/wiki/Retro_Gamer">Retro Gamer</a></i> called it "a key release for the genre's popularity in the West and a key reason to own a Master System".</p>
+
+<p>In 1996 <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i>, listing the entire series as number 72 on their "<a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">Top 100 Games of All Time</a>", opined that "the best game in the series is still the first ... There was a lot more variety in the settings, a deeper storyline, and just plain more of everything." The following year it was ranked the 62nd best console video game of all time by <i>Electronic Gaming Monthly</i>, the only appearance of a Master System game on the list. In 2001, <i><a href="https://en.wikipedia.org/wiki/Game_Informer">Game Informer</a></i> included it on its own list of greatest video games at #94. The staff praised it for its innovation and graphical superiority (specifically to <i><a href="https://en.wikipedia.org/wiki/Dragon_Warrior">Dragon Warrior</a></i>). In 2006, <i><a href="https://en.wikipedia.org/wiki/1UP.com">1UP</a></i> and <i>Electronic Gaming Monthly</i> placed it at #26 on "The Greatest 200 Videogames of Their Time" list, which puts it as the second highest-ranking RPG on the list, behind only <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_Online">Phantasy Star Online</a></i> at #21. In 2023, Time Extension included the game on their "Best JRPGs of All Time" list, noting that it "had some of the best visuals and grandest sense of adventure" among its contemporaries.</p>
+
+<p>The game introduced many elements that later became staples of the RPG genre. Its fusion of science fiction with <a href="https://en.wikipedia.org/wiki/Medieval_fantasy">medieval fantasy</a> contrasted with the traditional fantasy seen in other RPGs of its era. <i><a href="https://en.wikipedia.org/wiki/Nintendo_Power">Nintendo Power</a></i> explained that <i>Phantasy Star</i> "was the first RPG to break out of the <i>Dragon Quest</i> / <i><a href="https://en.wikipedia.org/wiki/Dungeons_&amp;_Dragons">Dungeons &amp; Dragons</a></i> mold of generic <a href="https://en.wikipedia.org/wiki/King_Arthur">Arthurian</a> fantasy by introducing sci-fi elements". The inclusion of pre-defined characters with unique personalities and abilities in the game is also considered revolutionary when compared to the customizable characters in other RPGs. The graphics are considered ahead of their time, particularly the 3D dungeons and monster animations. It was also one of the earliest video games to feature a female protagonist, which <i>Nintendo Life</i> called "perhaps [its] most revolutionary aspect".</p>
+
+<p><i>Phantasy Star</i> launched the careers of its staff. Some worked on <a href="https://en.wikipedia.org/wiki/Phantasy_Star">a series of sequels</a> starting on the <a href="https://en.wikipedia.org/wiki/Mega_Drive">Mega Drive</a>, known as some of the best RPGs of their era. Both programmer Yuji Naka and artist Rieko Kodama worked on the sequel <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_II">Phantasy Star II</a></i> (1989),<i><sup><a href="https://en.wikipedia.org/wiki/Phantasy_Star_(video_game)#cite_note-cvg_phantasy-50">[45]</a></sup></i> and Kodama directed <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_IV:_The_End_of_the_Millennium">Phantasy Star IV: The End of the Millennium</a></i> (1993), considered by some industry journalists to be one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest games ever made</a>. She later served as producer on <i><a href="https://en.wikipedia.org/wiki/Skies_of_Arcadia">Skies of Arcadia</a></i> (2000), a critically acclaimed RPG for the <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a>. Meanwhile, Naka served as producer on <i><a href="https://en.wikipedia.org/wiki/Phantasy_Star_Online">Phantasy Star Online</a></i> (2000), the first online RPG for home consoles. Character designer Naoto Ohshima went on to create the character <a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(character)">Sonic the Hedgehog</a> and collaborated with Naka on several games including <i><a href="https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(1991_video_game)">Sonic the Hedgehog</a></i> (1991), <i><a href="https://en.wikipedia.org/wiki/Nights_into_Dreams">Nights into Dreams</a></i> (1996), and <i><a href="https://en.wikipedia.org/wiki/Burning_Rangers">Burning Rangers</a></i> (1998)<i>.<sup><a href="https://en.wikipedia.org/wiki/Phantasy_Star_(video_game)#cite_note-untold-20">[16]</a></sup></i></p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

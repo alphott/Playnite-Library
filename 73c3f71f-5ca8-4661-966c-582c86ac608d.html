@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Command &amp; Conquer - Red Alert</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('73c3f71f-5ca8-4661-966c-582c86ac608d/26f0f2f8-d621-4447-9216-31f4f0cc8e30.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="73c3f71f-5ca8-4661-966c-582c86ac608d/5806f49f-9f9c-4a1f-ba21-e907902fc998.ico"/> Command &amp; Conquer - Red Alert</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-22/05/2024">22/05/2024</a> 18:12:37</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-22/05/2024">22/05/2024</a> 18:18:21</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation">Sony PlayStation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-22/11/1996">22/11/1996</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-86">86</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-90">90</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Real Time Strategy (RTS)">Real Time Strategy (RTS)</a><br/><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Westwood Studios">Westwood Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Virgin Interactive Entertainment">Virgin Interactive Entertainment</a><br/><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Westwood Studios">Westwood Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<p><i><b>Command &amp; Conquer: Red Alert</b></i> is a <a href="https://en.wikipedia.org/wiki/Real-time_strategy">real-time strategy</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> in the <a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer"><i>Command &amp; Conquer</i> franchise</a>, developed and published by <a href="https://en.wikipedia.org/wiki/Westwood_Studios">Westwood Studios</a> in <a href="https://en.wikipedia.org/wiki/1996_in_video_gaming">1996</a>. The second game to bear the <i>Command &amp; Conquer</i> title, <i>Red Alert</i> is the <a href="https://en.wikipedia.org/wiki/Prequel">prequel</a> to the original <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer_(1995_video_game)">Command &amp; Conquer</a></i> of 1995, and takes place in the <a href="https://en.wikipedia.org/wiki/Alternate_history">alternate early history</a> of <i>Command &amp; Conquer</i> when Allied Forces battle an aggressive <a href="https://en.wikipedia.org/wiki/Soviet_Union">Soviet Union</a> for control over the European mainland.</p>
+
+<p>It was initially available for <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a> (<a href="https://en.wikipedia.org/wiki/MS-DOS">MS-DOS</a> and <a href="https://en.wikipedia.org/wiki/Windows_95">Windows 95</a> versions included in one package) and was subsequently ported to <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a>. The PlayStation version was also re-released as a download on the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> for <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a>. On August 31, 2008, <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a>, who acquired Westwood Studios in 1998, rendered <i>Command &amp; Conquer: Red Alert</i> <a href="https://en.wikipedia.org/wiki/Freeware">freeware</a>.</p>
+
+<p>The <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer_Remastered_Collection">Command &amp; Conquer Remastered Collection</a></i>, released on June 5, 2020, through the services <a href="https://en.wikipedia.org/wiki/Origin_(service)">Origin</a> and <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a>, contains a graphically rebuilt <i>Red Alert</i>, the expansions <i>Counterstrike</i> and <i>The Aftermath</i>, additional missions and briefing videos that were exclusive to the PlayStation's <i>Retaliation</i> port, and an unlockable gallery of unused and "making-of" materials.</p>
+
+<h2>Gameplay</h2>
+
+<p>Like Tiberian Dawn, the game has split routes for most missions. The objective stays the same but the map layout differs. The single-player campaign is complemented by live-action cinematic sequences.</p>
+
+<p>Players can queue commands, create unit groups that can be selected by a number key, and control numerous units at a time.</p>
+
+<p>Players mine resources (consisting of <a href="https://en.wikipedia.org/wiki/Ore">ores</a> and gems, as the Tiberium mineral in the regular <i>C&amp;C</i> series has not yet arrived on Earth), which are processed into credits to make in-game purchases including building structures, produce vehicles, training troops, and making repairs. Rare gems are worth significantly more credits, but unlike ores, they do not regenerate within the map. Players can build additional ore refineries and ore trucks to mine these resources faster; however, excess unspent credits require storage in special 'ore silos' that can be constructed. Resource management, including acquiring ore quickly to build up one's own forces as well as denial of ore to opponents, is often key to victory.</p>
+
+<p>While building a base, a player has to construct power plants to keep up with the growing demands of electricity, otherwise high-powered installations such as radar and Tesla Coils will not function; as such, power plants are often the first to be targeted in a base attack. An opponent's critical damaged structures can be captured with the use of engineers, allowing the player to produce units from that structure even if not part of one's own faction (i.e. if an Allied player captures a Soviet war factory, they can produce Soviet units like the Mammoth Tank).</p>
+
+<p>In addition to the single-player campaign and a multiplayer mode, <i>Red Alert</i> includes a map editor and the bonus software <i>Westwood Chat</i>.</p>
+
+<h3>Factions</h3>
+
+<p>The game features two factions with differing styles of play. <i>Red Alert</i> requires each player to use their side's strengths in order to compensate for their weaknesses, in contrast to games such as <i><a href="https://en.wikipedia.org/wiki/Total_Annihilation">Total Annihilation</a></i> or <i><a href="https://en.wikipedia.org/wiki/Warcraft_II:_Tides_of_Darkness">Warcraft II: Tides of Darkness</a></i>, in which both sides have units with similar abilities and rely on outnumbering or possessing a better-balanced force than their opponent.</p>
+
+<p>The Soviets' vehicles tend to be more durable and powerful than Allied vehicles, but are usually slower-moving and more expensive. The Soviets also have superior defensive capabilities against ground attacks, with Flame Towers (guard towers outfitted with heavy flamethrowers) and weaponized <a href="https://en.wikipedia.org/wiki/Tesla_coils">Tesla coils</a>, with the latter being able to destroy most Allied armour in 1-2 hits, although it has very high power consumption and cannot function without a sufficient and continuous supply of electricity. The Soviets' main weakness is at sea; their only offensive naval unit is the <a href="https://en.wikipedia.org/wiki/Submarine">submarine</a> (produced in the <a href="https://en.wikipedia.org/wiki/Submarine_pen">submarine pen</a>), which only exists to counter Allied warships and gain intelligence. It is normally invisible except when surfacing to attack when it is vulnerable to destroyers and gunboats. They also have a wide selection of air units for assault; the <a href="https://en.wikipedia.org/wiki/Yak-9">Yak-9</a> plane armed with machine guns for strafing infantry and light structures, <a href="https://en.wikipedia.org/wiki/MiG-23">MiG-23</a> strike fighter (though erroneously depicted as a <a href="https://en.wikipedia.org/wiki/MiG-29">MiG-29</a> in cut-scenes) whose missiles are suited for heavily armored vehicles and buildings, and <a href="https://en.wikipedia.org/wiki/Mi-24_Hind">Mi-24 Hind</a> helicopter gunship whose <a href="https://en.wikipedia.org/wiki/YakB-12.7_machine_gun">YakB rotary gun</a> is effective against light and heavy targets; the unprotected Yak-9 and MiG are designed for hit-and-run attacks as they release their payload all at once, while the armored Hind can remain in combat longer and unleashes its firepower more gradually. In addition, the Soviets also have access to periodic map revelation through spy planes, and can deploy infantry by air through <a href="https://en.wikipedia.org/wiki/Paratroopers">paratroopers</a>. In the latter half of the Soviet campaign (but not in multiplayer/skirmish mode), they also have access to periodic airstrikes from <a href="https://en.wikipedia.org/wiki/Tu-16_Badger">Badger bombers</a>. The Soviets' secret weapon is the <a href="https://en.wikipedia.org/wiki/Iron_Curtain">Iron Curtain</a>, a device that renders a selected unit invulnerable to attacks for a short period of time. The Soviet 'tank rush' was a popular strategy online, involving building many heavy tanks and overwhelming the opponent with sheer numbers.</p>
+
+<p>The Allies' forces are generally cheaper, faster to build and more agile. Their infantry can survive longer with good use of their <a href="https://en.wikipedia.org/wiki/Medic">Medic</a> unit. The Allies' strongest tank (the Medium Tank) is weaker in a one-on-one engagement against the Soviets' starting tank (the Heavy Tank), but it is also slightly faster and less expensive. The Allies also have anti-tank minelayers to counter superior Soviet armour. The Allies have only one air unit, the anti-tank <a href="https://en.wikipedia.org/wiki/AH-64_Apache">AH-64 Apache</a> attack helicopter (erroneously called 'Longbow' despite lacking the distinctive FCR of the same name), compared to three Soviet air units; however, the Allies also have anti-aircraft guns (more powerful but shorter-ranged than Soviet <a href="https://en.wikipedia.org/wiki/Surface_to_Air_Missiles">Surface to Air Missiles</a>). Allied defenses against ground assaults — pillboxes and turret emplacements — are less powerful than the Soviets' Tesla Coil, but cheaper and better protected while also less dependent on electricity. On maps with water, Allies possess a major advantage in naval power thanks to the <a href="https://en.wikipedia.org/wiki/Guided-missile_destroyer">Destroyer</a>, a versatile medium-sized warship armed with guided missiles capable of engaging all targets on land, sea and air, and the <a href="https://en.wikipedia.org/wiki/Heavy_cruiser">Cruiser</a> (erroneously depicted as an <a href="https://en.wikipedia.org/wiki/Iowa-class_battleship"><i>Iowa</i>-class battleship</a> in cut-scenes), a large warship for shore bombardment equipped with turret-mounted <a href="https://en.wikipedia.org/wiki/8-inch/55-caliber_gun">8-inch naval guns</a> giving it the longest-ranged and most powerful surface-to-surface attack in the game. The Allies also possess several other tools of <a href="https://en.wikipedia.org/wiki/Military_deception">subterfuge</a> and military intelligence, such as spies to gain information on or disable enemy facilities, and thieves for stealing enemy resources, hiding their own units and structures from detection via the 'gap generator' (a special tower outfitted with electronic warfare equipment, which creates a <a href="https://en.wikipedia.org/wiki/Fog_of_war#In_video_games">"fog of war"</a> preventing enemy players from being able to see the tower or anything else in a large radius around itself), and revealing the whole game map with a prototype GPS satellite. The Allies' secret weapon is the Chronosphere, which temporarily teleports a selected unit to another part of the map.</p>
+
+<p>In online play and computer skirmish, both Allied and Soviet forces have access to the <a href="https://en.wikipedia.org/wiki/CH-47_Chinook">transport helicopters</a> and the <a href="https://en.wikipedia.org/wiki/Missile_silo">missile silo</a>, which is not available to either side in single-player mode (though missile silos are found in some Soviet bases in the latter half of the Allied campaign). In online play and computer skirmishes, the Soviets have access to two of the Allied side's infantry: the Rocket Soldier (for anti-air and anti-tank fighting) and Tanya, a commando capable of easily killing infantry and destroying structures with demolition charges.</p>
+
+<p>Unlike the standard Allied/Soviet factions in the single-player campaigns, in multiplayer/skirmish, players choose a particular country to play as, each with its own unique advantage over the others. Allied countries consist of Germany (greater firepower), England (better durability) and France (faster rate of fire), while Soviet countries consist of Russia (lower costs) and Ukraine (faster movement speed).</p>
+
+<h2>Plot</h2>
+
+<p><i>Command &amp; Conquer: Red Alert</i> takes place in a parallel universe. At the <a href="https://en.wikipedia.org/wiki/Trinity_Site">Trinity Site</a> in <a href="https://en.wikipedia.org/wiki/New_Mexico">New Mexico</a> in 1946, <a href="https://en.wikipedia.org/wiki/Albert_Einstein">Albert Einstein</a> prepares to travel back in time. He activates his experimental time machine to find himself in <a href="https://en.wikipedia.org/wiki/Landsberg_am_Lech">Landsberg</a>, <a href="https://en.wikipedia.org/wiki/Weimar_Republic">Germany</a>, on December 20, 1924, where he meets a young <a href="https://en.wikipedia.org/wiki/Adolf_Hitler">Adolf Hitler</a> just after the latter's release from <a href="https://en.wikipedia.org/wiki/Landsberg_Prison">Landsberg Prison</a>. Following a brief conversation between the two, Einstein shakes Hitler's hand, which erases him from the timeline.</p>
+
+<p>Hitler's death prevents him from rising to power as leader of <a href="https://en.wikipedia.org/wiki/Nazi_Germany">Nazi Germany</a>, effectively creating a new timeline. Without Nazi Germany, the <a href="https://en.wikipedia.org/wiki/Soviet_Union">Soviet Union</a> (USSR) grows powerful under the rule of <a href="https://en.wikipedia.org/wiki/Joseph_Stalin">Joseph Stalin</a>. The USSR seizes land from <a href="https://en.wikipedia.org/wiki/China">China</a> and then invades <a href="https://en.wikipedia.org/wiki/Eastern_Europe">Eastern Europe</a>, to achieve Joseph Stalin's vision of a Soviet Union stretching across the entire <a href="https://en.wikipedia.org/wiki/Eurasia">Eurasian</a> landmass. In response, the countries of <a href="https://en.wikipedia.org/wiki/Western_Europe">Western Europe</a> (including an <a href="https://en.wikipedia.org/wiki/German_rearmament">already-rearmed Germany</a>) form the <a href="https://en.wikipedia.org/wiki/Western_Bloc">Allied Nations</a> and start a guerrilla war against the invading Soviet Army. Over the course of the game's story, the Allies and Soviets fight for control over the European mainland in an alternate <a href="https://en.wikipedia.org/wiki/World_War_II">World War II</a>:</p>
+
+<ul>
+  <li>Allied ending: Following the siege of <a href="https://en.wikipedia.org/wiki/Moscow">Moscow</a>, an Allied platoon discovers Stalin buried alive in the rubble of the <a href="https://en.wikipedia.org/wiki/Moscow_Kremlin">Kremlin</a>. As they begin attempting to remove the debris from the fallen Soviet leader, General Stavros unexpectedly enters the room and stops them. He "convinces" them that they saw nothing and orders them to leave the premises. Stavros then stuffs a handkerchief into Stalin's mouth before covering his head with a large stone and walking away.</li>
+  <li>Soviet ending: As the Soviets celebrate their victory at the newly captured <a href="https://en.wikipedia.org/wiki/Buckingham_Palace">Buckingham Palace</a>, Stalin commends the Commander (the player), but is poisoned by Nadia, who guns him down as the poison overcomes his body. Following Stalin's death, Nadia tells the Commander that the Soviet Union is now under the rule of the Brotherhood of Nod, who plan to return to the shadows again and reemerge in the 1990s, leaving the player as the puppet ruler of the USSR, ready to do the Brotherhood of Nod bidding for "the foreseeable future". She is betrayed and shot in the back by <a href="https://en.wikipedia.org/wiki/Kane_(Command_&amp;_Conquer)">Kane</a>, who reveals to "Comrade <a href="https://en.wikipedia.org/wiki/Premier_of_the_Soviet_Union">Chairman</a>" that <i>he</i> is the true mastermind.</li>
+</ul>
+
+<h2>Connection to the <i>Tiberian</i> games</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Westwood_Studios">Westwood Studios</a> designed <i>Command &amp; Conquer: Red Alert</i> to be the <a href="https://en.wikipedia.org/wiki/Prequel">prequel</a> of <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer_(1995_video_game)">Command &amp; Conquer: Tiberian Dawn</a></i>, and by proxy of the <a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer:_Tiberian_series"><i>Tiberian</i> series</a> as a whole.</p>
+
+<p>During the course of the Soviet's campaign, <a href="https://en.wikipedia.org/wiki/Kane_(Command_&amp;_Conquer)">Kane</a> is seen to make infrequent appearances as a mysterious counselor to <a href="https://en.wikipedia.org/wiki/Joseph_Stalin">Joseph Stalin</a>, and the story implies that he has in fact been the instigator of the world war between the <a href="https://en.wikipedia.org/wiki/USSR">USSR</a> and the Allied nations in order to further the long-term goals of the Brotherhood of Nod. Indeed, Nadia, the head of the <a href="https://en.wikipedia.org/wiki/NKVD">NKVD</a>, Stalin's <a href="https://en.wikipedia.org/wiki/Mistress_(lover)">mistress</a> and evidently a secretive member of the Brotherhood herself as early as the 1950s, instructs the player to "keep the peace" until Nod would "tire of the USSR in the early 1990s" upon the campaign's successful conclusion. Kane, however, shoots her without warning and proclaims to the player that he "<i>[is]</i> the future". Moreover, during the fifth cutscene of the Allied campaign, a news announcer reporting on the Allies' loss of <a href="https://en.wikipedia.org/wiki/Greece">Greece</a> is suddenly heard stating that the <a href="https://en.wikipedia.org/wiki/United_Nations">United Nations</a> are in the process of bringing about a unique military <a href="https://en.wikipedia.org/wiki/Task_force">task force</a> aimed at preventing future globalized conflicts. This task force is heavily implied to have been "<i>Special Operations Group Echo: Black Ops 9</i>"—the covert and international peace enforcing unit of the United Nations and the precursor of the Global Defense Initiative, one of the two main and iconic factions of the <i>Tiberian</i> series alongside the Brotherhood of Nod.</p>
+
+<p>A much debated theory intended to resolve the apparent timeline error which came to exist between <i>Command &amp; Conquer: Tiberian Dawn</i> and <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer:_Red_Alert_2">Command &amp; Conquer: Red Alert 2</a></i> is to consider <i>Red Alert</i> as the genesis of two parallel storylines. If the Soviet campaign were to be completed in <i>Red Alert</i>, the USSR would emerge as the dominant <a href="https://en.wikipedia.org/wiki/Eurasia">Eurasian</a> power and Kane and the Brotherhood of Nod would subsequently take control of this new <a href="https://en.wikipedia.org/wiki/Empire">empire</a>. Conversely, if the Allied campaign were to be completed, the Allies would emerge victorious and the timeline would instead lead into the events of <i>Red Alert 2</i> (though the latter completely ignores anything that could connect it to the Tiberium timeline). However, <i>Command &amp; Conquer: Tiberian Dawn</i> has the Brotherhood of Nod start out as an underground terrorist organisation, not as a political force in control of the late Soviet empire. This is further confirmed by former <i>C&amp;C</i> designer Adam Isgreen, who confirms that <i>Tiberian Dawn</i> in fact follows on the conclusion of <i>Red Alert</i>'s Allies campaign, while <i>Red Alert 2</i> and <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer:_Yuri's_Revenge">Yuri's Revenge</a></i> take place in a second parallel universe, created by a new attempt to alter history in "<i>Tiberian Incursion</i>", the <a href="https://en.wikipedia.org/wiki/Working_title">working title</a> of Westwood Studios' cancelled version of <i>Command &amp; Conquer 3</i>. Isgreen also implied that <a href="https://en.wikipedia.org/wiki/Nikola_Tesla">Nikola Tesla</a> may have been responsible for inadvertently having attracted the attention of the Scrin through his experiments, and thus for the arrival of Tiberium on Earth.</p>
+
+<p>When the <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer:_The_First_Decade">Command &amp; Conquer: The First Decade</a></i> compilation pack was released in February 2006, <a href="https://en.wikipedia.org/wiki/Electronic_Arts">Electronic Arts</a> adopted the policy of considering the <a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer"><i>C&amp;C</i> franchise</a> to consist of three distinct universes, with this decision apparently violating the storyline connections between <i>Red Alert</i> and <i>Tiberian Dawn</i> established by Westwood Studios. With the release of <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer_3:_Tiberium_Wars">Command &amp; Conquer 3: Tiberium Wars</a></i> in March 2007, Electronic Arts published a document wherein an implicit reference to Kane's appearance in <i>Red Alert</i> is made, revealing that GDI's "InOps" intelligence division is in the possession of photos of Kane which were taken by <a href="https://en.wikipedia.org/wiki/Central_Intelligence_Agency">CIA</a> that, if genuine, would mean that Kane's age by year 2030 is close to 125.</p>
+
+<h2>Freeware release</h2>
+
+<p>To mark the 13th anniversary of <i>Command and Conquer</i> and the announcement of <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer:_Red_Alert_3">Red Alert 3</a></i>, EA released <i>Command and Conquer: Red Alert</i> as freeware. After the promotion ended they allowed third-party <a href="https://en.wikipedia.org/wiki/Web_mirror">mirrors</a> to pick up and also ship the addons for free. The community has started repackaging it to installers that do not require burning the original <a href="https://en.wikipedia.org/wiki/ISO_image">ISO images</a> and included their latest <a href="https://en.wikipedia.org/wiki/Fan_patch">fan patches</a> that modernize the renderer, remove duplicate files, fix bugs and include content from the PlayStation release. Those repacks typically also include modding tools as well as network utilities for multiplayer matches.</p>
+
+<h2>Development</h2>
+
+<p>The game was developed by close to 30 people.</p>
+
+<h2>Soundtrack</h2>
+
+<p>The game's original score was composed by <a href="https://en.wikipedia.org/wiki/Frank_Klepacki">Frank Klepacki</a> and was voted the best video game soundtrack of 1996 by <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> and <i>Gameslice</i> magazines.</p>
+
+<h2>Reception</h2>
+
+<h3>Ads</h3>
+
+<p>Westwood Studios started a controversial ad campaign portraying previous dictators next to current military leaders with the subtitle "Previous High Scores".</p>
+
+<h3>Sales</h3>
+
+<p>In the United States, <i>Command &amp; Conquer: Red Alert</i> debuted at No. 2 on <a href="https://en.wikipedia.org/wiki/PC_Data">PC Data</a>'s computer game sales chart for November 1996, behind <i><a href="https://en.wikipedia.org/wiki/Microsoft_Flight_Simulator">Microsoft Flight Simulator</a></i>. Following a third-place finish in December, it became the United States' seventh-best-selling computer game of 1996 as a whole. According to PC Data, its domestic sales totaled 347,844 units during the period, which drew revenues of $16.5 million. In 1997, <i>Red Alert</i> held a position in PC Data's top 3 for the first four months of the year, peaking at No. 2 in April. It was ultimately the fourth-biggest seller of 1997's first half in the United States, after finishing at No. 4 in May and June. While the game remained in the top 10 through September, it was absent from the top 20 by October. <i>Red Alert</i> ended 1997 as the United States' eighth-best seller among computer titles, with sales of 363,207 units for the year. The game's lifetime sales rose to 869,623 copies in the United States by September 1999. At the time, PC Data declared it the country's 17th-best-selling computer game released since January 1993.</p>
+
+<p>In August 1998, <i>Red Alert</i> received a "Platinum" sales award from the Verband der Unterhaltungssoftware Deutschland (VUD), indicating sales of at least 200,000 units across Germany, Austria and Switzerland. In Germany alone, the game sold 400,000 copies in 1996. <i>Red Alert</i> was a commercial success, with global sales of 1.5 million copies in its debut month. Over half of these sales derived from North America. It sold close to 2 million copies by mid-February 1997.</p>
+
+<h3>Critical reviews</h3>
+
+<p>The PC version of the game scored 90.91% on <a href="https://en.wikipedia.org/wiki/GameRankings">GameRankings</a> based on 11 reviews, while the PlayStation version scored 81.40% based on 5 reviews. A reviewer for <i><a href="https://en.wikipedia.org/wiki/Next_Generation_(magazine)">Next Generation</a></i> commented that <i>Command &amp; Conquer: Red Alert</i> retains the gameplay elements of the outstanding original game while enhancing the graphics, expanding warfare to both air and sea, and rebalancing the gameplay so that players cannot succeed by simply using the same tactics which worked in the original. He concluded that "in a holiday season swamped with <i>C&amp;C</i> clones, discerning gamers won't go wrong by sticking to the real thing." Vince Broady of <i><a href="https://en.wikipedia.org/wiki/GameSpot">GameSpot</a></i> also commented on the saturation of real-time strategy games in the 1996 holiday shopping season and concluded <i>Red Alert</i> to clearly be the best choice. He praised the unit design and variety, particularly that "the units of the two opposing sides aren't mere copies of each other, but instead maintain a sort of karmic balance." Additionally complimenting the level design, cutscenes, graphics, sound effects, and music, he judged that, "<i>Red Alert</i> belongs in the same category as <i><a href="https://en.wikipedia.org/wiki/Civilization_II">Civilization II</a></i> and <i><a href="https://en.wikipedia.org/wiki/Quake_(video_game)">Quake</a></i>, games that followed legendary predecessors and immediately eclipsed them." In a review for <i>PC Games</i> which was also published in its sister magazine <i><a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a></i>, Rob Smith summarized, "The new units, the great story, and the variety of mission styles make up for the limited improvement in the A.I." He also noted that the control interface allows players to quickly and easily select units and order them into combat.</p>
+
+<p><i>Command &amp; Conquer</i> won the 1996 <a href="https://en.wikipedia.org/wiki/Spotlight_Awards">Spotlight Award</a> for "Best Strategy/War Game" from the <a href="https://en.wikipedia.org/wiki/Game_Developers_Conference">Game Developers Conference</a>. <i><a href="https://en.wikipedia.org/wiki/Computer_Gaming_World">Computer Gaming World</a></i> gave it the Strategy Game of the Year award (Readers' Choice). The game was a finalist for <i>Computer Gaming World</i>'s 1996 "Strategy Game of the Year" award, which ultimately went to <i>Civilization II</i>.</p>
+
+<p>The PlayStation version was also positively received, but generally not as enthusiastically as the PC original. <i><a href="https://en.wikipedia.org/wiki/IGN">IGN</a></i> hailed it as "one of the best PC to PlayStation ports we've ever seen", citing the inclusion of PC version's entire content, the control with the <a href="https://en.wikipedia.org/wiki/PlayStation_Mouse">PlayStation Mouse</a>, and the <a href="https://en.wikipedia.org/wiki/PlayStation_Link_Cable">PlayStation Link Cable</a> support. Most reviewers, however, noted that the PlayStation Mouse was difficult to find at this time, and that control with the standard PlayStation controller takes a good deal of time and patience to master. In addition to its being even rarer than the PlayStation Mouse, they noted that the PlayStation Link Cable was not a practical option for most gamers. Some also found this version's inability to save mid-mission to be frustrating. <i>GamePro</i> ultimately recommended it, though only to those for whom the PC version is not an option, citing the addictive gameplay, engaging cutscenes, "both exciting and subtle" music, and improved A.I. over the PC version. <i>GameSpot</i> also recommended it, while advising that it is more of a tweaking and expansion of the original <i>Command &amp; Conquer</i> than a "true sequel". <i><a href="https://en.wikipedia.org/wiki/Electronic_Gaming_Monthly">Electronic Gaming Monthly</a></i>'s team of four reviewers all gave it an 8.5/10 or better, particularly noting its strategic depth and high quality FMV cutscenes, with Kraig Kujawa concluding, "Although <i>Red Alert</i> isn't as good as its PC counterpart, you won't find a better realtime strategy game on the PlayStation." <i>Electronic Gaming Monthly</i> also named it "Strategy Game of the Year" at their 1997 Editors' Choice Awards, calling it "the best console realtime strategy game of all time".</p>
+
+<p>In 1998, <i><a href="https://en.wikipedia.org/wiki/PC_Gamer">PC Gamer</a></i> declared it the 14th-best computer game ever released, and the editors called it "a perfectly balanced and action-packed epic that functions brilliantly in both the multi-play and the solo campaigns".</p>
+
+<h2>Expansion packs</h2>
+
+<h3><i>Counterstrike</i> and <i>The Aftermath</i> (1997)</h3>
+
+<p>In 1997, two expansion packs for <i>Red Alert</i> were released for the PC, <i>Command &amp; Conquer: Red Alert: Counterstrike</i> and <i>Command &amp; Conquer: Red Alert: The Aftermath</i>. The expansion packs were designed by Westwood Studios with the "apprenticeship" of <a href="https://en.wikipedia.org/wiki/Intelligent_Games">Intelligent Games</a>, a <a href="https://en.wikipedia.org/wiki/London">London</a>-based game developer. Much of the development on multiplayer maps was undertaken by players from the Compuserve Red Alert ladder. New units, missions, maps, and music were included in the expansions.</p>
+
+<p>By October 1997, <i>Counterstrike</i> had sold 650,000 copies worldwide after its launch in April of that year. According to Westwood, this made it the all-time fastest-selling expansion pack for a computer game by that point. The <i>Counterstrike</i> add-on included the secret <i>Ant Missions</i> titled "It Came from Red Alert", where the player battles against an army of giant, mutant ants.</p>
+
+<p>The <i>Aftermath</i> add-on contained many new units available in single and multiplayer modes. New Allied units include the <i>Field Mechanic</i> and the <i>Chrono Tank</i>. New Soviet units include the <i>Missile Sub</i>, the <i>Shock Trooper</i>, the <i><a href="https://en.wikipedia.org/wiki/Mutual_assured_destruction">M.A.D</a> Tank</i> and the <i>Tesla Tank</i>. In addition, both sides receive the <i>Demolition Truck</i>. The add-on also includes hundreds of new maps as well as a new, significantly larger, map size.</p>
+
+<h3><i>Retaliation</i> (1998)</h3>
+
+<p>On August 28, 1998, <a href="https://en.wikipedia.org/wiki/Westwood_Studios">Westwood Studios</a> released <i>Command &amp; Conquer Red Alert: Retaliation</i> for the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a>, a compilation of the two PC expansion packs, including the secret Ant Missions. It is almost identical to the PlayStation port of the original <i>Red Alert</i>, except that it allows the player to save mid-mission, introduced some new units like Tesla Tank, Shock Trooper, Chrono Tank and Missile Sub, and includes 105 skirmish maps. The gameplay also includes an in-game sidebar code called <a href="https://en.wikipedia.org/wiki/Soylent_Green">Soylent Green</a> Mode. In this mode, all ore fields turn to people/civilians, and ore trucks harvest them with grisly sound effects.</p>
+
+<p>It also included 19 exclusive briefing FMV (full-motion video) clips that were not in any of the PC expansion packs, which had none. All of the videos are shown when the player either starts playing through the operational theatre from the beginning or when all the missions of the theatre are accomplished. In other cases, the briefing text is shown. The FMVs include a general for each side telling the player the mission objectives; The Allied General Carville later appears in <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer:_Red_Alert_2">Red Alert 2</a></i> while Soviet General Topolov has made no further appearances in the <i>Red Alert</i> series.</p>
+
+<p>The <i>Retaliation</i> videos were made available for the PC <i>Red Alert</i> in the modification <i>The Lost Files</i>. This modification adds the <i>Retaliation</i> videos to the <i>Counterstrike</i> and <i>Aftermath</i> missions. The <a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer_Remastered_Collection">Command &amp; Conquer Remastered Collection</a> officially includes the Retaliation cutscenes, linking them to their respective expansion missions in the same way the mod does.</p>
+
+<p><i>Red Alert Retaliation</i> was released as a download for <a href="https://en.wikipedia.org/wiki/PlayStation_Portable">PlayStation Portable</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_3">PlayStation 3</a> from the <a href="https://en.wikipedia.org/wiki/PlayStation_Network">PlayStation Network</a> in Europe on March 27, 2008, and in North America on December 3, 2009.</p>
+
+<p><i>Red Alert Retaliation</i> was a nominee for "8th Annual <a href="https://en.wikipedia.org/wiki/GamePro">GamePro</a> Readers' Choice Awards" for "Best Strategy Game of The Year", but lost to <i><a href="https://en.wikipedia.org/wiki/Pokémon_Red_and_Blue">Pokémon Red and Blue</a></i> for <a href="https://en.wikipedia.org/wiki/Game_Boy">Game Boy</a>.</p>
+
+<h2>Open source</h2>
+
+<p>Coinciding with the release of <i><a href="https://en.wikipedia.org/wiki/Command_&amp;_Conquer_Remastered_Collection">Command &amp; Conquer Remastered Collection</a></i> in 2020, Electronic Arts released the original source code for both <i>Tiberian Dawn</i> and <i>Red Alert</i> through <a href="https://en.wikipedia.org/wiki/GitHub">GitHub</a> under the <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GNU General Public License</a> in collaboration between EA and the <i>Command &amp; Conquer</i> community to aid in the development of mods. The source release has also allowed community developers to produce <a href="https://en.wikipedia.org/wiki/Source_port">source ports</a> of the original PC version of the game which was released as <a href="https://en.wikipedia.org/wiki/Freeware">freeware</a>. This now includes unofficial ports to platforms such as the <a href="https://en.wikipedia.org/wiki/PlayStation_Vita">PlayStation Vita</a> derived from an upstream project called Vanilla-Conquer.</p>
+
+<h3>OpenRA</h3>
+
+<p><b><a href="https://www.openra.net/">OpenRA</a></b> is an open source <a href="https://en.wikipedia.org/wiki/Game_engine_recreation">game engine reimplementation</a> and remake of several <i>Command &amp; Conquer</i> games, including <i>Red Alert</i>. It is built using <a href="https://en.wikipedia.org/wiki/OpenGL">OpenGL</a> and <a href="https://en.wikipedia.org/wiki/Simple_DirectMedia_Layer">SDL</a>, has support for <a href="https://en.wikipedia.org/wiki/Pixel_density">HiDPI</a>, and is <a href="https://en.wikipedia.org/wiki/Cross-platform_software">cross platform</a>, supporting Windows, Linux, macOS, and FreeBSD. The engine has support for custom <a href="https://en.wikipedia.org/wiki/Mod_(computer_game)">mods</a> via an <a href="https://en.wikipedia.org/wiki/Software_development_kit">SDK</a>. The games are remade for modern computers with updated gameplay, new campaigns, user-created and curated maps, and online play. Deviations from the originals included a choice between “right click” and classic “left click” control schemes, an overhauled sidebar interfaces for managing productions, support for <a href="https://en.wikipedia.org/wiki/Game_replay">game replays</a> and an observer interface designed for <a href="https://en.wikipedia.org/wiki/Video_game_live_streaming">video game live streaming</a>. <a href="https://en.wikipedia.org/wiki/Fog_of_war">Fog of war</a> that obscures the battlefield outside your units’ line of sight, civilian structures that can be captured to provide benefits and units gain <a href="https://en.wikipedia.org/wiki/Experience_point">experience</a> as they fight and improve when they earn new ranks. The game supports <a href="https://en.wikipedia.org/wiki/Handicapping">handicapping</a> players, <a href="https://en.wikipedia.org/wiki/Discord_(software)">Discord</a> integration and community <a href="https://en.wikipedia.org/wiki/Standings">ladders</a>. Experimental support for the remastered assets was published in 2023 as a binary compatible yet separate mod.</p>
+
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
