@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>MDK</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('d2e6991b-a4e8-477b-aeee-42c2e5eb7339/cf080bb0-bd71-4779-8b92-335d2118c519.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="d2e6991b-a4e8-477b-aeee-42c2e5eb7339/6cd801b9-b2fa-4d4b-bc6d-d0cb22ee6e30.ico"/> MDK</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-27/04/2024">27/04/2024</a> 21:32:46</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation">Sony PlayStation</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-27/03/1997">27/03/1997</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-83">83</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Third-person shooter">Third-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Shiny Entertainment">Shiny Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Shiny Entertainment">Shiny Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>MDK</b></i> is a 1997 <a href="https://en.wikipedia.org/wiki/Third-person_shooter">third-person shooter</a> <a href="https://en.wikipedia.org/wiki/Video_game">video game</a> developed by <a href="https://en.wikipedia.org/wiki/Shiny_Entertainment">Shiny Entertainment</a> for <a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> and subsequently ported to <a href="https://en.wikipedia.org/wiki/Mac_OS">Mac OS</a> by Shokwave, and to the <a href="https://en.wikipedia.org/wiki/PlayStation_(console)">PlayStation</a> by <a href="https://en.wikipedia.org/wiki/Neversoft">Neversoft</a>. The game was published on all systems by <a href="https://en.wikipedia.org/wiki/Playmates_Toys">PIE</a> in North America, while <a href="https://en.wikipedia.org/wiki/Shiny_Entertainment">Shiny Entertainment</a> handled the European release. It initially debuted in March 1997 for Windows and in November of the same year for PlayStation. Later on, MDK became available on <a href="https://en.wikipedia.org/wiki/GOG.com">GOG.com</a> in September 2008 and on <a href="https://en.wikipedia.org/wiki/Steam_(service)">Steam</a> in September 2009.</p>
+
+<p>The game tells the story of Kurt Hectic, a <a href="https://en.wikipedia.org/wiki/Janitor">janitor</a> who reluctantly attempts to save <a href="https://en.wikipedia.org/wiki/Earth">Earth</a> from an <a href="https://en.wikipedia.org/wiki/Alien_invasion">alien invasion</a> of gigantic <a href="https://en.wikipedia.org/wiki/Surface_mining">strip mining</a> city-sized <a href="https://en.wikipedia.org/wiki/Vehicle">vehicles</a> named "Minecrawlers". The Minecrawlers are ruthlessly harvesting Earth's <a href="https://en.wikipedia.org/wiki/Natural_resource">natural resources</a> and crushing any <a href="https://en.wikipedia.org/wiki/People">people</a> and cities that get in their way. Assisted by his somewhat eccentric boss, Dr. Fluke Hawkins, an inventive scientist, and an unusual robotic companion named Bones, Kurt embarks on a quest to infiltrate each Minecrawler and eliminate its pilot. After accomplishing this dangerous task, he must return to Dr. Hawkins' in-orbit space station, the Jim Dandy.</p>
+
+<p>Conceived and co-<a href="https://en.wikipedia.org/wiki/Video_game_design#Game_designer">designed</a> by <a href="https://en.wikipedia.org/wiki/Nick_Bruty">Nick Bruty</a>, <i>MDK</i> was Shiny's first <a href="https://en.wikipedia.org/wiki/Personal_computer">PC</a> game, and was notable for using <a href="https://en.wikipedia.org/wiki/Software_rendering">software rendering</a>, requiring a <a href="https://en.wikipedia.org/wiki/Pentium">Pentium</a> or equivalent <a href="https://en.wikipedia.org/wiki/Microprocessor">microprocessor</a>, rather than necessitating any <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPU</a> enhancements, despite its large <a href="https://en.wikipedia.org/wiki/3D_computer_graphics">3D</a> levels and complex <a href="https://en.wikipedia.org/wiki/Polygon_(computer_graphics)">polygonal</a> enemies. As the developers were attempting very ambitious things, they wrote their own <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a>. Additionally, when in <a href="https://en.wikipedia.org/wiki/Sniper">sniper</a> mode, the player has the ability to zoom up to 100x, but the developers chose not to employ any of the standard solutions to <a href="https://en.wikipedia.org/wiki/Draw_distance">pop-up</a>, such as <a href="https://en.wikipedia.org/wiki/Clipping_(computer_graphics)">clipping</a> or <a href="https://en.wikipedia.org/wiki/Distance_fog">fogging</a>. They also worked to ensure the game ran at a minimum of 30 <a href="https://en.wikipedia.org/wiki/Frame_rate">fps</a> at all times on all machines. The game's original <a href="https://en.wikipedia.org/wiki/System_requirements">system requirements</a> were a 60 MHz Pentium, 16<a href="https://en.wikipedia.org/wiki/Megabyte">MB</a> of <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM</a>, 17MB of <a href="https://en.wikipedia.org/wiki/Hard_disk_drive">hard drive</a> storage, an SVGA-compatible <a href="https://en.wikipedia.org/wiki/Video_card">video card</a>, and a <a href="https://en.wikipedia.org/wiki/Sound_Blaster">Sound Blaster</a> or equivalent <a href="https://en.wikipedia.org/wiki/Sound_card">sound card</a>.</p>
+
+<p><i>MDK</i> received generally positive <a href="https://en.wikipedia.org/wiki/Review">reviews</a>, with <a href="https://en.wikipedia.org/wiki/Critic">critics</a> praising the <a href="https://en.wikipedia.org/wiki/Gameplay">gameplay</a>, the <a href="https://en.wikipedia.org/wiki/Level_design">level design</a>, the sardonic sense of humor, the game's technical accomplishments, and the use of sniper mode. The most often repeated criticisms included that the game was too short, and the story was weak. The game was a commercial success, and Interplay approached Bruty to work on a sequel immediately. However, he was already developing <i><a href="https://en.wikipedia.org/wiki/Giants:_Citizen_Kabuto">Giants: Citizen Kabuto</a></i>, so <a href="https://en.wikipedia.org/wiki/BioWare">BioWare</a> was hired to develop the game. <i><a href="https://en.wikipedia.org/wiki/MDK2">MDK2</a></i> was published for Windows and the <a href="https://en.wikipedia.org/wiki/Dreamcast">Dreamcast</a> in 2000, and for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> (as <i>MDK 2: Armageddon</i>) in 2001. In 2007, Interplay announced a third game was planned, but it was never made.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

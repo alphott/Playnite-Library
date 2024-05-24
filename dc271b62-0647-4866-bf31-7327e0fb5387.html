@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Half-Life</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('dc271b62-0647-4866-bf31-7327e0fb5387/a1d53da2-6feb-42fe-b9b1-c62159c266c8.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="dc271b62-0647-4866-bf31-7327e0fb5387/7b7e3c8c-f760-4a9f-8791-1bf2d756d723.ico"/> Half-Life</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src=""/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="#quicklink-10/05/2024">10/05/2024</a> 20:15:47</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="#quicklink-20/05/2024">20/05/2024</a> 22:32:56</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="#quicklink-Playnite">Playnite</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list_platform_ascending_name_ascending.html#quicklink-Sony PlayStation 2">Sony PlayStation 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="#quicklink-14/11/2001">14/11/2001</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-67">67</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-92">92</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-0">0</a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-First-person shooter">First-person shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Gearbox Software">Gearbox Software</a><br/><a href="default%20list%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Valve">Valve</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Sierra Entertainment">Sierra Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<i><b>Half-Life</b></i><!--Do not add stylization in this since it's only used in box art and title screen.--> is a 1998 <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> game developed by <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve Corporation</a> and published by <a href="https://en.wikipedia.org/wiki/Sierra_Studios">Sierra Studios</a> for <a href="https://en.wikipedia.org/wiki/Windows">Windows</a>. It was Valve's debut product and the first game in the <a href="https://en.wikipedia.org/wiki/Half-Life_(series)"><i>Half-Life</i> series</a>. The player assumes the role of <a href="https://en.wikipedia.org/wiki/Gordon_Freeman">Gordon Freeman</a>, a scientist who must escape from the <a href="https://en.wikipedia.org/wiki/Black_Mesa_Research_Facility">Black Mesa Research Facility</a> after it is invaded by aliens following a disastrous scientific experiment. The gameplay consists of combat, exploration and puzzles.</p>
+
+<p>Valve was disappointed with the lack of innovation in the FPS genre, and aimed to create an immersive world rather than a "shooting gallery". Unlike other games at the time, the player has almost uninterrupted control of the <a href="https://en.wikipedia.org/wiki/Player_character">player character</a>; the story is mostly experienced through <a href="https://en.wikipedia.org/wiki/Scripted_sequence">scripted sequences</a> rather than <a href="https://en.wikipedia.org/wiki/Cutscene">cutscenes</a>. Valve developed the game using <a href="https://en.wikipedia.org/wiki/GoldSrc">GoldSrc</a>, a heavily-modified version of the <a href="https://en.wikipedia.org/wiki/Quake_engine"><i>Quake</i> engine</a>, licensed from <a href="https://en.wikipedia.org/wiki/Id_Software">id Software</a>. The science fiction novelist <a href="https://en.wikipedia.org/wiki/Marc_Laidlaw">Marc Laidlaw</a> was hired to craft the plot and assist with design.</p>
+
+<p><i>Half-Life</i> received acclaim for its graphics, gameplay and narrative and won more than 50 <a href="https://en.wikipedia.org/wiki/PC_game">PC</a> "<a href="https://en.wikipedia.org/wiki/List_of_Game_of_the_Year_awards">Game of the Year</a>" awards. It is considered one of the most influential first-person shooter games and one of the <a href="https://en.wikipedia.org/wiki/List_of_video_games_considered_the_best">greatest video games ever made</a>. By 2008, it had sold more than nine million copies. It was ported to the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> in 2001, along with the multiplayer expansion <i><a href="https://en.wikipedia.org/wiki/Half-Life:_Decay">Decay</a></i>, and to <a href="https://en.wikipedia.org/wiki/OS_X">OS X</a> and <a href="https://en.wikipedia.org/wiki/Linux_kernel">Linux</a> in 2013. Valve ported <i>Half-Life</i> to its <a href="https://en.wikipedia.org/wiki/Source_(game_engine)">Source</a> engine as <i>Half-Life: Source</i> in 2004. In 2020, Crowbar Collective released an unofficial remake, <i><a href="https://en.wikipedia.org/wiki/Black_Mesa_(video_game)">Black Mesa</a></i>.</p>
+
+<p><i>Half-Life</i> inspired numerous fan-made <a href="https://en.wikipedia.org/wiki/Mod_(video_gaming)">mods</a>, some of which became standalone games, such as <i><a href="https://en.wikipedia.org/wiki/Counter-Strike_(video_game)">Counter-Strike</a></i>, <i><a href="https://en.wikipedia.org/wiki/Day_of_Defeat">Day of Defeat</a></i>, and <i><a href="https://en.wikipedia.org/wiki/Sven_Co-op">Sven Co-op</a></i>. It was followed by the <a href="https://en.wikipedia.org/wiki/Expansion_pack">expansion packs</a> <i><a href="https://en.wikipedia.org/wiki/Half-Life:_Opposing_Force">Opposing Force</a></i> (1999) and <i><a href="https://en.wikipedia.org/wiki/Half-Life:_Blue_Shift">Blue Shift</a></i> (2001), developed by <a href="https://en.wikipedia.org/wiki/Gearbox_Software">Gearbox Software</a>, and the sequels <i><a href="https://en.wikipedia.org/wiki/Half-Life_2">Half-Life 2</a></i> (2004), <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Episode_One">Half-Life 2: Episode One</a></i> (2006), <i><a href="https://en.wikipedia.org/wiki/Half-Life_2:_Episode_Two">Half-Life 2: Episode Two</a></i> (2007) and <i><a href="https://en.wikipedia.org/wiki/Half-Life:_Alyx">Half-Life: Alyx</a></i> (2020).</p>
+
+<h3>Ports and remakes</h3>
+
+<p>Gearbox created a <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative</a> multiplayer expansion pack, <i><a href="https://en.wikipedia.org/wiki/Half-Life:_Decay">Decay</a>,</i> exclusively for the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> port of <i>Half-Life</i> which is played through the perspectives of Gina Cross and Colette Green, two Black Mesa scientists.</p>
+
+<p><i><b>Half-Life: Decay</b></i> is a <a href="https://en.wikipedia.org/wiki/Multiplayer_video_game">multiplayer</a>-only <a href="https://en.wikipedia.org/wiki/Expansion_pack">expansion pack</a> for <a href="https://en.wikipedia.org/wiki/Valve_Corporation">Valve</a>'s <a href="https://en.wikipedia.org/wiki/First-person_shooter">first-person shooter</a> <i><a href="https://en.wikipedia.org/wiki/Half-Life_(video_game)">Half-Life</a></i>. Developed by <a href="https://en.wikipedia.org/wiki/Gearbox_Software">Gearbox Software</a> and published by <a href="https://en.wikipedia.org/wiki/Sierra_On-Line">Sierra On-Line</a>, <i>Decay</i> was released as part of the <a href="https://en.wikipedia.org/wiki/PlayStation_2">PlayStation 2</a> version of <i>Half-Life</i> in 2001. It is the third expansion pack for <i>Half-Life</i>, and like its predecessors, <i>Decay</i> returns to the setting and timeline of the original story, albeit portraying the story from the viewpoint of a different set of <a href="https://en.wikipedia.org/wiki/Protagonist">protagonists</a>: two scientists working in the <a href="https://en.wikipedia.org/wiki/Black_Mesa_Research_Facility">Black Mesa Research Facility</a>. <i>Decay</i> is a <a href="https://en.wikipedia.org/wiki/Cooperative_video_game">cooperative multiplayer game</a>, designed to be played by two people working together to pass through the game's <a href="https://en.wikipedia.org/wiki/Level_(video_games)">levels</a>.</p>
+
+<p><i>Decay</i> was not a critical success, but was received with some positivity by video game journalists. Many reviewers felt the game was best when played with other players, but that its more puzzle-oriented gameplay somewhat detracted from the overall experience. A number of reviews stated that the game simply felt like little more than an extra add-on for the PlayStation 2 version of <i>Half-Life</i>.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
